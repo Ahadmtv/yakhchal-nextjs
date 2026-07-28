@@ -45,7 +45,10 @@ export default function Navbar() {
     };
   }, []);
 
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setOpen(false), 0);
+    return () => window.clearTimeout(timer);
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -105,10 +108,10 @@ export default function Navbar() {
               <Icon className="theme-icon theme-sun" name="sun" />
               <Icon className="theme-icon theme-moon" name="moon" />
             </button>
-            <a className="button button-primary nav-download" href="/#download">
+            <Link className="button button-primary nav-download" href="/#download">
               <Icon name="download" />
               دریافت برنامه
-            </a>
+            </Link>
             <button className="icon-button mobile-menu-button" type="button" onClick={() => setOpen(true)} aria-label="بازکردن منوی اصلی" aria-expanded={open} aria-controls="mobile-navigation">
               <Icon name="menu" />
             </button>
@@ -139,10 +142,10 @@ export default function Navbar() {
               );
             })}
           </nav>
-          <a className="button button-primary drawer-download" href="/#download" onClick={closeMenu}>
+          <Link className="button button-primary drawer-download" href="/#download" onClick={closeMenu}>
             <Icon name="download" />
             دریافت رایگان برنامه
-          </a>
+          </Link>
         </aside>
       </div>
     </header>

@@ -16,8 +16,8 @@ export default function LazyBMICalculator() {
     const element = hostRef.current;
     if (!element || shouldLoad) return;
     if (!("IntersectionObserver" in window)) {
-      setShouldLoad(true);
-      return;
+      const timer = setTimeout(() => setShouldLoad(true), 0);
+      return () => clearTimeout(timer);
     }
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
