@@ -1,0 +1,1591 @@
+.story {
+  --story-progress: 1;
+  --recognized: 1;
+  --recipe-opacity: 0;
+  --plan-opacity: 0;
+  --support-opacity: 0;
+  --shopping-opacity: 0;
+  --recipe-shift-x: 0px;
+  --recipe-shift-y: 0px;
+  --recipe-scale: 1;
+  --cards-shift: 0px;
+  --shopping-row-shift: 0px;
+  --door-angle: 0deg;
+  --interior-opacity: .14;
+  --final-opacity: 1;
+  --final-shift: 0px;
+  --hint-opacity: 0;
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-block: 104px;
+  background:
+    radial-gradient(760px 520px at 16% 36%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 72%),
+    linear-gradient(180deg, var(--background), color-mix(in srgb, var(--surface-soft) 68%, var(--background)), var(--background));
+}
+
+.story::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  opacity: .38;
+  color: color-mix(in srgb, var(--primary) 28%, transparent);
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(90deg, transparent, #000 24%, #000 74%, transparent);
+}
+
+.story[data-enhanced="true"] {
+  height: 400svh;
+  padding-block: 0;
+}
+
+.sticky {
+  position: relative;
+}
+
+.story[data-enhanced="true"] .sticky {
+  position: sticky;
+  z-index: 1;
+  top: 82px;
+  height: calc(100svh - 82px);
+  overflow: hidden;
+}
+
+.layout {
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 60px);
+  padding-block: 24px 30px;
+}
+
+.copy {
+  position: relative;
+  z-index: 30;
+  min-width: 0;
+}
+
+.heading {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  width: fit-content;
+  margin-bottom: 11px;
+  padding: 6px 12px;
+  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+  border-radius: 999px;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  font-size: .77rem;
+  font-weight: 900;
+}
+
+.heading h2 {
+  margin-bottom: 14px;
+  font-size: clamp(1.9rem, 3.2vw, 3.15rem);
+  line-height: 1.28;
+}
+
+.heading > p:last-child {
+  max-width: 40rem;
+  margin-bottom: 0;
+  color: var(--text-muted);
+  font-size: .96rem;
+  line-height: 1.9;
+}
+
+.stageList {
+  display: grid;
+  gap: 7px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stage {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: center;
+  gap: 11px;
+  min-height: 66px;
+  padding: 9px 11px;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  opacity: 1;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.story[data-enhanced="true"] .stage {
+  opacity: .42;
+  transform: translateX(5px);
+}
+
+.stageNumber {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-size: .72rem;
+  font-weight: 900;
+}
+
+.stage strong,
+.stage small {
+  display: block;
+}
+
+.stage strong {
+  margin-bottom: 1px;
+  font-size: .89rem;
+}
+
+.stage small {
+  color: var(--text-muted);
+  font-size: .7rem;
+  line-height: 1.65;
+}
+
+.story[data-enhanced="true"][data-active-stage="0"] .stage[data-stage-index="0"],
+.story[data-enhanced="true"][data-active-stage="1"] .stage[data-stage-index="1"],
+.story[data-enhanced="true"][data-active-stage="2"] .stage[data-stage-index="2"],
+.story[data-enhanced="true"][data-active-stage="3"] .stage[data-stage-index="3"],
+.story[data-enhanced="true"][data-active-stage="4"] .stage[data-stage-index="4"] {
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--primary) 23%, transparent);
+  background: color-mix(in srgb, var(--primary) 8%, var(--surface));
+  transform: translateX(0);
+}
+
+.story[data-enhanced="true"][data-active-stage="0"] .stage[data-stage-index="0"] .stageNumber,
+.story[data-enhanced="true"][data-active-stage="1"] .stage[data-stage-index="1"] .stageNumber,
+.story[data-enhanced="true"][data-active-stage="2"] .stage[data-stage-index="2"] .stageNumber,
+.story[data-enhanced="true"][data-active-stage="3"] .stage[data-stage-index="3"] .stageNumber,
+.story[data-enhanced="true"][data-active-stage="4"] .stage[data-stage-index="4"] .stageNumber {
+  border-color: var(--primary);
+  color: var(--primary-contrast);
+  background: var(--primary);
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+.progressRail {
+  position: absolute;
+  top: 252px;
+  inset-inline-end: -15px;
+  width: 3px;
+  height: min(390px, 45vh);
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.progressRail span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, var(--primary), var(--secondary));
+  transform: scaleY(var(--story-progress));
+  transform-origin: top;
+}
+
+.scene {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: min(720px, calc(100svh - 132px));
+  min-height: 590px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--primary) 15%, var(--border));
+  border-radius: clamp(28px, 4vw, 46px);
+  background:
+    radial-gradient(circle at 64% 44%, color-mix(in srgb, var(--primary) 15%, transparent), transparent 29%),
+    linear-gradient(145deg, color-mix(in srgb, var(--surface) 90%, transparent), color-mix(in srgb, var(--surface-soft) 70%, transparent));
+  box-shadow:
+    0 36px 90px color-mix(in srgb, var(--shadow) 74%, transparent),
+    inset 0 1px rgba(255, 255, 255, .12);
+}
+
+.sceneGlow {
+  position: absolute;
+  z-index: -1;
+  width: 58%;
+  aspect-ratio: 1;
+  left: 50%;
+  top: 52%;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 21%, transparent), transparent 68%);
+  filter: blur(10px);
+  transform: translate(-20%, -50%);
+}
+
+.gridTexture {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  opacity: .3;
+  color: color-mix(in srgb, var(--primary) 22%, transparent);
+  background-image:
+    linear-gradient(currentColor 1px, transparent 1px),
+    linear-gradient(90deg, currentColor 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at 64% 48%, #000, transparent 68%);
+}
+
+.recognitionStatus {
+  position: absolute;
+  z-index: 24;
+  top: 4.5%;
+  left: 65%;
+  min-width: 210px;
+  display: grid;
+  grid-template-columns: 8px 28px minmax(0, 1fr) 24px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+  border-radius: 18px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  box-shadow: 0 15px 38px var(--shadow);
+  backdrop-filter: blur(16px);
+  opacity: var(--recognized);
+  transform: translateX(-50%) scale(max(.72, var(--recognized)));
+  transform-origin: center;
+}
+
+.recognitionStatus > span:first-child {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--primary) 13%, transparent);
+}
+
+.recognitionStatus > svg {
+  width: 21px;
+  height: 21px;
+  color: var(--primary);
+}
+
+.recognitionStatus > svg:last-child {
+  width: 18px;
+  height: 18px;
+}
+
+.recognitionStatus small,
+.recognitionStatus strong {
+  display: block;
+}
+
+.recognitionStatus small {
+  color: var(--text-muted);
+  font-size: .66rem;
+}
+
+.recognitionStatus strong {
+  font-size: .78rem;
+}
+
+.fridge {
+  position: absolute;
+  z-index: 6;
+  left: 65%;
+  top: 51%;
+  width: clamp(242px, 36%, 310px);
+  aspect-ratio: .565;
+  transform: translate(-50%, -50%);
+  perspective: 1400px;
+}
+
+.fridgeShadow {
+  position: absolute;
+  inset: auto 2% -5.5%;
+  height: 9%;
+  border-radius: 50%;
+  background: rgba(6, 24, 14, .26);
+  filter: blur(14px);
+  transform: scaleX(1.1);
+}
+
+.fridgeShell {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  border: 1px solid rgba(255, 255, 255, .62);
+  border-radius: 26px 26px 19px 19px;
+  background: linear-gradient(118deg, #dfe7e2 0%, #b7c3bb 52%, #8e9d94 100%);
+  box-shadow:
+    0 24px 48px rgba(17, 42, 26, .24),
+    inset 3px 0 6px rgba(255, 255, 255, .62),
+    inset -4px 0 10px rgba(29, 48, 36, .17);
+}
+
+.fridgeTop {
+  position: absolute;
+  z-index: 2;
+  inset: 0 2% auto;
+  height: 2.5%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .66);
+  filter: blur(.4px);
+}
+
+.interior {
+  position: absolute;
+  z-index: 2;
+  inset: 3.2% 5.2% 4.4%;
+  overflow: hidden;
+  border: 5px solid rgba(106, 125, 113, .55);
+  border-radius: 20px 20px 13px 13px;
+  background:
+    radial-gradient(circle at 50% 5%, rgba(250, 255, 235, .92), transparent 28%),
+    linear-gradient(115deg, #eff8f2, #d8ebe0 60%, #c6ddd0);
+  box-shadow:
+    inset 0 8px 20px rgba(23, 65, 39, .12),
+    inset 0 0 40px rgba(94, 162, 108, .13);
+  opacity: var(--interior-opacity);
+}
+
+.interiorLight {
+  position: absolute;
+  top: 2.5%;
+  left: 50%;
+  width: 42%;
+  height: 10px;
+  border-radius: 999px;
+  background: #fff8c9;
+  box-shadow: 0 7px 24px rgba(255, 236, 135, .78);
+  transform: translateX(-50%);
+}
+
+.coolingVent {
+  position: absolute;
+  top: 9%;
+  left: 50%;
+  width: 26%;
+  height: 5px;
+  border-top: 1px solid rgba(55, 86, 66, .2);
+  border-bottom: 1px solid rgba(55, 86, 66, .2);
+  transform: translateX(-50%);
+}
+
+.shelf {
+  position: absolute;
+  z-index: 3;
+  inset-inline: 4%;
+  height: 7px;
+  border: 1px solid rgba(79, 115, 91, .25);
+  border-radius: 3px;
+  background: rgba(245, 255, 249, .67);
+  box-shadow: 0 5px 7px rgba(29, 77, 44, .12);
+}
+
+.shelf::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  inset-inline: 4%;
+  height: 2px;
+  background: rgba(75, 109, 86, .13);
+}
+
+.shelfTop {
+  top: 33%;
+}
+
+.shelfMiddle {
+  top: 58%;
+}
+
+.shelfBottom {
+  top: 80.5%;
+}
+
+.drawer {
+  position: absolute;
+  z-index: 2;
+  inset: auto 5% 2.7%;
+  height: 15%;
+  border: 1px solid rgba(74, 111, 85, .2);
+  border-radius: 8px 8px 12px 12px;
+  background: linear-gradient(180deg, rgba(239, 252, 244, .56), rgba(174, 207, 187, .45));
+}
+
+.drawer small {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  color: rgba(44, 78, 56, .52);
+  font-size: .46rem;
+  transform: translateX(-50%);
+}
+
+.frameTop,
+.frameSideStart,
+.frameSideEnd,
+.frameBottom {
+  position: absolute;
+  z-index: 7;
+  pointer-events: none;
+  background: linear-gradient(90deg, #b0beb5, #ecf2ee, #9caba2);
+}
+
+.frameTop {
+  inset: 2.1% 4.2% auto;
+  height: 2.4%;
+  border-radius: 10px 10px 0 0;
+}
+
+.frameBottom {
+  inset: auto 4.2% 3.1%;
+  height: 2.2%;
+  border-radius: 0 0 9px 9px;
+}
+
+.frameSideStart,
+.frameSideEnd {
+  top: 3.3%;
+  bottom: 4%;
+  width: 2.2%;
+}
+
+.frameSideStart {
+  left: 4.2%;
+}
+
+.frameSideEnd {
+  right: 4.2%;
+}
+
+.fridgeFootStart,
+.fridgeFootEnd {
+  position: absolute;
+  z-index: 1;
+  bottom: -2.5%;
+  width: 13%;
+  height: 4%;
+  border-radius: 0 0 8px 8px;
+  background: #59685f;
+}
+
+.fridgeFootStart {
+  left: 10%;
+}
+
+.fridgeFootEnd {
+  right: 10%;
+}
+
+.door {
+  position: absolute;
+  z-index: 14;
+  inset: 1.8% 1.9% 2.3%;
+  transform: perspective(1300px) rotateY(var(--door-angle));
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.doorFront,
+.doorInner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 23px 23px 16px 16px;
+  backface-visibility: hidden;
+}
+
+.doorFront {
+  border: 1px solid rgba(255, 255, 255, .7);
+  background:
+    linear-gradient(106deg, rgba(255, 255, 255, .85), transparent 35%),
+    linear-gradient(145deg, #e8ece9, #b9c2bc 62%, #97a29b);
+  box-shadow:
+    5px 0 18px rgba(22, 43, 29, .22),
+    inset -7px 0 12px rgba(42, 58, 47, .13);
+  transform: translateZ(3px);
+}
+
+.doorInner {
+  border: 5px solid #a7b5ac;
+  background: linear-gradient(140deg, #eaf5ee, #cadfd1);
+  box-shadow: inset 0 0 24px rgba(38, 82, 52, .14);
+  transform: rotateY(180deg) translateZ(3px);
+}
+
+.doorSheen {
+  position: absolute;
+  width: 70%;
+  height: 125%;
+  left: -42%;
+  top: -12%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .34), transparent);
+  transform: skewX(-16deg);
+}
+
+.doorHandle {
+  position: absolute;
+  top: 15%;
+  right: 7%;
+  width: 7px;
+  height: 38%;
+  border: 1px solid rgba(53, 65, 57, .22);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #707a74, #dce2de 47%, #69736d);
+  box-shadow: 2px 4px 8px rgba(33, 48, 38, .25);
+}
+
+.doorBrand {
+  position: absolute;
+  top: 19%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.doorBrand img {
+  width: clamp(42px, 18%, 58px);
+  height: auto;
+  margin-bottom: 7px;
+  filter: drop-shadow(0 7px 12px rgba(41, 83, 48, .18));
+}
+
+.doorBrand strong,
+.doorBrand small {
+  display: block;
+}
+
+.doorBrand strong {
+  color: #27452f;
+  font-size: clamp(.82rem, 2vw, 1.08rem);
+  font-weight: 950;
+}
+
+.doorBrand small {
+  margin-top: 2px;
+  color: rgba(35, 61, 42, .58);
+  font-size: .47rem;
+  white-space: nowrap;
+}
+
+.doorDisplay {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  width: 30%;
+  min-width: 62px;
+  padding: 8px 5px;
+  border: 1px solid rgba(34, 65, 43, .13);
+  border-radius: 12px;
+  color: #87c867;
+  background: #182d21;
+  box-shadow: inset 0 0 12px rgba(129, 203, 99, .12);
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.doorDisplay small,
+.doorDisplay strong {
+  display: block;
+}
+
+.doorDisplay small {
+  color: rgba(221, 241, 215, .55);
+  font-size: .42rem;
+}
+
+.doorDisplay strong {
+  font-size: .78rem;
+}
+
+.doorBin {
+  position: absolute;
+  inset: 18% 8% auto;
+  height: 18%;
+  border: 1px solid rgba(75, 112, 88, .2);
+  border-radius: 6px 6px 11px 11px;
+  background: rgba(226, 245, 233, .68);
+}
+
+.doorBinMiddle {
+  top: 47%;
+}
+
+.doorBinBottom {
+  top: 72%;
+  height: 21%;
+}
+
+.ingredients {
+  position: absolute;
+  z-index: 12;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ingredient {
+  --item-x: 0px;
+  --item-y: 0px;
+  --item-scale: .6;
+  --item-rotation: 0deg;
+  --item-opacity: 0;
+  position: absolute;
+  z-index: 12;
+  left: 50%;
+  top: 50%;
+  width: var(--ingredient-size);
+  aspect-ratio: 1;
+  opacity: var(--item-opacity);
+  filter: drop-shadow(0 12px 13px rgba(16, 48, 26, .22));
+  transform:
+    translate3d(var(--item-x), var(--item-y), 0)
+    translate(-50%, -50%)
+    rotate(var(--item-rotation))
+    scale(var(--item-scale));
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.ingredient > img {
+  object-fit: contain;
+  animation: ingredient-float 3.8s ease-in-out var(--float-delay) infinite;
+}
+
+.ingredient > small {
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  padding: 3px 7px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  box-shadow: 0 6px 16px var(--shadow);
+  font-size: .48rem;
+  font-weight: 800;
+  white-space: nowrap;
+  opacity: calc(1 - var(--story-progress));
+  transform: translateX(-50%);
+}
+
+.cardHeading,
+.supportHeading {
+  display: flex;
+  align-items: center;
+}
+
+.recipeCard,
+.weeklyCard,
+.shoppingCard {
+  position: absolute;
+  z-index: 22;
+  margin: 0;
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  box-shadow: 0 22px 60px color-mix(in srgb, var(--shadow) 78%, transparent);
+  backdrop-filter: blur(18px) saturate(130%);
+  will-change: transform, opacity;
+}
+
+.recipeCard {
+  top: 13%;
+  left: 2.5%;
+  width: min(278px, 39%);
+  padding: 17px;
+  border-radius: 23px;
+  opacity: var(--recipe-opacity);
+  transform:
+    translate3d(var(--recipe-shift-x), var(--recipe-shift-y), 0)
+    scale(var(--recipe-scale));
+  transform-origin: bottom left;
+}
+
+.cardHeading {
+  gap: 10px;
+}
+
+.cardIcon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 14px;
+  color: var(--primary-contrast);
+  background: var(--primary);
+  box-shadow: 0 9px 24px color-mix(in srgb, var(--primary) 24%, transparent);
+}
+
+.cardIcon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.cardHeading small,
+.cardHeading strong {
+  display: block;
+}
+
+.cardHeading small {
+  color: var(--primary);
+  font-size: .65rem;
+  font-weight: 850;
+}
+
+.cardHeading strong {
+  margin-top: 2px;
+  font-size: .96rem;
+}
+
+.recipeCard > p {
+  margin: 11px 0 9px;
+  color: var(--text-muted);
+  font-size: .7rem;
+  line-height: 1.7;
+}
+
+.recipeMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.recipeMeta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  font-size: .59rem;
+}
+
+.recipeMeta svg {
+  width: 13px;
+  height: 13px;
+}
+
+.recipeAction {
+  display: grid;
+  grid-template-columns: 22px 1fr 18px;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 9px 10px;
+  border-radius: 13px;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  font-size: .67rem;
+  font-weight: 850;
+}
+
+.recipeAction svg {
+  width: 17px;
+  height: 17px;
+}
+
+.weeklyCard,
+.shoppingCard {
+  bottom: 3.5%;
+  width: min(244px, 34%);
+  padding: 13px;
+  border-radius: 21px;
+  opacity: var(--support-opacity);
+  transform: translateY(var(--cards-shift));
+}
+
+.weeklyCard {
+  left: 2%;
+}
+
+.shoppingCard {
+  right: 1.5%;
+}
+
+.supportHeading {
+  gap: 8px;
+  margin-bottom: 9px;
+}
+
+.supportHeading > span {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 12px;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 11%, transparent);
+}
+
+.supportHeading svg {
+  width: 18px;
+  height: 18px;
+}
+
+.supportHeading > div {
+  min-width: 0;
+  flex: 1;
+}
+
+.supportHeading small,
+.supportHeading strong {
+  display: block;
+}
+
+.supportHeading small {
+  color: var(--text-muted);
+  font-size: .54rem;
+}
+
+.supportHeading strong {
+  font-size: .76rem;
+}
+
+.supportHeading em {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 9%, transparent);
+  font-size: .5rem;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.supportHeading em svg {
+  width: 12px;
+  height: 12px;
+}
+
+.weeklyRows {
+  display: grid;
+  gap: 5px;
+}
+
+.weeklyRow {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 27px minmax(0, 1fr);
+  align-items: center;
+  gap: 7px;
+  padding: 6px 7px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--text) 3.5%, transparent);
+}
+
+.weeklyRow:first-child {
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 9%, transparent);
+}
+
+.weeklyRow > span {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  font-size: .56rem;
+  font-weight: 900;
+}
+
+.weeklyRow p {
+  min-width: 0;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.weeklyRow small,
+.weeklyRow strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.weeklyRow small {
+  color: var(--text-muted);
+  font-size: .48rem;
+}
+
+.weeklyRow strong {
+  font-size: .62rem;
+}
+
+.shoppingCard ul {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shoppingCard li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--text) 3.5%, transparent);
+  font-size: .63rem;
+  font-weight: 760;
+  opacity: var(--shopping-opacity);
+  transform: translateX(var(--shopping-row-shift));
+}
+
+.shoppingCard li > span {
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.shoppingCard li svg {
+  width: 13px;
+  height: 13px;
+}
+
+.finalMessage {
+  position: absolute;
+  z-index: 28;
+  top: 26%;
+  left: 3.5%;
+  width: min(300px, 42%);
+  padding: 22px;
+  border: 1px solid color-mix(in srgb, var(--secondary) 28%, var(--border));
+  border-radius: 27px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  box-shadow: 0 24px 70px var(--shadow);
+  backdrop-filter: blur(20px);
+  opacity: var(--final-opacity);
+  transform: translateY(var(--final-shift));
+}
+
+.finalMark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 13px;
+  border-radius: 15px;
+  color: var(--secondary-dark);
+  background: color-mix(in srgb, var(--secondary) 17%, transparent);
+}
+
+.finalMark svg {
+  width: 22px;
+  height: 22px;
+}
+
+.finalMessage p {
+  margin-bottom: 2px;
+  color: var(--primary);
+  font-size: .75rem;
+  font-weight: 900;
+}
+
+.finalMessage h3 {
+  margin-bottom: 7px;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  line-height: 1.5;
+}
+
+.englishLine {
+  display: block;
+  margin-bottom: 17px;
+  color: var(--text-muted);
+  direction: ltr;
+  font-size: .76rem;
+  font-weight: 750;
+  letter-spacing: .025em;
+  text-align: right;
+}
+
+.finalMessage :global(.button) {
+  width: 100%;
+  padding-inline: 15px;
+  font-size: .72rem;
+}
+
+.scrollHint {
+  position: absolute;
+  z-index: 18;
+  left: 22px;
+  bottom: 19px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text-muted);
+  opacity: var(--hint-opacity);
+}
+
+.scrollHint > span {
+  position: relative;
+  width: 18px;
+  height: 29px;
+  border: 1px solid color-mix(in srgb, var(--text) 24%, transparent);
+  border-radius: 999px;
+}
+
+.scrollHint > span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  width: 3px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--primary);
+  transform: translateX(-50%);
+  animation: scroll-cue 1.6s ease-in-out infinite;
+}
+
+.scrollHint small {
+  font-size: .58rem;
+}
+
+.story:not([data-enhanced="true"]) .ingredients,
+.story:not([data-enhanced="true"]) .recognitionStatus,
+.story:not([data-enhanced="true"]) .recipeCard,
+.story:not([data-enhanced="true"]) .weeklyCard,
+.story:not([data-enhanced="true"]) .shoppingCard,
+.story:not([data-enhanced="true"]) .scrollHint {
+  display: none;
+}
+
+:global(html[data-theme="dark"]) .scene {
+  background:
+    radial-gradient(circle at 64% 44%, color-mix(in srgb, var(--primary) 13%, transparent), transparent 31%),
+    linear-gradient(145deg, color-mix(in srgb, var(--surface) 96%, transparent), color-mix(in srgb, var(--background) 75%, var(--surface-soft)));
+}
+
+:global(html[data-theme="dark"]) .fridgeShell {
+  border-color: rgba(231, 241, 234, .28);
+  background: linear-gradient(118deg, #b6c1ba 0%, #87978d 54%, #64736a 100%);
+}
+
+:global(html[data-theme="dark"]) .doorFront {
+  border-color: rgba(255, 255, 255, .34);
+  background:
+    linear-gradient(106deg, rgba(255, 255, 255, .52), transparent 35%),
+    linear-gradient(145deg, #cdd5d0, #9aa69e 62%, #738078);
+}
+
+:global(html[data-theme="dark"]) .interior {
+  background:
+    radial-gradient(circle at 50% 5%, rgba(238, 255, 219, .72), transparent 27%),
+    linear-gradient(115deg, #dfeee5, #bfd8c8 60%, #a8c5b2);
+}
+
+@keyframes ingredient-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+@keyframes scroll-cue {
+  0%,
+  100% {
+    opacity: .35;
+    transform: translate(-50%, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, 8px);
+  }
+}
+
+@media (max-width: 1099px) {
+  .layout {
+    grid-template-columns: minmax(270px, .68fr) minmax(0, 1.32fr);
+    gap: 22px;
+  }
+
+  .stage {
+    min-height: 62px;
+  }
+
+  .stage small {
+    font-size: .66rem;
+  }
+
+  .recipeCard {
+    width: min(250px, 41%);
+  }
+}
+
+@media (max-width: 899px) {
+  .story[data-enhanced="true"] {
+    height: 360svh;
+  }
+
+  .story[data-enhanced="true"] .sticky {
+    top: 72px;
+    height: calc(100svh - 72px);
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 12px;
+    padding-block: 15px 18px;
+  }
+
+  .copy {
+    display: grid;
+    gap: 10px;
+  }
+
+  .heading {
+    text-align: center;
+  }
+
+  .eyebrow {
+    margin-inline: auto;
+    margin-bottom: 7px;
+  }
+
+  .heading h2 {
+    max-width: 680px;
+    margin: 0 auto 7px;
+    font-size: clamp(1.55rem, 5.2vw, 2.35rem);
+  }
+
+  .heading > p:last-child {
+    max-width: 640px;
+    margin-inline: auto;
+    font-size: .82rem;
+    line-height: 1.7;
+  }
+
+  .story[data-enhanced="true"] .stageList {
+    position: relative;
+    width: min(620px, 100%);
+    height: 55px;
+    margin: 0 auto;
+  }
+
+  .story[data-enhanced="true"] .stage {
+    position: absolute;
+    inset: 0;
+    min-height: 52px;
+    padding: 6px 10px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(7px);
+  }
+
+  .story[data-enhanced="true"][data-active-stage="0"] .stage[data-stage-index="0"],
+  .story[data-enhanced="true"][data-active-stage="1"] .stage[data-stage-index="1"],
+  .story[data-enhanced="true"][data-active-stage="2"] .stage[data-stage-index="2"],
+  .story[data-enhanced="true"][data-active-stage="3"] .stage[data-stage-index="3"],
+  .story[data-enhanced="true"][data-active-stage="4"] .stage[data-stage-index="4"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stage small {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .progressRail {
+    position: relative;
+    top: auto;
+    inset-inline-end: auto;
+    width: min(620px, 100%);
+    height: 3px;
+    margin-inline: auto;
+  }
+
+  .progressRail span {
+    transform: scaleX(var(--story-progress));
+    transform-origin: right;
+  }
+
+  .scene {
+    height: 100%;
+    min-height: 0;
+    max-height: 690px;
+    border-radius: 32px;
+  }
+
+  .fridge {
+    left: 59%;
+    top: 51%;
+    width: clamp(220px, 36vw, 255px);
+  }
+
+  .recognitionStatus {
+    top: 3.5%;
+    left: 59%;
+  }
+
+  .ingredient {
+    width: var(--ingredient-mobile-size);
+  }
+
+  .recipeCard {
+    top: 10%;
+    left: 2.5%;
+    width: min(245px, 38%);
+  }
+
+  .weeklyCard,
+  .shoppingCard {
+    width: min(230px, 35%);
+  }
+
+  .finalMessage {
+    width: min(290px, 42%);
+  }
+}
+
+@media (max-width: 699px) {
+  .story[data-enhanced="true"] {
+    height: 325svh;
+  }
+
+  .story[data-enhanced="true"] .sticky {
+    top: 68px;
+    height: calc(100svh - 68px);
+  }
+
+  .layout {
+    width: min(100% - 20px, 480px);
+    gap: 8px;
+    padding-block: 10px 12px;
+  }
+
+  .copy {
+    gap: 6px;
+  }
+
+  .eyebrow {
+    padding: 4px 10px;
+    font-size: .66rem;
+  }
+
+  .heading h2 {
+    margin-bottom: 5px;
+    font-size: clamp(1.35rem, 6.8vw, 1.8rem);
+    line-height: 1.35;
+  }
+
+  .heading > p:last-child {
+    font-size: .7rem;
+    line-height: 1.55;
+  }
+
+  .story[data-enhanced="true"] .stageList {
+    height: 49px;
+  }
+
+  .story[data-enhanced="true"] .stage {
+    grid-template-columns: 34px minmax(0, 1fr);
+    min-height: 46px;
+    border-radius: 15px;
+  }
+
+  .stageNumber {
+    width: 31px;
+    height: 31px;
+    border-radius: 10px;
+    font-size: .62rem;
+  }
+
+  .stage strong {
+    font-size: .76rem;
+  }
+
+  .stage small {
+    font-size: .59rem;
+  }
+
+  .scene {
+    border-radius: 25px;
+  }
+
+  .sceneGlow {
+    width: 86%;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+  }
+
+  .fridge {
+    left: 50%;
+    top: 49%;
+    width: min(205px, 61vw);
+  }
+
+  .recognitionStatus {
+    top: 3%;
+    left: 50%;
+    min-width: 185px;
+    grid-template-columns: 7px 23px minmax(0, 1fr) 19px;
+    padding: 8px 10px;
+    border-radius: 15px;
+  }
+
+  .recognitionStatus small {
+    font-size: .56rem;
+  }
+
+  .recognitionStatus strong {
+    font-size: .68rem;
+  }
+
+  .ingredient > small {
+    display: none;
+  }
+
+  .recipeCard {
+    top: 7%;
+    left: 3%;
+    width: 225px;
+    max-width: 66%;
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .cardIcon {
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+  }
+
+  .cardHeading strong {
+    font-size: .77rem;
+  }
+
+  .recipeCard > p {
+    margin-block: 7px;
+    font-size: .59rem;
+  }
+
+  .recipeMeta span {
+    font-size: .5rem;
+  }
+
+  .recipeAction {
+    margin-top: 8px;
+    padding: 7px 8px;
+    font-size: .57rem;
+  }
+
+  .weeklyCard,
+  .shoppingCard {
+    bottom: 2.2%;
+    width: calc(50% - 7px);
+    padding: 9px;
+    border-radius: 17px;
+  }
+
+  .weeklyCard {
+    left: 5px;
+  }
+
+  .shoppingCard {
+    right: 5px;
+  }
+
+  .supportHeading {
+    gap: 5px;
+    margin-bottom: 6px;
+  }
+
+  .supportHeading > span {
+    width: 29px;
+    height: 29px;
+    border-radius: 9px;
+  }
+
+  .supportHeading em {
+    display: none;
+  }
+
+  .supportHeading small {
+    font-size: .44rem;
+  }
+
+  .supportHeading strong {
+    font-size: .62rem;
+  }
+
+  .weeklyRow {
+    grid-template-columns: 21px minmax(0, 1fr);
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .weeklyRow > span,
+  .shoppingCard li > span {
+    width: 20px;
+    height: 20px;
+    border-radius: 7px;
+  }
+
+  .weeklyRow small {
+    font-size: .4rem;
+  }
+
+  .weeklyRow strong,
+  .shoppingCard li {
+    font-size: .5rem;
+  }
+
+  .shoppingCard li {
+    gap: 4px;
+    padding: 5px;
+  }
+
+  .finalMessage {
+    top: auto;
+    left: 3%;
+    bottom: 3%;
+    width: 94%;
+    padding: 16px;
+    border-radius: 21px;
+    text-align: center;
+  }
+
+  .finalMark {
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 8px;
+    border-radius: 12px;
+  }
+
+  .finalMessage p {
+    font-size: .66rem;
+  }
+
+  .finalMessage h3 {
+    margin-bottom: 3px;
+    font-size: 1.25rem;
+  }
+
+  .englishLine {
+    margin-bottom: 10px;
+    font-size: .65rem;
+    text-align: center;
+  }
+
+  .finalMessage :global(.button) {
+    min-height: 42px;
+  }
+
+  .scrollHint {
+    display: none;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 700px) {
+  .heading h2 {
+    font-size: clamp(1.7rem, 3vw, 2.45rem);
+  }
+
+  .heading > p:last-child {
+    font-size: .83rem;
+  }
+
+  .stageList {
+    gap: 4px;
+    margin-top: 16px;
+  }
+
+  .stage {
+    min-height: 54px;
+    padding-block: 6px;
+  }
+
+  .stage small {
+    display: none;
+  }
+
+  .progressRail {
+    top: 214px;
+    height: 310px;
+  }
+
+  .scene {
+    min-height: 530px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story,
+  .story[data-enhanced="true"] {
+    height: auto;
+    padding-block: 76px;
+  }
+
+  .story[data-enhanced="true"] .sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+    overflow: visible;
+  }
+
+  .layout {
+    min-height: 0;
+  }
+
+  .story[data-enhanced="true"] .stage {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    transform: none;
+  }
+
+  .story[data-enhanced="true"] .stageList {
+    height: auto;
+  }
+
+  .story[data-enhanced="true"] .ingredients,
+  .story[data-enhanced="true"] .recognitionStatus,
+  .story[data-enhanced="true"] .recipeCard,
+  .story[data-enhanced="true"] .weeklyCard,
+  .story[data-enhanced="true"] .shoppingCard,
+  .story[data-enhanced="true"] .scrollHint {
+    display: none;
+  }
+
+  .ingredient > img,
+  .scrollHint > span::after {
+    animation: none;
+  }
+}

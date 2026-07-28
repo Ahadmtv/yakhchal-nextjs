@@ -1,0 +1,958 @@
+{
+  "pageUrl": "http://localhost:4174/",
+  "capturedAt": "2026-07-28T20:42:10.538Z",
+  "homepage": {
+    "desktopFilePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\00-homepage-1440x900.png",
+    "mobileFilePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\00a-homepage-390x844.png"
+  },
+  "stages": [
+    {
+      "requestedProgress": 0.08,
+      "computedProgress": 0.08,
+      "activeStage": "0",
+      "doorAngle": "-108.00deg",
+      "recipeOpacity": 0,
+      "supportOpacity": 0,
+      "finalOpacity": 0,
+      "rectTop": -135,
+      "viewport": [
+        1440,
+        900
+      ],
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\01-initial-ingredients.png"
+    },
+    {
+      "requestedProgress": 0.45,
+      "computedProgress": 0.4501,
+      "activeStage": "2",
+      "doorAngle": "-108.00deg",
+      "recipeOpacity": 0.1995,
+      "supportOpacity": 0,
+      "finalOpacity": 0,
+      "rectTop": -1167,
+      "viewport": [
+        1440,
+        900
+      ],
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\02-ingredients-inside.png"
+    },
+    {
+      "requestedProgress": 0.53,
+      "computedProgress": 0.5301,
+      "activeStage": "2",
+      "doorAngle": "-108.00deg",
+      "recipeOpacity": 0.9453,
+      "supportOpacity": 0,
+      "finalOpacity": 0,
+      "rectTop": -1390,
+      "viewport": [
+        1440,
+        900
+      ],
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\03-recipe-recommendation.png"
+    },
+    {
+      "requestedProgress": 0.72,
+      "computedProgress": 0.7199,
+      "activeStage": "3",
+      "doorAngle": "-108.00deg",
+      "recipeOpacity": 1,
+      "supportOpacity": 1,
+      "finalOpacity": 0,
+      "rectTop": -1919,
+      "viewport": [
+        1440,
+        900
+      ],
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\04-weekly-plan-shopping.png"
+    },
+    {
+      "requestedProgress": 0.98,
+      "computedProgress": 0.9799,
+      "activeStage": "4",
+      "doorAngle": "0.00deg",
+      "recipeOpacity": 0,
+      "supportOpacity": 0,
+      "finalOpacity": 1,
+      "rectTop": -2644,
+      "viewport": [
+        1440,
+        900
+      ],
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\05-final-closed-door.png"
+    }
+  ],
+  "darkTheme": {
+    "recipeState": {
+      "requestedProgress": 0.53,
+      "computedProgress": 0.5301,
+      "activeStage": "2",
+      "doorAngle": "-108.00deg",
+      "recipeOpacity": 0.9453,
+      "supportOpacity": 0,
+      "finalOpacity": 0,
+      "rectTop": -1390,
+      "viewport": [
+        1440,
+        900
+      ]
+    },
+    "recipeFilePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\06a-recipe-dark-theme.png",
+    "state": {
+      "requestedProgress": 0.98,
+      "computedProgress": 0.9799,
+      "activeStage": "4",
+      "doorAngle": "0.00deg",
+      "recipeOpacity": 0,
+      "supportOpacity": 0,
+      "finalOpacity": 1,
+      "rectTop": -2644,
+      "viewport": [
+        1440,
+        900
+      ]
+    },
+    "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\06-final-dark-theme.png"
+  },
+  "responsive": [
+    {
+      "width": 360,
+      "height": 800,
+      "mobile": true,
+      "progress": 0.53,
+      "name": "07-mobile-360x800-recipe.png",
+      "state": {
+        "requestedProgress": 0.53,
+        "computedProgress": 0.5302,
+        "activeStage": "2",
+        "doorAngle": "-96.00deg",
+        "recipeOpacity": 0.9458,
+        "supportOpacity": 0,
+        "finalOpacity": 0,
+        "rectTop": -920,
+        "viewport": [
+          360,
+          800
+        ]
+      },
+      "layout": {
+        "label": "07-mobile-360x800-recipe.png",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "page": {
+          "clientWidth": 360,
+          "scrollWidth": 360,
+          "horizontalOverflow": 0
+        },
+        "story": {
+          "height": 2600,
+          "rect": {
+            "top": -920,
+            "bottom": 1680,
+            "width": 360
+          },
+          "enhanced": "true",
+          "reducedMotion": "false",
+          "activeStage": "2"
+        },
+        "ingredients": [
+          {
+            "id": "tomato",
+            "x": 140,
+            "y": 438,
+            "width": 42,
+            "height": 42,
+            "opacity": 1
+          },
+          {
+            "id": "herbs",
+            "x": 176,
+            "y": 439,
+            "width": 46,
+            "height": 46,
+            "opacity": 1
+          },
+          {
+            "id": "eggs",
+            "x": 144,
+            "y": 525,
+            "width": 35,
+            "height": 35,
+            "opacity": 1
+          },
+          {
+            "id": "chicken",
+            "x": 178,
+            "y": 527,
+            "width": 42,
+            "height": 42,
+            "opacity": 1
+          },
+          {
+            "id": "rice",
+            "x": 142,
+            "y": 615,
+            "width": 38,
+            "height": 38,
+            "opacity": 1
+          },
+          {
+            "id": "peppers",
+            "x": 178,
+            "y": 614,
+            "width": 41,
+            "height": 41,
+            "opacity": 1
+          }
+        ],
+        "images": [
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fbrand%2Flogo-80.webp&w=80&q=75",
+            "complete": true,
+            "naturalWidth": 80,
+            "naturalHeight": 80
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ftomato-cluster.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ffresh-herb-bunch.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fbrown-eggs.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fraw-chicken-breast-plate.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Frice-bowl.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fyellow-red-bell-peppers.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          }
+        ]
+      },
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\07-mobile-360x800-recipe.png"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "mobile": true,
+      "progress": 0.72,
+      "name": "08-mobile-390x844-plan.png",
+      "state": {
+        "requestedProgress": 0.72,
+        "computedProgress": 0.7198,
+        "activeStage": "3",
+        "doorAngle": "-96.00deg",
+        "recipeOpacity": 1,
+        "supportOpacity": 1,
+        "finalOpacity": 0,
+        "rectTop": -1346,
+        "viewport": [
+          390,
+          844
+        ]
+      },
+      "layout": {
+        "label": "08-mobile-390x844-plan.png",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "page": {
+          "clientWidth": 390,
+          "scrollWidth": 390,
+          "horizontalOverflow": 0
+        },
+        "story": {
+          "height": 2743,
+          "rect": {
+            "top": -1346,
+            "bottom": 1397,
+            "width": 390
+          },
+          "enhanced": "true",
+          "reducedMotion": "false",
+          "activeStage": "3"
+        },
+        "ingredients": [
+          {
+            "id": "tomato",
+            "x": 154,
+            "y": 456,
+            "width": 42,
+            "height": 42,
+            "opacity": 1
+          },
+          {
+            "id": "herbs",
+            "x": 192,
+            "y": 457,
+            "width": 46,
+            "height": 46,
+            "opacity": 1
+          },
+          {
+            "id": "eggs",
+            "x": 157,
+            "y": 550,
+            "width": 35,
+            "height": 35,
+            "opacity": 1
+          },
+          {
+            "id": "chicken",
+            "x": 194,
+            "y": 552,
+            "width": 42,
+            "height": 42,
+            "opacity": 1
+          },
+          {
+            "id": "rice",
+            "x": 156,
+            "y": 647,
+            "width": 38,
+            "height": 38,
+            "opacity": 1
+          },
+          {
+            "id": "peppers",
+            "x": 195,
+            "y": 646,
+            "width": 41,
+            "height": 41,
+            "opacity": 1
+          }
+        ],
+        "images": [
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fbrand%2Flogo-80.webp&w=80&q=75",
+            "complete": true,
+            "naturalWidth": 80,
+            "naturalHeight": 80
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ftomato-cluster.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ffresh-herb-bunch.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fbrown-eggs.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fraw-chicken-breast-plate.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Frice-bowl.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fyellow-red-bell-peppers.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          }
+        ]
+      },
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\08-mobile-390x844-plan.png"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "mobile": true,
+      "progress": 0.98,
+      "name": "08a-mobile-390x844-final.png",
+      "state": {
+        "requestedProgress": 0.98,
+        "computedProgress": 0.9798,
+        "activeStage": "4",
+        "doorAngle": "0.00deg",
+        "recipeOpacity": 0,
+        "supportOpacity": 0,
+        "finalOpacity": 1,
+        "rectTop": -1859,
+        "viewport": [
+          390,
+          844
+        ]
+      },
+      "layout": {
+        "label": "08a-mobile-390x844-final.png",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "page": {
+          "clientWidth": 390,
+          "scrollWidth": 390,
+          "horizontalOverflow": 0
+        },
+        "story": {
+          "height": 2743,
+          "rect": {
+            "top": -1859,
+            "bottom": 884,
+            "width": 390
+          },
+          "enhanced": "true",
+          "reducedMotion": "false",
+          "activeStage": "4"
+        },
+        "ingredients": [
+          {
+            "id": "tomato",
+            "x": 154,
+            "y": 456,
+            "width": 42,
+            "height": 42,
+            "opacity": 0
+          },
+          {
+            "id": "herbs",
+            "x": 192,
+            "y": 457,
+            "width": 46,
+            "height": 46,
+            "opacity": 0
+          },
+          {
+            "id": "eggs",
+            "x": 157,
+            "y": 550,
+            "width": 35,
+            "height": 35,
+            "opacity": 0
+          },
+          {
+            "id": "chicken",
+            "x": 194,
+            "y": 552,
+            "width": 42,
+            "height": 42,
+            "opacity": 0
+          },
+          {
+            "id": "rice",
+            "x": 156,
+            "y": 647,
+            "width": 38,
+            "height": 38,
+            "opacity": 0
+          },
+          {
+            "id": "peppers",
+            "x": 195,
+            "y": 646,
+            "width": 41,
+            "height": 41,
+            "opacity": 0
+          }
+        ],
+        "images": [
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fbrand%2Flogo-80.webp&w=80&q=75",
+            "complete": true,
+            "naturalWidth": 80,
+            "naturalHeight": 80
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ftomato-cluster.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ffresh-herb-bunch.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fbrown-eggs.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fraw-chicken-breast-plate.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Frice-bowl.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fyellow-red-bell-peppers.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          }
+        ]
+      },
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\08a-mobile-390x844-final.png"
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "mobile": false,
+      "progress": 0.45,
+      "name": "09-tablet-768x1024-ingredients.png",
+      "state": {
+        "requestedProgress": 0.45,
+        "computedProgress": 0.4499,
+        "activeStage": "2",
+        "doorAngle": "-96.00deg",
+        "recipeOpacity": 0.1977,
+        "supportOpacity": 0,
+        "finalOpacity": 0,
+        "rectTop": -1157,
+        "viewport": [
+          768,
+          1024
+        ]
+      },
+      "layout": {
+        "label": "09-tablet-768x1024-ingredients.png",
+        "viewport": {
+          "width": 768,
+          "height": 1024
+        },
+        "page": {
+          "clientWidth": 768,
+          "scrollWidth": 768,
+          "horizontalOverflow": 0
+        },
+        "story": {
+          "height": 3686,
+          "rect": {
+            "top": -1157,
+            "bottom": 2529,
+            "width": 768
+          },
+          "enhanced": "true",
+          "reducedMotion": "false",
+          "activeStage": "2"
+        },
+        "ingredients": [
+          {
+            "id": "tomato",
+            "x": 323,
+            "y": 547,
+            "width": 42,
+            "height": 42,
+            "opacity": 1
+          },
+          {
+            "id": "herbs",
+            "x": 400,
+            "y": 548,
+            "width": 46,
+            "height": 46,
+            "opacity": 1
+          },
+          {
+            "id": "eggs",
+            "x": 327,
+            "y": 662,
+            "width": 35,
+            "height": 35,
+            "opacity": 1
+          },
+          {
+            "id": "chicken",
+            "x": 403,
+            "y": 665,
+            "width": 42,
+            "height": 42,
+            "opacity": 1
+          },
+          {
+            "id": "rice",
+            "x": 325,
+            "y": 782,
+            "width": 38,
+            "height": 38,
+            "opacity": 1
+          },
+          {
+            "id": "peppers",
+            "x": 406,
+            "y": 780,
+            "width": 41,
+            "height": 41,
+            "opacity": 1
+          }
+        ],
+        "images": [
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fbrand%2Flogo-80.webp&w=80&q=75",
+            "complete": true,
+            "naturalWidth": 80,
+            "naturalHeight": 80
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ftomato-cluster.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ffresh-herb-bunch.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fbrown-eggs.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fraw-chicken-breast-plate.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Frice-bowl.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fyellow-red-bell-peppers.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 72,
+            "naturalHeight": 72
+          }
+        ]
+      },
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\09-tablet-768x1024-ingredients.png"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "mobile": false,
+      "progress": 0.98,
+      "name": "10-desktop-1920x1080-final.png",
+      "state": {
+        "requestedProgress": 0.98,
+        "computedProgress": 0.9799,
+        "activeStage": "4",
+        "doorAngle": "0.00deg",
+        "recipeOpacity": 0,
+        "supportOpacity": 0,
+        "finalOpacity": 1,
+        "rectTop": -3173,
+        "viewport": [
+          1920,
+          1080
+        ]
+      },
+      "layout": {
+        "label": "10-desktop-1920x1080-final.png",
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "page": {
+          "clientWidth": 1920,
+          "scrollWidth": 1920,
+          "horizontalOverflow": 0
+        },
+        "story": {
+          "height": 4320,
+          "rect": {
+            "top": -3173,
+            "bottom": 1147,
+            "width": 1920
+          },
+          "enhanced": "true",
+          "reducedMotion": "false",
+          "activeStage": "4"
+        },
+        "ingredients": [
+          {
+            "id": "tomato",
+            "x": 773,
+            "y": 422,
+            "width": 61,
+            "height": 61,
+            "opacity": 0
+          },
+          {
+            "id": "herbs",
+            "x": 841,
+            "y": 422,
+            "width": 68,
+            "height": 68,
+            "opacity": 0
+          },
+          {
+            "id": "eggs",
+            "x": 777,
+            "y": 555,
+            "width": 52,
+            "height": 52,
+            "opacity": 0
+          },
+          {
+            "id": "chicken",
+            "x": 851,
+            "y": 557,
+            "width": 63,
+            "height": 63,
+            "opacity": 0
+          },
+          {
+            "id": "rice",
+            "x": 775,
+            "y": 690,
+            "width": 57,
+            "height": 57,
+            "opacity": 0
+          },
+          {
+            "id": "peppers",
+            "x": 852,
+            "y": 688,
+            "width": 61,
+            "height": 61,
+            "opacity": 0
+          }
+        ],
+        "images": [
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fbrand%2Flogo-80.webp&w=80&q=75",
+            "complete": true,
+            "naturalWidth": 80,
+            "naturalHeight": 80
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ftomato-cluster.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 110,
+            "naturalHeight": 110
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ffresh-herb-bunch.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 110,
+            "naturalHeight": 110
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fbrown-eggs.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 110,
+            "naturalHeight": 110
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fraw-chicken-breast-plate.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 110,
+            "naturalHeight": 110
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Frice-bowl.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 110,
+            "naturalHeight": 110
+          },
+          {
+            "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fyellow-red-bell-peppers.webp&w=128&q=75",
+            "complete": true,
+            "naturalWidth": 110,
+            "naturalHeight": 110
+          }
+        ]
+      },
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\10-desktop-1920x1080-final.png"
+    }
+  ],
+  "reverseScroll": {
+    "state": {
+      "requestedProgress": 0.24,
+      "computedProgress": 0.24,
+      "activeStage": "1",
+      "doorAngle": "-108.00deg",
+      "recipeOpacity": 0,
+      "supportOpacity": 0,
+      "finalOpacity": 0,
+      "rectTop": -581,
+      "viewport": [
+        1440,
+        900
+      ]
+    },
+    "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\11-reverse-scroll.png"
+  },
+  "reducedMotion": {
+    "layout": {
+      "label": "reduced-motion",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "page": {
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "horizontalOverflow": 0
+      },
+      "story": {
+        "height": 926,
+        "rect": {
+          "top": 112,
+          "bottom": 1038,
+          "width": 1440
+        },
+        "enhanced": "true",
+        "reducedMotion": "true",
+        "activeStage": "4"
+      },
+      "ingredients": [
+        {
+          "id": "tomato",
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "opacity": 0
+        },
+        {
+          "id": "herbs",
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "opacity": 0
+        },
+        {
+          "id": "eggs",
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "opacity": 0
+        },
+        {
+          "id": "chicken",
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "opacity": 0
+        },
+        {
+          "id": "rice",
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "opacity": 0
+        },
+        {
+          "id": "peppers",
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "opacity": 0
+        }
+      ],
+      "images": [
+        {
+          "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fbrand%2Flogo-80.webp&w=80&q=75",
+          "complete": true,
+          "naturalWidth": 80,
+          "naturalHeight": 80
+        },
+        {
+          "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ftomato-cluster.webp&w=128&q=75",
+          "complete": true,
+          "naturalWidth": 110,
+          "naturalHeight": 110
+        },
+        {
+          "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Ffresh-herb-bunch.webp&w=128&q=75",
+          "complete": true,
+          "naturalWidth": 110,
+          "naturalHeight": 110
+        },
+        {
+          "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fbrown-eggs.webp&w=128&q=75",
+          "complete": true,
+          "naturalWidth": 110,
+          "naturalHeight": 110
+        },
+        {
+          "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fraw-chicken-breast-plate.webp&w=128&q=75",
+          "complete": true,
+          "naturalWidth": 110,
+          "naturalHeight": 110
+        },
+        {
+          "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Frice-bowl.webp&w=128&q=75",
+          "complete": true,
+          "naturalWidth": 110,
+          "naturalHeight": 110
+        },
+        {
+          "src": "http://localhost:4174/_next/image?url=%2Fassets%2Fsmart-fridge%2Fyellow-red-bell-peppers.webp&w=128&q=75",
+          "complete": true,
+          "naturalWidth": 110,
+          "naturalHeight": 110
+        }
+      ]
+    },
+    "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\12-reduced-motion.png"
+  },
+  "diagnostics": {
+    "consoleMessages": [],
+    "logEntries": [],
+    "exceptions": [],
+    "failedRequests": [],
+    "hydrationMatches": []
+  }
+}

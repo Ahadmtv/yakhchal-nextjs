@@ -27,6 +27,13 @@ export const assets = {
   article3: "/assets/articles/article-3.webp",
   article3Small: "/assets/articles/article-3-450.webp",
 
+  smartFridgeTomato: "/assets/smart-fridge/tomato-cluster.webp",
+  smartFridgeHerbs: "/assets/smart-fridge/fresh-herb-bunch.webp",
+  smartFridgeEggs: "/assets/smart-fridge/brown-eggs.webp",
+  smartFridgeChicken: "/assets/smart-fridge/raw-chicken-breast-plate.webp",
+  smartFridgeRice: "/assets/smart-fridge/rice-bowl.webp",
+  smartFridgePeppers: "/assets/smart-fridge/yellow-red-bell-peppers.webp",
+
   og: "/assets/seo/og-image-1200x630.png",
 
   icon192: "/icons/android-chrome-192x192.png",

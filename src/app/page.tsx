@@ -1,6 +1,6 @@
 import Hero from "@/components/Hero";
 import FeaturesSection from "@/components/FeaturesSection";
-import WorkflowSection from "@/components/WorkflowSection";
+import SmartFridgeStory from "@/components/smart-fridge-story/SmartFridgeStory";
 import LazyBMICalculator from "@/components/LazyBMICalculator";
 import DownloadSection from "@/components/DownloadSection";
 import ArticlesSection from "@/components/ArticlesSection";
@@ -28,10 +28,8 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqSchema) }}
       />
       <Hero />
+      <SmartFridgeStory />
       <FeaturesSection />
-      <section id="workflow">
-        <WorkflowSection />
-      </section>
       <LazyBMICalculator />
       <DownloadSection />
       <ArticlesSection />
