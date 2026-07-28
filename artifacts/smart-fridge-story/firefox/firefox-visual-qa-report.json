@@ -1,0 +1,755 @@
+{
+  "pageUrl": "http://localhost:4174/",
+  "capturedAt": "2026-07-28T21:33:19.503Z",
+  "browser": {
+    "executable": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+    "bidiUrl": "ws://127.0.0.1:4951/session",
+    "capabilities": {
+      "acceptInsecureCerts": true,
+      "browserName": "firefox",
+      "browserVersion": "153.0.1",
+      "platformName": "windows",
+      "setWindowRect": true,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "moz:buildID": "20260727124451",
+      "moz:headless": true,
+      "moz:platformVersion": "10.0",
+      "moz:processID": 10156,
+      "moz:profile": "C:\\Users\\ahad\\AppData\\Local\\Temp\\codex-smart-fridge-firefox-C4kXDm",
+      "moz:shutdownTimeout": 60000
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "devicePixelRatio": 1,
+    "location": "http://localhost:4174/"
+  },
+  "states": [
+    {
+      "name": "00-initial-p006.png",
+      "progress": 0.06,
+      "stage": "0",
+      "requestedProgress": 0.06,
+      "computedProgress": 0.06,
+      "activeStage": "0",
+      "variables": {
+        "doorAngle": "-108.00deg",
+        "doorFrontOpacity": 0,
+        "doorInnerOpacity": 1,
+        "recipeOpacity": 0,
+        "supportOpacity": 0,
+        "finalOpacity": 0
+      },
+      "door": {
+        "exists": true,
+        "className": "smartFridgeStory-module__6Dm2RG__door",
+        "rect": {
+          "x": 346.7,
+          "y": 230.6,
+          "width": 117.4,
+          "height": 526.5
+        },
+        "layoutSize": {
+          "width": 248,
+          "height": 438
+        },
+        "transform": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)",
+        "transformOrigin": "0px 218.858px",
+        "transformStyle": "flat",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": 1,
+        "frontOpacity": 0,
+        "innerOpacity": 1
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "storyHeight": 2700,
+      "imagesReady": true,
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\firefox\\00-initial-p006.png"
+    },
+    {
+      "name": "01-ingredients-p031.png",
+      "progress": 0.31,
+      "stage": "1",
+      "requestedProgress": 0.31,
+      "computedProgress": 0.3098,
+      "activeStage": "1",
+      "variables": {
+        "doorAngle": "-108.00deg",
+        "doorFrontOpacity": 0,
+        "doorInnerOpacity": 1,
+        "recipeOpacity": 0,
+        "supportOpacity": 0,
+        "finalOpacity": 0
+      },
+      "door": {
+        "exists": true,
+        "className": "smartFridgeStory-module__6Dm2RG__door",
+        "rect": {
+          "x": 346.7,
+          "y": 230.6,
+          "width": 117.4,
+          "height": 526.5
+        },
+        "layoutSize": {
+          "width": 248,
+          "height": 438
+        },
+        "transform": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)",
+        "transformOrigin": "0px 218.858px",
+        "transformStyle": "flat",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": 1,
+        "frontOpacity": 0,
+        "innerOpacity": 1
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "storyHeight": 2700,
+      "imagesReady": true,
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\firefox\\01-ingredients-p031.png"
+    },
+    {
+      "name": "02-recipe-p040.png",
+      "progress": 0.4,
+      "stage": "2",
+      "requestedProgress": 0.4,
+      "computedProgress": 0.4001,
+      "activeStage": "2",
+      "variables": {
+        "doorAngle": "-108.00deg",
+        "doorFrontOpacity": 0,
+        "doorInnerOpacity": 1,
+        "recipeOpacity": 1,
+        "supportOpacity": 0,
+        "finalOpacity": 0
+      },
+      "door": {
+        "exists": true,
+        "className": "smartFridgeStory-module__6Dm2RG__door",
+        "rect": {
+          "x": 346.7,
+          "y": 230.6,
+          "width": 117.4,
+          "height": 526.5
+        },
+        "layoutSize": {
+          "width": 248,
+          "height": 438
+        },
+        "transform": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)",
+        "transformOrigin": "0px 218.858px",
+        "transformStyle": "flat",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": 1,
+        "frontOpacity": 0,
+        "innerOpacity": 1
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "storyHeight": 2700,
+      "imagesReady": true,
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\firefox\\02-recipe-p040.png"
+    },
+    {
+      "name": "03-plan-p062.png",
+      "progress": 0.62,
+      "stage": "3",
+      "requestedProgress": 0.62,
+      "computedProgress": 0.6201,
+      "activeStage": "3",
+      "variables": {
+        "doorAngle": "-108.00deg",
+        "doorFrontOpacity": 0,
+        "doorInnerOpacity": 1,
+        "recipeOpacity": 1,
+        "supportOpacity": 1,
+        "finalOpacity": 0
+      },
+      "door": {
+        "exists": true,
+        "className": "smartFridgeStory-module__6Dm2RG__door",
+        "rect": {
+          "x": 346.7,
+          "y": 230.6,
+          "width": 117.4,
+          "height": 526.5
+        },
+        "layoutSize": {
+          "width": 248,
+          "height": 438
+        },
+        "transform": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)",
+        "transformOrigin": "0px 218.858px",
+        "transformStyle": "flat",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": 1,
+        "frontOpacity": 0,
+        "innerOpacity": 1
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "storyHeight": 2700,
+      "imagesReady": true,
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\firefox\\03-plan-p062.png"
+    },
+    {
+      "name": "04-door-mid-p080.png",
+      "progress": 0.8,
+      "stage": "4",
+      "requestedProgress": 0.8,
+      "computedProgress": 0.8002,
+      "activeStage": "4",
+      "variables": {
+        "doorAngle": "-53.78deg",
+        "doorFrontOpacity": 0.502,
+        "doorInnerOpacity": 0.498,
+        "recipeOpacity": 0,
+        "supportOpacity": 0,
+        "finalOpacity": 0
+      },
+      "door": {
+        "exists": true,
+        "className": "smartFridgeStory-module__6Dm2RG__door",
+        "rect": {
+          "x": 464,
+          "y": 238.5,
+          "width": 150.4,
+          "height": 510.7
+        },
+        "layoutSize": {
+          "width": 248,
+          "height": 438
+        },
+        "transform": "matrix3d(0.590887, 0, 0.806754, 0, 0, 1, 0, 0, -0.806754, 0, 0.590887, 0, 0, 0, 0, 1)",
+        "transformOrigin": "0px 218.858px",
+        "transformStyle": "flat",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": 1,
+        "frontOpacity": 0.502,
+        "innerOpacity": 0.498
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "storyHeight": 2700,
+      "imagesReady": true,
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\firefox\\04-door-mid-p080.png"
+    },
+    {
+      "name": "05-door-near-p084.png",
+      "progress": 0.84,
+      "stage": "4",
+      "requestedProgress": 0.84,
+      "computedProgress": 0.8401,
+      "activeStage": "4",
+      "variables": {
+        "doorAngle": "-16.83deg",
+        "doorFrontOpacity": 0.8442,
+        "doorInnerOpacity": 0.1558,
+        "recipeOpacity": 0,
+        "supportOpacity": 0,
+        "finalOpacity": 1
+      },
+      "door": {
+        "exists": true,
+        "className": "smartFridgeStory-module__6Dm2RG__door",
+        "rect": {
+          "x": 464,
+          "y": 263.3,
+          "width": 243.6,
+          "height": 461.4
+        },
+        "layoutSize": {
+          "width": 248,
+          "height": 438
+        },
+        "transform": "matrix3d(0.957168, 0, 0.289533, 0, 0, 1, 0, 0, -0.289533, 0, 0.957168, 0, 0, 0, 0, 1)",
+        "transformOrigin": "0px 218.858px",
+        "transformStyle": "flat",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": 1,
+        "frontOpacity": 0.8442,
+        "innerOpacity": 0.1558
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "storyHeight": 2700,
+      "imagesReady": true,
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\firefox\\05-door-near-p084.png"
+    },
+    {
+      "name": "06-final-p091.png",
+      "progress": 0.91,
+      "stage": "4",
+      "requestedProgress": 0.91,
+      "computedProgress": 0.9102,
+      "activeStage": "4",
+      "variables": {
+        "doorAngle": "0.00deg",
+        "doorFrontOpacity": 1,
+        "doorInnerOpacity": 0,
+        "recipeOpacity": 0,
+        "supportOpacity": 0,
+        "finalOpacity": 1
+      },
+      "door": {
+        "exists": true,
+        "className": "smartFridgeStory-module__6Dm2RG__door",
+        "rect": {
+          "x": 464,
+          "y": 275.2,
+          "width": 248.1,
+          "height": 437.7
+        },
+        "layoutSize": {
+          "width": 248,
+          "height": 438
+        },
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "transformOrigin": "0px 218.858px",
+        "transformStyle": "flat",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": 1,
+        "frontOpacity": 1,
+        "innerOpacity": 0
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "storyHeight": 2700,
+      "imagesReady": true,
+      "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\firefox\\06-final-p091.png"
+    }
+  ],
+  "reverseScroll": {
+    "requestedProgress": 0.17,
+    "computedProgress": 0.17,
+    "activeStage": "1",
+    "variables": {
+      "doorAngle": "-108.00deg",
+      "doorFrontOpacity": 0,
+      "doorInnerOpacity": 1,
+      "recipeOpacity": 0,
+      "supportOpacity": 0,
+      "finalOpacity": 0
+    },
+    "door": {
+      "exists": true,
+      "className": "smartFridgeStory-module__6Dm2RG__door",
+      "rect": {
+        "x": 346.7,
+        "y": 230.6,
+        "width": 117.4,
+        "height": 526.5
+      },
+      "layoutSize": {
+        "width": 248,
+        "height": 438
+      },
+      "transform": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)",
+      "transformOrigin": "0px 218.858px",
+      "transformStyle": "flat",
+      "display": "block",
+      "visibility": "visible",
+      "opacity": 1,
+      "frontOpacity": 0,
+      "innerOpacity": 1
+    },
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "storyHeight": 2700,
+    "imagesReady": true,
+    "filePath": "C:\\Users\\ahad\\Desktop\\yakhchal-nextjs-optimized\\artifacts\\smart-fridge-story\\firefox\\07-reverse-p017.png"
+  },
+  "diagnostics": {
+    "errorLogs": [],
+    "fetchErrors": [],
+    "launchOutput": [
+      "*** You are running in headless mode.",
+      "Dynamically enable window occlusion 0",
+      "WebDriver BiDi listening on ws://127.0.0.1:4951",
+      "[WARN  rkv::backend::impl_safe::environment] `load_ratio()` is irrelevant for this storage backend.",
+      "[GFX1-]: RenderCompos",
+      "itorSWGL failed mapping default framebuffer, no dt",
+      "1785274389469\tRemoteAgent\tINFO\tPerform WebSocket upgrade for incoming connection from 127.0.0.1:4964",
+      "1785274389530\tRemoteAgent\tWARN\tTLS certificate errors will be ignored for this session"
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "0.06: expected active stage",
+        "passed": true,
+        "detail": "expected 0, received 0"
+      },
+      {
+        "name": "0.06: door is rendered",
+        "passed": true,
+        "detail": {
+          "exists": true,
+          "className": "smartFridgeStory-module__6Dm2RG__door",
+          "rect": {
+            "x": 346.7,
+            "y": 230.6,
+            "width": 117.4,
+            "height": 526.5
+          },
+          "layoutSize": {
+            "width": 248,
+            "height": 438
+          },
+          "transform": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)",
+          "transformOrigin": "0px 218.858px",
+          "transformStyle": "flat",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": 1,
+          "frontOpacity": 0,
+          "innerOpacity": 1
+        }
+      },
+      {
+        "name": "0.06: door transform is finite",
+        "passed": true,
+        "detail": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)"
+      },
+      {
+        "name": "0.06: ingredient images are decoded",
+        "passed": true,
+        "detail": true
+      },
+      {
+        "name": "0.31: expected active stage",
+        "passed": true,
+        "detail": "expected 1, received 1"
+      },
+      {
+        "name": "0.31: door is rendered",
+        "passed": true,
+        "detail": {
+          "exists": true,
+          "className": "smartFridgeStory-module__6Dm2RG__door",
+          "rect": {
+            "x": 346.7,
+            "y": 230.6,
+            "width": 117.4,
+            "height": 526.5
+          },
+          "layoutSize": {
+            "width": 248,
+            "height": 438
+          },
+          "transform": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)",
+          "transformOrigin": "0px 218.858px",
+          "transformStyle": "flat",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": 1,
+          "frontOpacity": 0,
+          "innerOpacity": 1
+        }
+      },
+      {
+        "name": "0.31: door transform is finite",
+        "passed": true,
+        "detail": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)"
+      },
+      {
+        "name": "0.31: ingredient images are decoded",
+        "passed": true,
+        "detail": true
+      },
+      {
+        "name": "0.4: expected active stage",
+        "passed": true,
+        "detail": "expected 2, received 2"
+      },
+      {
+        "name": "0.4: door is rendered",
+        "passed": true,
+        "detail": {
+          "exists": true,
+          "className": "smartFridgeStory-module__6Dm2RG__door",
+          "rect": {
+            "x": 346.7,
+            "y": 230.6,
+            "width": 117.4,
+            "height": 526.5
+          },
+          "layoutSize": {
+            "width": 248,
+            "height": 438
+          },
+          "transform": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)",
+          "transformOrigin": "0px 218.858px",
+          "transformStyle": "flat",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": 1,
+          "frontOpacity": 0,
+          "innerOpacity": 1
+        }
+      },
+      {
+        "name": "0.4: door transform is finite",
+        "passed": true,
+        "detail": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)"
+      },
+      {
+        "name": "0.4: ingredient images are decoded",
+        "passed": true,
+        "detail": true
+      },
+      {
+        "name": "0.62: expected active stage",
+        "passed": true,
+        "detail": "expected 3, received 3"
+      },
+      {
+        "name": "0.62: door is rendered",
+        "passed": true,
+        "detail": {
+          "exists": true,
+          "className": "smartFridgeStory-module__6Dm2RG__door",
+          "rect": {
+            "x": 346.7,
+            "y": 230.6,
+            "width": 117.4,
+            "height": 526.5
+          },
+          "layoutSize": {
+            "width": 248,
+            "height": 438
+          },
+          "transform": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)",
+          "transformOrigin": "0px 218.858px",
+          "transformStyle": "flat",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": 1,
+          "frontOpacity": 0,
+          "innerOpacity": 1
+        }
+      },
+      {
+        "name": "0.62: door transform is finite",
+        "passed": true,
+        "detail": "matrix3d(-0.309017, 0, 0.951057, 0, 0, 1, 0, 0, -0.951057, 0, -0.309017, 0, 0, 0, 0, 1)"
+      },
+      {
+        "name": "0.62: ingredient images are decoded",
+        "passed": true,
+        "detail": true
+      },
+      {
+        "name": "0.8: expected active stage",
+        "passed": true,
+        "detail": "expected 4, received 4"
+      },
+      {
+        "name": "0.8: door is rendered",
+        "passed": true,
+        "detail": {
+          "exists": true,
+          "className": "smartFridgeStory-module__6Dm2RG__door",
+          "rect": {
+            "x": 464,
+            "y": 238.5,
+            "width": 150.4,
+            "height": 510.7
+          },
+          "layoutSize": {
+            "width": 248,
+            "height": 438
+          },
+          "transform": "matrix3d(0.590887, 0, 0.806754, 0, 0, 1, 0, 0, -0.806754, 0, 0.590887, 0, 0, 0, 0, 1)",
+          "transformOrigin": "0px 218.858px",
+          "transformStyle": "flat",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": 1,
+          "frontOpacity": 0.502,
+          "innerOpacity": 0.498
+        }
+      },
+      {
+        "name": "0.8: door transform is finite",
+        "passed": true,
+        "detail": "matrix3d(0.590887, 0, 0.806754, 0, 0, 1, 0, 0, -0.806754, 0, 0.590887, 0, 0, 0, 0, 1)"
+      },
+      {
+        "name": "0.8: ingredient images are decoded",
+        "passed": true,
+        "detail": true
+      },
+      {
+        "name": "0.84: expected active stage",
+        "passed": true,
+        "detail": "expected 4, received 4"
+      },
+      {
+        "name": "0.84: door is rendered",
+        "passed": true,
+        "detail": {
+          "exists": true,
+          "className": "smartFridgeStory-module__6Dm2RG__door",
+          "rect": {
+            "x": 464,
+            "y": 263.3,
+            "width": 243.6,
+            "height": 461.4
+          },
+          "layoutSize": {
+            "width": 248,
+            "height": 438
+          },
+          "transform": "matrix3d(0.957168, 0, 0.289533, 0, 0, 1, 0, 0, -0.289533, 0, 0.957168, 0, 0, 0, 0, 1)",
+          "transformOrigin": "0px 218.858px",
+          "transformStyle": "flat",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": 1,
+          "frontOpacity": 0.8442,
+          "innerOpacity": 0.1558
+        }
+      },
+      {
+        "name": "0.84: door transform is finite",
+        "passed": true,
+        "detail": "matrix3d(0.957168, 0, 0.289533, 0, 0, 1, 0, 0, -0.289533, 0, 0.957168, 0, 0, 0, 0, 1)"
+      },
+      {
+        "name": "0.84: ingredient images are decoded",
+        "passed": true,
+        "detail": true
+      },
+      {
+        "name": "0.91: expected active stage",
+        "passed": true,
+        "detail": "expected 4, received 4"
+      },
+      {
+        "name": "0.91: door is rendered",
+        "passed": true,
+        "detail": {
+          "exists": true,
+          "className": "smartFridgeStory-module__6Dm2RG__door",
+          "rect": {
+            "x": 464,
+            "y": 275.2,
+            "width": 248.1,
+            "height": 437.7
+          },
+          "layoutSize": {
+            "width": 248,
+            "height": 438
+          },
+          "transform": "matrix(1, 0, 0, 1, 0, 0)",
+          "transformOrigin": "0px 218.858px",
+          "transformStyle": "flat",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": 1,
+          "frontOpacity": 1,
+          "innerOpacity": 0
+        }
+      },
+      {
+        "name": "0.91: door transform is finite",
+        "passed": true,
+        "detail": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "name": "0.91: ingredient images are decoded",
+        "passed": true,
+        "detail": true
+      },
+      {
+        "name": "no ghost recipe card at p=.31",
+        "passed": true,
+        "detail": 0
+      },
+      {
+        "name": "recipe card is fully opaque at p=.40",
+        "passed": true,
+        "detail": 1
+      },
+      {
+        "name": "plan cards are fully opaque at p=.62",
+        "passed": true,
+        "detail": 1
+      },
+      {
+        "name": "door reaches a visible midpoint at p=.80",
+        "passed": true,
+        "detail": "-53.78deg"
+      },
+      {
+        "name": "door continues smoothly at p=.84",
+        "passed": true,
+        "detail": "-16.83deg"
+      },
+      {
+        "name": "final card appears fully opaque at p=.84",
+        "passed": true,
+        "detail": 1
+      },
+      {
+        "name": "door is closed and final message is visible at p=.91",
+        "passed": true,
+        "detail": {
+          "doorAngle": "0.00deg",
+          "finalOpacity": 1
+        }
+      },
+      {
+        "name": "door transform changes at both closing checkpoints",
+        "passed": true,
+        "detail": [
+          "matrix3d(0.590887, 0, 0.806754, 0, 0, 1, 0, 0, -0.806754, 0, 0.590887, 0, 0, 0, 0, 1)",
+          "matrix3d(0.957168, 0, 0.289533, 0, 0, 1, 0, 0, -0.289533, 0, 0.957168, 0, 0, 0, 0, 1)",
+          "matrix(1, 0, 0, 1, 0, 0)"
+        ]
+      },
+      {
+        "name": "reverse scroll reopens the door",
+        "passed": true,
+        "detail": {
+          "doorAngle": "-108.00deg",
+          "activeStage": "1"
+        }
+      },
+      {
+        "name": "no Firefox error-level console logs",
+        "passed": true,
+        "detail": []
+      }
+    ],
+    "failures": []
+  }
+}

@@ -115,8 +115,7 @@ async function screenshot(fileName) {
 async function scrollStory(progress) {
   return evaluate(`(async () => {
     const section = document.getElementById("workflow");
-    const compact = innerWidth < 900;
-    const headerOffset = compact ? 74 : 88;
+    const headerOffset = innerWidth < 700 ? 68 : innerWidth < 900 ? 72 : 82;
     const sectionTop = scrollY + section.getBoundingClientRect().top;
     const distance = Math.max(1, section.offsetHeight - innerHeight + headerOffset);
     scrollTo({ top: sectionTop - headerOffset + distance * ${progress}, behavior: "instant" });
@@ -209,11 +208,11 @@ await wait(180);
 const homepageDesktopScreenshot = await screenshot("00-homepage-1440x900.png");
 
 const requestedStages = [
-  ["01-initial-ingredients.png", 0.08],
-  ["02-ingredients-inside.png", 0.45],
-  ["03-recipe-recommendation.png", 0.53],
-  ["04-weekly-plan-shopping.png", 0.72],
-  ["05-final-closed-door.png", 0.98],
+  ["01-initial-ingredients.png", 0.06],
+  ["02-ingredients-inside.png", 0.31],
+  ["03-recipe-recommendation.png", 0.4],
+  ["04-weekly-plan-shopping.png", 0.62],
+  ["05-final-closed-door.png", 0.91],
 ];
 
 const stages = [];
@@ -227,9 +226,9 @@ await evaluate(
   `document.documentElement.dataset.theme = "dark"; document.documentElement.style.colorScheme = "dark"; localStorage.setItem("yakhchal:theme", "dark"); true`,
 );
 await wait(220);
-const darkRecipeState = await scrollStory(0.53);
+const darkRecipeState = await scrollStory(0.4);
 const darkRecipeScreenshot = await screenshot("06a-recipe-dark-theme.png");
-const darkFinalState = await scrollStory(0.98);
+const darkFinalState = await scrollStory(0.91);
 const darkFinalScreenshot = await screenshot("06-final-dark-theme.png");
 
 await evaluate(
@@ -241,11 +240,11 @@ await wait(180);
 const homepageMobileScreenshot = await screenshot("00a-homepage-390x844.png");
 
 const responsiveCases = [
-  { width: 360, height: 800, mobile: true, progress: 0.53, name: "07-mobile-360x800-recipe.png" },
-  { width: 390, height: 844, mobile: true, progress: 0.72, name: "08-mobile-390x844-plan.png" },
-  { width: 390, height: 844, mobile: true, progress: 0.98, name: "08a-mobile-390x844-final.png" },
-  { width: 768, height: 1024, mobile: false, progress: 0.45, name: "09-tablet-768x1024-ingredients.png" },
-  { width: 1920, height: 1080, mobile: false, progress: 0.98, name: "10-desktop-1920x1080-final.png" },
+  { width: 360, height: 800, mobile: true, progress: 0.4, name: "07-mobile-360x800-recipe.png" },
+  { width: 390, height: 844, mobile: true, progress: 0.62, name: "08-mobile-390x844-plan.png" },
+  { width: 390, height: 844, mobile: true, progress: 0.91, name: "08a-mobile-390x844-final.png" },
+  { width: 768, height: 1024, mobile: false, progress: 0.31, name: "09-tablet-768x1024-ingredients.png" },
+  { width: 1920, height: 1080, mobile: false, progress: 0.91, name: "10-desktop-1920x1080-final.png" },
 ];
 
 const responsive = [];
@@ -259,8 +258,8 @@ for (const testCase of responsiveCases) {
 }
 
 await setViewport(1440, 900);
-await scrollStory(0.98);
-const reverseState = await scrollStory(0.24);
+await scrollStory(0.91);
+const reverseState = await scrollStory(0.17);
 const reverseScreenshot = await screenshot("11-reverse-scroll.png");
 
 await send("Emulation.setEmulatedMedia", {
@@ -307,6 +306,57 @@ diagnostics.hydrationMatches =
     /hydration|hydrated|server rendered|did not match/gi,
   ) || [];
 
+const validationChecks = {
+  requestedProgressReached: stages.every(
+    (stage) =>
+      Math.abs(stage.requestedProgress - stage.computedProgress) <= 0.002,
+  ),
+  ingredientStageHasNoGhostCard:
+    stages[1].activeStage === "1" && stages[1].recipeOpacity === 0,
+  recipeStageIsFullyReadable:
+    stages[2].activeStage === "2" &&
+    stages[2].recipeOpacity === 1 &&
+    stages[2].supportOpacity === 0,
+  planStageIsFullyReadable:
+    stages[3].activeStage === "3" &&
+    stages[3].recipeOpacity === 1 &&
+    stages[3].supportOpacity === 1,
+  finalStageIsClean:
+    stages[4].activeStage === "4" &&
+    stages[4].doorAngle === "0.00deg" &&
+    stages[4].recipeOpacity === 0 &&
+    stages[4].supportOpacity === 0 &&
+    stages[4].finalOpacity === 1,
+  reverseScrollRestoresOpenState:
+    reverseState.activeStage === "1" &&
+    reverseState.doorAngle.startsWith("-") &&
+    reverseState.recipeOpacity === 0 &&
+    reverseState.supportOpacity === 0 &&
+    reverseState.finalOpacity === 0,
+  noResponsiveOverflow: responsive.every(
+    ({ layout }) => layout.page.horizontalOverflow === 0,
+  ),
+  allStoryImagesLoaded: responsive.every(({ layout }) =>
+    layout.images.every(
+      (image) =>
+        image.complete && image.naturalWidth > 0 && image.naturalHeight > 0,
+    ),
+  ),
+  reducedMotionUsesStaticFinalState:
+    reducedMotionLayout.story.reducedMotion === "true" &&
+    reducedMotionLayout.story.activeStage === "4",
+  noRuntimeErrors:
+    diagnostics.logEntries.length === 0 &&
+    diagnostics.exceptions.length === 0 &&
+    diagnostics.failedRequests.length === 0 &&
+    diagnostics.hydrationMatches.length === 0,
+};
+
+const validation = {
+  passed: Object.values(validationChecks).every(Boolean),
+  checks: validationChecks,
+};
+
 const report = {
   pageUrl,
   capturedAt: new Date().toISOString(),
@@ -331,6 +381,7 @@ const report = {
     filePath: reducedMotionScreenshot,
   },
   diagnostics,
+  validation,
 };
 
 await writeFile(
@@ -339,3 +390,10 @@ await writeFile(
 );
 console.log(JSON.stringify(report, null, 2));
 socket.close();
+
+if (!validation.passed) {
+  const failures = Object.entries(validationChecks)
+    .filter(([, passed]) => !passed)
+    .map(([name]) => name);
+  throw new Error(`Visual QA failed: ${failures.join(", ")}`);
+}

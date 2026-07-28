@@ -16,6 +16,8 @@ const staticFinalVariables = {
   "--recipe-scale": "1",
   "--door-close": "1",
   "--door-angle": "0deg",
+  "--door-front-opacity": "1",
+  "--door-inner-opacity": "0",
   "--interior-opacity": ".14",
   "--final-opacity": "1",
   "--final-shift": "0px",

@@ -1,17 +1,18 @@
 # Smart Fridge Story — delivery notes
 
-Production QA was captured from the optimized Next.js build on 2026-07-28.
+Production QA was captured from the optimized Next.js build on 2026-07-29.
 
 ## Scroll timeline
 
-- `0.00–0.18` — six ingredients appear around the open refrigerator.
-- `0.18–0.46` — ingredients follow individually staggered, curved paths into three shelf zones.
-- `0.40–0.62` — the interior illuminates, recognition status appears, and the recipe card is revealed.
-- `0.58–0.80` — the recipe transfers toward the weekly plan while the plan and missing-item shopping list appear.
-- `0.78–0.96` — the hinged door closes with perspective and the interior UI clears away.
-- `0.87–1.00` — the final message and download CTA appear.
+- `0.00–0.12` — six ingredients appear around the open refrigerator.
+- `0.10–0.32` — ingredients follow individually staggered, curved paths into three shelf zones.
+- `0.275–0.32` — the interior recognizes the ingredients and confirms the inventory.
+- `0.32–0.48` — the recipe card appears at full opacity, with no half-readable resting state.
+- `0.48–0.72` — the weekly plan and missing-item shopping list appear at full opacity.
+- `0.72–0.88` — the hinged door closes while the interior UI clears away.
+- `0.84–1.00` — the final message and download CTA appear at full opacity.
 
-The controller derives one normalized value from the story section’s measured height and viewport position. It uses a passive scroll listener plus `requestAnimationFrame`, writes CSS variables directly, and reverses on upward scroll without timers or scroll locking.
+The controller derives one normalized value from the story section’s measured height and viewport position. It uses a passive scroll listener plus `requestAnimationFrame`, writes CSS variables directly, and reverses on upward scroll without timers or scroll locking. The track is now `300svh` on desktop, `285svh` on tablet, and `250svh` on mobile, reducing the interaction by roughly one quarter to one third.
 
 ## Primary story screenshots
 
@@ -35,18 +36,26 @@ The controller derives one normalized value from the story section’s measured 
 - [Reverse-scroll state](./11-reverse-scroll.png)
 - [Reduced-motion static composition](./12-reduced-motion.png)
 - [Machine-readable browser report](./visual-qa-report.json)
+- [Firefox door midpoint](./firefox/04-door-mid-p080.png)
+- [Firefox near-closed door](./firefox/05-door-near-p084.png)
+- [Firefox final state](./firefox/06-final-p091.png)
+- [Firefox WebDriver BiDi report](./firefox/firefox-visual-qa-report.json)
 
 ## Browser QA results
 
-- Exact requested/computed progress: `0.08/0.0800`, `0.45/0.4501`, `0.53/0.5301`, `0.72/0.7199`, `0.98/0.9799`.
-- Reverse test: scrolling from `0.98` back to `0.24` restored stage `1`, reopened the door to `-108deg`, and hid final-state UI.
+- Exact requested/computed progress stays within `0.0003` at checkpoints `0.06`, `0.31`, `0.40`, `0.62`, and `0.91`.
+- At `0.31` the incoming recipe card is fully hidden; at `0.40` the recipe is fully opaque; at `0.62` the recipe, plan, and shopping cards are fully opaque.
+- Reverse test: scrolling from `0.91` back to `0.17` restored stage `1`, reopened the door to `-108deg`, and hid every recipe/final card.
 - Horizontal overflow: `0px` at 360×800, 390×844, 768×1024, 1440×900, and 1920×1080.
 - Console errors/warnings: `0`.
 - Runtime exceptions: `0`.
 - Failed requests: `0`.
 - Hydration-warning matches: `0`.
 - All story images loaded with non-zero natural dimensions through `next/image`.
-- Reduced motion collapses the story to a static 926px section at 1440×900 instead of the four-screen scroll track.
+- All ten machine-enforced visual QA checks pass.
+- Firefox 153.0.1 production QA passes through native WebDriver BiDi: the door moves through `-53.78deg`, `-16.83deg`, and `0deg`, then reopens to `-108deg` on reverse scroll.
+- Firefox reports `0` error-level console entries and `0` fetch errors; the final card is fully opaque at the near-closed checkpoint.
+- Reduced motion collapses the story to a static 926px section at 1440×900 instead of the three-screen desktop scroll track.
 
 ## Generated ingredient assets
 
@@ -69,5 +78,7 @@ All generated assets use consistent three-quarter food photography, soft upper-l
 - `npm run lint` — passed.
 - `npm run build` — passed; 17 static/SSG pages generated.
 - `npm run check` — passed after the final clean install.
+- Chrome production visual QA — passed all 10 enforced checks.
+- Firefox 153.0.1 production visual QA — passed all WebDriver BiDi checks.
 
 `npm ci` also surfaced the repository dependency tree’s existing npm-audit advisories (12 high-severity entries). No automatic `npm audit fix` was applied because it can rewrite locked dependencies and introduce unrelated or breaking upgrades.

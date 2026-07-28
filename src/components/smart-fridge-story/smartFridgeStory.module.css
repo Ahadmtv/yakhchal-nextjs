@@ -11,6 +11,8 @@
   --cards-shift: 0px;
   --shopping-row-shift: 0px;
   --door-angle: 0deg;
+  --door-front-opacity: 1;
+  --door-inner-opacity: 0;
   --interior-opacity: .14;
   --final-opacity: 1;
   --final-shift: 0px;
@@ -37,7 +39,7 @@
 }
 
 .story[data-enhanced="true"] {
-  height: 400svh;
+  height: 300svh;
   padding-block: 0;
 }
 
@@ -309,6 +311,7 @@
   aspect-ratio: .565;
   transform: translate(-50%, -50%);
   perspective: 1400px;
+  perspective-origin: 50% 50%;
 }
 
 .fridgeShadow {
@@ -494,9 +497,14 @@
   position: absolute;
   z-index: 14;
   inset: 1.8% 1.9% 2.3%;
-  transform: perspective(1300px) rotateY(var(--door-angle));
+  overflow: hidden;
+  border-radius: 23px 23px 16px 16px;
+  background: linear-gradient(145deg, #d7ded9, #aeb9b2 62%, #8d9991);
+  box-shadow: 5px 0 18px rgba(22, 43, 29, .22);
+  transform: rotateY(var(--door-angle));
   transform-origin: left center;
-  transform-style: preserve-3d;
+  transform-style: flat;
+  transform-box: border-box;
   will-change: transform;
 }
 
@@ -506,7 +514,8 @@
   inset: 0;
   overflow: hidden;
   border-radius: 23px 23px 16px 16px;
-  backface-visibility: hidden;
+  backface-visibility: visible;
+  transform: none;
 }
 
 .doorFront {
@@ -517,14 +526,14 @@
   box-shadow:
     5px 0 18px rgba(22, 43, 29, .22),
     inset -7px 0 12px rgba(42, 58, 47, .13);
-  transform: translateZ(3px);
+  opacity: var(--door-front-opacity);
 }
 
 .doorInner {
   border: 5px solid #a7b5ac;
   background: linear-gradient(140deg, #eaf5ee, #cadfd1);
   box-shadow: inset 0 0 24px rgba(38, 82, 52, .14);
-  transform: rotateY(180deg) translateZ(3px);
+  opacity: var(--door-inner-opacity);
 }
 
 .doorSheen {
@@ -560,9 +569,9 @@
 }
 
 .doorBrand img {
-  width: clamp(42px, 18%, 58px);
+  width: clamp(50px, 21%, 66px);
   height: auto;
-  margin-bottom: 7px;
+  margin-bottom: 9px;
   filter: drop-shadow(0 7px 12px rgba(41, 83, 48, .18));
 }
 
@@ -573,14 +582,16 @@
 
 .doorBrand strong {
   color: #27452f;
-  font-size: clamp(.82rem, 2vw, 1.08rem);
+  font-size: clamp(1.05rem, 2.65vw, 1.45rem);
   font-weight: 950;
+  line-height: 1.3;
 }
 
 .doorBrand small {
-  margin-top: 2px;
-  color: rgba(35, 61, 42, .58);
-  font-size: .47rem;
+  margin-top: 4px;
+  color: rgba(35, 61, 42, .72);
+  font-size: .62rem;
+  font-weight: 750;
   white-space: nowrap;
 }
 
@@ -607,11 +618,11 @@
 
 .doorDisplay small {
   color: rgba(221, 241, 215, .55);
-  font-size: .42rem;
+  font-size: .5rem;
 }
 
 .doorDisplay strong {
-  font-size: .78rem;
+  font-size: .92rem;
 }
 
 .doorBin {
@@ -698,7 +709,7 @@
   margin: 0;
   border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
   color: var(--text);
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
   box-shadow: 0 22px 60px color-mix(in srgb, var(--shadow) 78%, transparent);
   backdrop-filter: blur(18px) saturate(130%);
   will-change: transform, opacity;
@@ -981,9 +992,8 @@
   border: 1px solid color-mix(in srgb, var(--secondary) 28%, var(--border));
   border-radius: 27px;
   color: var(--text);
-  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
   box-shadow: 0 24px 70px var(--shadow);
-  backdrop-filter: blur(20px);
   opacity: var(--final-opacity);
   transform: translateY(var(--final-shift));
 }
@@ -1147,7 +1157,7 @@
 
 @media (max-width: 899px) {
   .story[data-enhanced="true"] {
-    height: 360svh;
+    height: 285svh;
   }
 
   .story[data-enhanced="true"] .sticky {
@@ -1275,7 +1285,7 @@
 
 @media (max-width: 699px) {
   .story[data-enhanced="true"] {
-    height: 325svh;
+    height: 250svh;
   }
 
   .story[data-enhanced="true"] .sticky {

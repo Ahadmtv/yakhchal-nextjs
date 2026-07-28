@@ -3,29 +3,34 @@ import styles from "@/components/smart-fridge-story/smartFridgeStory.module.css"
 
 const stages: ReadonlyArray<StoryStage> = [
   {
-    number: "۰۱",
+    number: "۱",
     title: "مواد موجود را آماده کنید",
-    description: "مواد ساده‌ای که همین حالا در خانه دارید، نقطه شروع یک وعده بهترند.",
+    description:
+      "مواد ساده‌ای که همین حالا در خانه دارید، نقطه شروع یک وعده بهترند.",
   },
   {
-    number: "۰۲",
+    number: "۲",
     title: "یخچال آن‌ها را می‌شناسد",
-    description: "هر ماده در جای خودش قرار می‌گیرد و موجودی شما یک‌جا ثبت می‌شود.",
+    description:
+      "هر ماده در جای خودش قرار می‌گیرد و موجودی شما یک‌جا ثبت می‌شود.",
   },
   {
-    number: "۰۳",
+    number: "۳",
     title: "پیشنهاد مناسب شکل می‌گیرد",
-    description: "یک دستور سریع و متعادل، براساس همان مواد موجود پیشنهاد می‌شود.",
+    description:
+      "یک دستور سریع و متعادل، براساس همان مواد موجود پیشنهاد می‌شود.",
   },
   {
-    number: "۰۴",
+    number: "۴",
     title: "هفته و خریدتان کامل می‌شود",
-    description: "وعده به برنامه می‌رود و فقط مواد کمبود به فهرست خرید اضافه می‌شوند.",
+    description:
+      "وعده به برنامه می‌رود و فقط مواد کمبود به فهرست خرید اضافه می‌شوند.",
   },
   {
-    number: "۰۵",
+    number: "۵",
     title: "کمتر تصمیم، دورریز کمتر",
-    description: "یک مسیر ساده از یخچال خانه تا برنامه‌ای که واقعاً قابل اجراست.",
+    description:
+      "یک مسیر ساده از یخچال خانه تا برنامه‌ای که واقعاً قابل اجراست.",
   },
 ];
 
@@ -43,7 +48,11 @@ export default function SmartFridgeCopy() {
 
       <ol className={styles.stageList} aria-label="مراحل تجربه هوشمند یخچال">
         {stages.map((stage, index) => (
-          <li className={styles.stage} data-stage-index={index} key={stage.number}>
+          <li
+            className={styles.stage}
+            data-stage-index={index}
+            key={stage.number}
+          >
             <span className={styles.stageNumber}>{stage.number}</span>
             <span>
               <strong>{stage.title}</strong>

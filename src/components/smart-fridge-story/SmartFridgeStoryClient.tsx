@@ -13,6 +13,12 @@ const smoothstep = (value: number) => value * value * (3 - 2 * value);
 const lerp = (start: number, end: number, progress: number) =>
   start + (end - start) * progress;
 
+const headerOffsetForWidth = (width: number) => {
+  if (width < 700) return 68;
+  if (width < 900) return 72;
+  return 82;
+};
+
 type IngredientNode = HTMLElement & {
   dataset: DOMStringMap & {
     startX: string;
@@ -60,10 +66,10 @@ function readNumber(value: string | undefined, fallback = 0) {
 }
 
 function stageForProgress(progress: number) {
-  if (progress < 0.18) return 0;
-  if (progress < 0.42) return 1;
-  if (progress < 0.6) return 2;
-  if (progress < 0.79) return 3;
+  if (progress < 0.12) return 0;
+  if (progress < 0.32) return 1;
+  if (progress < 0.48) return 2;
+  if (progress < 0.72) return 3;
   return 4;
 }
 
@@ -109,41 +115,41 @@ export default function SmartFridgeStoryClient({
     let sectionHeight = section.offsetHeight;
     let viewportHeight = window.innerHeight;
     let compact = window.innerWidth < 900;
+    let headerOffset = headerOffsetForWidth(window.innerWidth);
     let previousProgress = -1;
     let previousStage = -1;
 
     section.dataset.enhanced = "true";
 
     const setStoryVariables = (progress: number) => {
-      const recognized = smoothstep(rangeProgress(progress, 0.37, 0.5));
-      const recipeReveal = smoothstep(rangeProgress(progress, 0.41, 0.55));
-      const planReveal = smoothstep(rangeProgress(progress, 0.57, 0.7));
-      const shoppingReveal = smoothstep(rangeProgress(progress, 0.63, 0.78));
-      const recipeTransfer = smoothstep(rangeProgress(progress, 0.58, 0.75));
-      const cardsExit = smoothstep(rangeProgress(progress, 0.77, 0.9));
-      const doorClose = smoothstep(rangeProgress(progress, 0.78, 0.96));
-      const finalReveal = smoothstep(rangeProgress(progress, 0.87, 0.98));
-      const ingredientAppear = smoothstep(rangeProgress(progress, 0.01, 0.14));
+      const recognized = smoothstep(rangeProgress(progress, 0.275, 0.305));
+      const planReveal = smoothstep(rangeProgress(progress, 0.45, 0.475));
+      const shoppingReveal = smoothstep(rangeProgress(progress, 0.455, 0.48));
+      const recipeTransfer = smoothstep(rangeProgress(progress, 0.48, 0.61));
+      const doorClose = smoothstep(rangeProgress(progress, 0.72, 0.88));
+      const ingredientAppear = smoothstep(rangeProgress(progress, 0.005, 0.08));
+      const recipeVisible = progress >= 0.32 ? 1 : 0;
+      const supportVisible = progress >= 0.48 ? 1 : 0;
+      const storyCardsVisible = progress < 0.72 ? 1 : 0;
+      const finalVisible = progress >= 0.84 ? 1 : 0;
 
       section.style.setProperty("--story-progress", progress.toFixed(4));
       section.style.setProperty(
         "--recognized",
-        (recognized * (1 - cardsExit)).toFixed(4),
+        (recognized * storyCardsVisible).toFixed(4),
       );
       section.style.setProperty(
         "--recipe-opacity",
-        (recipeReveal * (1 - cardsExit)).toFixed(4),
+        (recipeVisible * storyCardsVisible).toFixed(4),
       );
-      section.style.setProperty("--plan-opacity", planReveal.toFixed(4));
+      section.style.setProperty("--plan-opacity", supportVisible.toFixed(4));
       section.style.setProperty(
         "--support-opacity",
-        ((Math.max(planReveal, shoppingReveal) || 0) * (1 - cardsExit)).toFixed(
-          4,
-        ),
+        (supportVisible * storyCardsVisible).toFixed(4),
       );
       section.style.setProperty(
         "--shopping-opacity",
-        shoppingReveal.toFixed(4),
+        supportVisible.toFixed(4),
       );
       section.style.setProperty(
         "--recipe-shift-x",
@@ -171,17 +177,25 @@ export default function SmartFridgeStoryClient({
         `${lerp(compact ? -96 : -108, 0, doorClose).toFixed(2)}deg`,
       );
       section.style.setProperty(
+        "--door-front-opacity",
+        doorClose.toFixed(4),
+      );
+      section.style.setProperty(
+        "--door-inner-opacity",
+        (1 - doorClose).toFixed(4),
+      );
+      section.style.setProperty(
         "--interior-opacity",
         lerp(1, 0.14, doorClose).toFixed(4),
       );
-      section.style.setProperty("--final-opacity", finalReveal.toFixed(4));
+      section.style.setProperty("--final-opacity", finalVisible.toFixed(4));
       section.style.setProperty(
         "--final-shift",
-        `${lerp(22, 0, finalReveal).toFixed(2)}px`,
+        `${lerp(22, 0, finalVisible).toFixed(2)}px`,
       );
       section.style.setProperty(
         "--hint-opacity",
-        (1 - smoothstep(rangeProgress(progress, 0.035, 0.14))).toFixed(4),
+        (1 - smoothstep(rangeProgress(progress, 0.025, 0.1))).toFixed(4),
       );
 
       for (const motion of ingredientMotions) {
@@ -213,7 +227,7 @@ export default function SmartFridgeStoryClient({
           rangeProgress(progress, 0.015 + motion.delay, 0.105 + motion.delay),
         );
         const opacity =
-          Math.max(ingredientAppear * 0.55, appeared) * (1 - doorClose);
+          Math.max(ingredientAppear * 0.55, appeared) * storyCardsVisible;
 
         motion.node.style.setProperty("--item-x", `${x.toFixed(2)}px`);
         motion.node.style.setProperty("--item-y", `${y.toFixed(2)}px`);
@@ -249,7 +263,6 @@ export default function SmartFridgeStoryClient({
 
       section.dataset.reducedMotion = "false";
       const rect = section.getBoundingClientRect();
-      const headerOffset = compact ? 74 : 88;
       const scrollableDistance = Math.max(
         1,
         sectionHeight - viewportHeight + headerOffset,
@@ -276,6 +289,7 @@ export default function SmartFridgeStoryClient({
       sectionHeight = section.offsetHeight;
       viewportHeight = window.innerHeight;
       compact = window.innerWidth < 900;
+      headerOffset = headerOffsetForWidth(window.innerWidth);
       previousProgress = -1;
       scheduleUpdate();
     };
