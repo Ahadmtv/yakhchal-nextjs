@@ -3,8 +3,8 @@ import Icon, { type IconName } from "@/components/Icon";
 import { assets } from "@/lib/assets";
 
 const stores = [
-  { name: "مایکت", href: "https://myket.ir/app/me.jfrpr.yakhchal", logo: assets.myket },
-  { name: "کافه‌بازار", href: "https://cafebazaar.ir/app/me.jfrpr.yakhchal", logo: assets.bazaar },
+  { name: "مایکت", href: "https://myket.ir/app/me.jfrpr.yakhchal", logo: assets.myket, platform: "myket" },
+  { name: "کافه‌بازار", href: "https://cafebazaar.ir/app/me.jfrpr.yakhchal", logo: assets.bazaar, platform: "bazaar" },
 ] as const;
 
 export default function DownloadSection() {
@@ -21,8 +21,15 @@ export default function DownloadSection() {
             </ul>
             <div className="store-grid">
               {stores.map((store) => (
-                <a key={store.name} href={store.href} target="_blank" rel="noopener noreferrer" aria-label={`دریافت یخچال از ${store.name}`}>
-                  <Image src={store.logo} alt={`نشان ${store.name}`} width={154} height={46} quality={75} sizes="154px" />
+                <a className={`store-download-button ${store.platform}`} key={store.name} href={store.href} target="_blank" rel="noopener noreferrer" aria-label={`دریافت یخچال از ${store.name}`}>
+                  <span className="store-download-logo">
+                    <Image src={store.logo} alt="" width={154} height={46} quality={75} sizes="80px" />
+                  </span>
+                  <span className="store-download-copy">
+                    <small>دانلود رایگان از</small>
+                    <strong>{store.name}</strong>
+                  </span>
+                  <span className="store-download-arrow"><Icon name="arrow" /></span>
                 </a>
               ))}
             </div>

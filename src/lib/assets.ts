@@ -6,8 +6,8 @@ export const assets = {
   appPreview760: "/assets/app/app-preview-760.webp",
   verticalMockup: "/assets/app/vertical-mockup.webp",
 
-  myket: "/assets/stores/myket.png",
-  bazaar: "/assets/stores/bazaar.png",
+  myket: "/assets/stores/myket-logo.svg",
+  bazaar: "/assets/stores/cafebazaar-logo.png",
 
   featureRecipes: "/assets/features/feature-recipes.webp",
   featureRecipesSmall: "/assets/features/feature-recipes-480.webp",
