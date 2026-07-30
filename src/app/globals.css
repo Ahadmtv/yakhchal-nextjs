@@ -199,27 +199,21 @@
   .hero-stat strong { font-size: 1.05rem; font-weight: 900; }
   .hero-stat span { color: var(--text-muted); font-size: .74rem; }
   .hero-visual { position: relative; width: 100%; max-width: 570px; height: 620px; margin-inline: auto; }
-  .hero-panel { position: absolute; inset: 4% 4% 1%; border: 1px solid rgba(255,255,255,.1); border-radius: 48px; background: linear-gradient(145deg, rgba(28,64,43,.88), rgba(11,29,20,.94)); box-shadow: 0 36px 90px rgba(0,0,0,.34); backdrop-filter: blur(18px); }
-  html[data-theme="light"] .hero-panel { border-color: rgba(255,255,255,.7); background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(224,241,217,.84)); box-shadow: 0 38px 90px rgba(39,76,46,.16); }
-  .hero-phone { position: absolute; z-index: 2; width: 250px; left: 50%; top: 20px; transform: translateX(-50%); animation: hero-float 6.5s ease-in-out infinite; }
-  .hero-phone img { filter: drop-shadow(0 30px 40px rgba(8,28,16,.28)); }
-  .hero-info-card { position: absolute; z-index: 3; inset-inline-end: 28px; width: 190px; display: flex; align-items: center; gap: 10px; padding: 13px; border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent); border-radius: 20px; background: rgba(14,34,24,.9); box-shadow: 0 18px 48px rgba(17,46,27,.16); backdrop-filter: blur(14px); }
-  html[data-theme="light"] .hero-info-card { background: rgba(255,255,255,.92); }
-  .hero-info-card.secondary { border-color: color-mix(in srgb, var(--secondary) 24%, transparent); }
-  .hero-info-card > span:last-child { min-width: 0; }
-  .hero-info-card small, .hero-info-card strong { display: block; }
-  .hero-info-card small { color: var(--text-muted); font-size: .72rem; }
-  .hero-info-card strong { font-size: .86rem; }
-  .hero-info-icon { width: 34px; height: 34px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 12px; color: var(--primary); background: color-mix(in srgb, var(--primary) 13%, transparent); }
-  .hero-info-icon svg { width: 19px; height: 19px; }
-  .secondary .hero-info-icon { color: var(--secondary); background: color-mix(in srgb, var(--secondary) 13%, transparent); }
-  .info-card-top { top: 72px; }
-  .info-card-bottom { bottom: 76px; inset-inline-end: 18px; }
-  .hero-security { position: absolute; z-index: 3; inset-inline-start: 24px; bottom: 30px; display: flex; align-items: center; gap: 7px; padding: 9px 14px; border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent); border-radius: 999px; background: rgba(14,34,24,.88); box-shadow: 0 14px 40px rgba(17,46,27,.14); backdrop-filter: blur(12px); font-size: .78rem; font-weight: 800; }
-  html[data-theme="light"] .hero-security { background: rgba(255,255,255,.9); }
-  .hero-security svg { width: 18px; height: 18px; color: var(--primary); }
-  .hero-sparkle { position: absolute; top: 12px; inset-inline-start: 18px; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, transparent); }
-  .hero-sparkle svg { width: 21px; height: 21px; }
+  .hero-poster-ring { position: absolute; width: 520px; height: 520px; top: 48px; left: 50%; border: 1px solid color-mix(in srgb, var(--primary-light) 38%, transparent); border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--primary) 18%, transparent), transparent 65%); transform: translateX(-50%) rotate(-22deg); }
+  .hero-poster-ring::after { content: ""; position: absolute; width: 720px; height: 160px; top: 180px; left: -100px; border-block: 1px solid color-mix(in srgb, var(--secondary) 30%, transparent); transform: rotate(-25deg); }
+  .hero-poster-ring-inner { position: absolute; width: 390px; height: 390px; top: 112px; left: 50%; border: 1px dashed color-mix(in srgb, var(--secondary) 40%, transparent); border-radius: 50%; transform: translateX(-50%) rotate(18deg); }
+  .hero-poster-mark { position: absolute; z-index: 1; top: 32px; inset-inline-end: 30px; width: 64px; height: 64px; display: grid; place-items: center; border: 1px solid color-mix(in srgb, var(--secondary) 40%, transparent); border-radius: 50%; color: var(--secondary-light); background: color-mix(in srgb, var(--secondary) 14%, transparent); font-size: 1.8rem; font-weight: 900; transform: rotate(12deg); }
+  html[data-theme="light"] .hero-poster-mark { color: var(--secondary-dark); }
+  .hero-ingredient { position: absolute; z-index: 4; overflow: hidden; border: 5px solid rgba(255,255,255,.88); border-radius: 50%; box-shadow: 0 18px 34px rgba(0,0,0,.24); }
+  .hero-ingredient img { width: 100%; height: 100%; object-fit: cover; }
+  .ingredient-tomato { width: 104px; height: 104px; top: 62px; inset-inline-start: 24px; transform: rotate(-14deg); }
+  .ingredient-herbs { width: 82px; height: 82px; top: 242px; inset-inline-end: 0; transform: rotate(16deg); }
+  .ingredient-peppers { width: 116px; height: 116px; bottom: 28px; inset-inline-start: 28px; transform: rotate(12deg); }
+  .hero-phone { position: absolute; z-index: 3; width: 300px; left: 50%; top: 12px; animation: hero-float 6.5s ease-in-out infinite; transform: translateX(-50%) rotate(5deg); }
+  .hero-phone img { filter: drop-shadow(22px 34px 24px rgba(4,19,10,.42)); }
+  .hero-security { position: absolute; z-index: 5; left: 50%; bottom: 24px; display: flex; align-items: center; gap: 7px; padding: 7px 11px; border: 1px solid color-mix(in srgb, var(--primary-light) 28%, transparent); border-radius: 999px; color: rgba(255,255,255,.78); background: rgba(10,33,20,.7); backdrop-filter: blur(10px); font-size: .66rem; font-weight: 800; transform: translateX(-50%); white-space: nowrap; }
+  html[data-theme="light"] .hero-security { color: var(--text-muted); background: rgba(255,255,255,.88); }
+  .hero-security svg { width: 14px; height: 14px; color: var(--primary-light); }
 
   /* Features */
   .features-section { position: relative; overflow: hidden; padding-block: 100px; }
@@ -548,6 +542,7 @@
     .hero-lead, .hero-stats { margin-inline: auto; }
     .hero-actions { justify-content: center; }
     .hero-visual { height: 590px; max-width: 560px; }
+    .hero-phone { top: 16px; }
     .feature-card-1, .feature-card-2 { grid-column: span 12; height: 430px; }
     .feature-card-3, .feature-card-4 { grid-column: span 6; }
     .feature-card-5 { grid-column: span 12; }
@@ -575,14 +570,15 @@
     .icon-button { width: 42px; }
     .hero-actions { flex-direction: column; width: 100%; }
     .hero-visual { height: 520px; }
-    .hero-phone { width: 205px; top: 36px; }
-    .hero-panel { inset: 7% 2% 3%; border-radius: 32px; }
-    .hero-info-card { width: 150px; inset-inline-end: 16px; padding: 10px; }
-    .info-card-top { top: 62px; }
-    .info-card-bottom { bottom: 72px; inset-inline-end: 8px; }
-    .hero-info-card strong { font-size: .72rem; }
-    .hero-security { inset-inline-start: 10px; bottom: 26px; font-size: .7rem; }
-    .hero-sparkle { top: 18px; inset-inline-start: 8px; }
+    .hero-poster-ring { width: 410px; height: 410px; top: 62px; }
+    .hero-poster-ring-inner { width: 300px; height: 300px; top: 117px; }
+    .hero-poster-mark { top: 24px; inset-inline-end: 14px; width: 48px; height: 48px; font-size: 1.4rem; }
+    .hero-ingredient { border-width: 4px; }
+    .ingredient-tomato { width: 76px; height: 76px; top: 84px; inset-inline-start: 4px; }
+    .ingredient-herbs { width: 62px; height: 62px; top: 228px; inset-inline-end: 0; }
+    .ingredient-peppers { width: 82px; height: 82px; bottom: 38px; inset-inline-start: 6px; }
+    .hero-phone { width: 245px; top: 32px; }
+    .hero-security { bottom: 20px; font-size: .62rem; }
     .features-section, .workflow-section, .download-section, .articles-section, .contact-section, .faq-section { padding-block: 72px; }
     .features-grid { gap: 15px; margin-top: 38px; }
     .feature-card, .feature-card-1, .feature-card-2, .feature-card-3, .feature-card-4, .feature-card-5 { grid-column: span 12; height: 370px; border-radius: 23px; }

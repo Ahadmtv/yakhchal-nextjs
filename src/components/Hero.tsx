@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Icon, { type IconName } from "@/components/Icon";
+import Icon from "@/components/Icon";
 import { assets } from "@/lib/assets";
 
 const stats = [
@@ -46,27 +46,42 @@ export default function Hero() {
         </div>
 
         <div className="hero-visual" aria-label="نمایی از اپلیکیشن یخچال">
-          <div className="hero-panel" aria-hidden="true" />
-          <InfoCard
-            className="info-card-top"
-            icon="calendar"
-            small="برنامه امروز"
-            strong="۴ وعده متعادل"
-          />
-          <InfoCard
-            className="info-card-bottom"
-            icon="restaurant"
-            small="پیشنهاد هوشمند"
-            strong="براساس مواد موجود"
-            secondary
-          />
+          <div className="hero-poster-ring" aria-hidden="true" />
+          <div className="hero-poster-ring-inner" aria-hidden="true" />
+          <div className="hero-ingredient ingredient-tomato" aria-hidden="true">
+            <Image
+              src={assets.smartFridgeTomato}
+              alt=""
+              width={180}
+              height={180}
+            />
+          </div>
+          <div className="hero-ingredient ingredient-herbs" aria-hidden="true">
+            <Image
+              src={assets.smartFridgeHerbs}
+              alt=""
+              width={180}
+              height={180}
+            />
+          </div>
+          <div
+            className="hero-ingredient ingredient-peppers"
+            aria-hidden="true"
+          >
+            <Image
+              src={assets.smartFridgePeppers}
+              alt=""
+              width={180}
+              height={180}
+            />
+          </div>
           <div className="hero-phone">
             <Image
               src={assets.appPreview760}
               alt="نمای اپلیکیشن یخچال روی گوشی اندرویدی"
               width={760}
               height={1516}
-              sizes="(max-width: 600px) 205px, (max-width: 900px) 240px, 250px"
+              sizes="(max-width: 600px) 245px, (max-width: 900px) 275px, 300px"
               quality={85}
               preload
               className="responsive-image"
@@ -77,40 +92,8 @@ export default function Hero() {
             <span>امن و بدون تبلیغ مزاحم</span>
             <Icon name="check" />
           </div>
-          <div className="hero-sparkle" aria-hidden="true">
-            <Icon name="sparkle" />
-          </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function InfoCard({
-  className,
-  icon,
-  small,
-  strong,
-  secondary = false,
-}: Readonly<{
-  className: string;
-  icon: IconName;
-  small: string;
-  strong: string;
-  secondary?: boolean;
-}>) {
-  return (
-    <div
-      className={`hero-info-card ${className}${secondary ? " secondary" : ""}`}
-      aria-hidden="true"
-    >
-      <span className="hero-info-icon">
-        <Icon name={icon} />
-      </span>
-      <span>
-        <small>{small}</small>
-        <strong>{strong}</strong>
-      </span>
-    </div>
   );
 }
