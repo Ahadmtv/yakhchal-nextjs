@@ -8,8 +8,7 @@ export type IngredientSpec = Readonly<{
   id: string;
   src: string;
   label: string;
-  size: number;
-  mobileSize: number;
+
   start: Readonly<[x: number, y: number]>;
   end: Readonly<[x: number, y: number]>;
   mobileStart: Readonly<[x: number, y: number]>;

@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import Icon from "@/components/Icon";
 import type { IngredientSpec } from "@/components/smart-fridge-story/types";
@@ -9,8 +8,6 @@ const ingredients: ReadonlyArray<IngredientSpec> = [
     id: "tomato",
     src: "/assets/smart-fridge/tomato-cluster.webp",
     label: "گوجه‌فرنگی",
-    size: 92,
-    mobileSize: 64,
     start: [-0.41, -0.3],
     end: [0.105, -0.175],
     mobileStart: [-0.39, -0.29],
@@ -27,8 +24,6 @@ const ingredients: ReadonlyArray<IngredientSpec> = [
     id: "herbs",
     src: "/assets/smart-fridge/fresh-herb-bunch.webp",
     label: "سبزی تازه",
-    size: 104,
-    mobileSize: 70,
     start: [-0.38, 0.045],
     end: [0.205, -0.17],
     mobileStart: [-0.4, 0.03],
@@ -45,8 +40,6 @@ const ingredients: ReadonlyArray<IngredientSpec> = [
     id: "eggs",
     src: "/assets/smart-fridge/brown-eggs.webp",
     label: "تخم‌مرغ",
-    size: 86,
-    mobileSize: 58,
     start: [-0.25, 0.335],
     end: [0.105, 0.005],
     mobileStart: [-0.28, 0.33],
@@ -63,8 +56,6 @@ const ingredients: ReadonlyArray<IngredientSpec> = [
     id: "chicken",
     src: "/assets/smart-fridge/raw-chicken-breast-plate.webp",
     label: "سینه مرغ",
-    size: 108,
-    mobileSize: 72,
     start: [0.43, -0.31],
     end: [0.215, 0.015],
     mobileStart: [0.38, -0.3],
@@ -81,8 +72,6 @@ const ingredients: ReadonlyArray<IngredientSpec> = [
     id: "rice",
     src: "/assets/smart-fridge/rice-bowl.webp",
     label: "برنج",
-    size: 100,
-    mobileSize: 67,
     start: [0.43, 0.075],
     end: [0.105, 0.195],
     mobileStart: [0.4, 0.08],
@@ -99,8 +88,6 @@ const ingredients: ReadonlyArray<IngredientSpec> = [
     id: "peppers",
     src: "/assets/smart-fridge/yellow-red-bell-peppers.webp",
     label: "فلفل دلمه‌ای",
-    size: 102,
-    mobileSize: 68,
     start: [0.35, 0.34],
     end: [0.215, 0.195],
     mobileStart: [0.34, 0.34],
@@ -216,13 +203,6 @@ export default function SmartFridgeScene() {
             data-arc={ingredient.arc}
             data-delay={ingredient.delay}
             key={ingredient.id}
-            style={
-              {
-                "--ingredient-size": `${ingredient.size}px`,
-                "--ingredient-mobile-size": `${ingredient.mobileSize}px`,
-                "--float-delay": `${ingredient.delay * -18}s`,
-              } as CSSProperties
-            }
           >
             <Image
               src={ingredient.src}
@@ -279,8 +259,8 @@ export default function SmartFridgeScene() {
           <em>۳ قلم</em>
         </div>
         <ul>
-          {shoppingItems.map((item, index) => (
-            <li key={item} style={{ "--row-index": index } as CSSProperties}>
+          {shoppingItems.map((item) => (
+            <li key={item}>
               <span><Icon name="check" /></span>
               {item}
             </li>

@@ -38,6 +38,19 @@
   mask-image: linear-gradient(90deg, transparent, #000 24%, #000 74%, transparent);
 }
 
+.story::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(52vw, 760px);
+  aspect-ratio: 1;
+  top: 8%;
+  right: -18%;
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 36px color-mix(in srgb, var(--primary) 4%, transparent), 0 0 0 74px color-mix(in srgb, var(--primary) 2%, transparent);
+}
+
 .story[data-enhanced="true"] {
   height: 300svh;
   padding-block: 0;
@@ -110,6 +123,7 @@
 }
 
 .stage {
+  position: relative;
   min-width: 0;
   display: grid;
   grid-template-columns: 40px minmax(0, 1fr);
@@ -124,7 +138,22 @@
     opacity 180ms ease,
     transform 180ms ease,
     border-color 180ms ease,
-    background-color 180ms ease;
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.stage::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  right: -1px;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--primary);
+  opacity: 0;
+  transform: scaleY(.45);
+  transition: opacity 180ms ease, transform 180ms ease;
 }
 
 .story[data-enhanced="true"] .stage {
@@ -169,7 +198,17 @@
   opacity: 1;
   border-color: color-mix(in srgb, var(--primary) 23%, transparent);
   background: color-mix(in srgb, var(--primary) 8%, var(--surface));
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--shadow) 55%, transparent);
   transform: translateX(0);
+}
+
+.story[data-enhanced="true"][data-active-stage="0"] .stage[data-stage-index="0"]::before,
+.story[data-enhanced="true"][data-active-stage="1"] .stage[data-stage-index="1"]::before,
+.story[data-enhanced="true"][data-active-stage="2"] .stage[data-stage-index="2"]::before,
+.story[data-enhanced="true"][data-active-stage="3"] .stage[data-stage-index="3"]::before,
+.story[data-enhanced="true"][data-active-stage="4"] .stage[data-stage-index="4"]::before {
+  opacity: 1;
+  transform: scaleY(1);
 }
 
 .story[data-enhanced="true"][data-active-stage="0"] .stage[data-stage-index="0"] .stageNumber,
@@ -218,7 +257,32 @@
     linear-gradient(145deg, color-mix(in srgb, var(--surface) 90%, transparent), color-mix(in srgb, var(--surface-soft) 70%, transparent));
   box-shadow:
     0 36px 90px color-mix(in srgb, var(--shadow) 74%, transparent),
-    inset 0 1px rgba(255, 255, 255, .12);
+    inset 0 1px rgba(255, 255, 255, .12),
+    inset 0 0 0 7px color-mix(in srgb, var(--surface) 20%, transparent);
+}
+
+.scene::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 12px;
+  border: 1px solid color-mix(in srgb, var(--primary) 12%, transparent);
+  border-radius: calc(clamp(28px, 4vw, 46px) - 12px);
+  pointer-events: none;
+}
+
+.scene::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 160px;
+  height: 160px;
+  right: -70px;
+  bottom: -76px;
+  border: 1px solid color-mix(in srgb, var(--secondary) 30%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 26px color-mix(in srgb, var(--secondary) 5%, transparent), 0 0 0 54px color-mix(in srgb, var(--secondary) 2%, transparent);
+  pointer-events: none;
 }
 
 .sceneGlow {
@@ -673,6 +737,42 @@
   will-change: transform, opacity;
 }
 
+.ingredient[data-ingredient-id="tomato"] {
+  --ingredient-size: 92px;
+  --ingredient-mobile-size: 64px;
+  --float-delay: 0s;
+}
+
+.ingredient[data-ingredient-id="herbs"] {
+  --ingredient-size: 104px;
+  --ingredient-mobile-size: 70px;
+  --float-delay: -.288s;
+}
+
+.ingredient[data-ingredient-id="eggs"] {
+  --ingredient-size: 86px;
+  --ingredient-mobile-size: 58px;
+  --float-delay: -.576s;
+}
+
+.ingredient[data-ingredient-id="chicken"] {
+  --ingredient-size: 108px;
+  --ingredient-mobile-size: 72px;
+  --float-delay: -.864s;
+}
+
+.ingredient[data-ingredient-id="rice"] {
+  --ingredient-size: 100px;
+  --ingredient-mobile-size: 67px;
+  --float-delay: -1.152s;
+}
+
+.ingredient[data-ingredient-id="peppers"] {
+  --ingredient-size: 102px;
+  --ingredient-mobile-size: 68px;
+  --float-delay: -1.44s;
+}
+
 .ingredient > img {
   object-fit: contain;
   animation: ingredient-float 3.8s ease-in-out var(--float-delay) infinite;
@@ -713,6 +813,21 @@
   box-shadow: 0 22px 60px color-mix(in srgb, var(--shadow) 78%, transparent);
   backdrop-filter: blur(18px) saturate(130%);
   will-change: transform, opacity;
+}
+
+@media (hover: hover) {
+  .recipeCard,
+  .weeklyCard,
+  .shoppingCard {
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .recipeCard:hover,
+  .weeklyCard:hover,
+  .shoppingCard:hover {
+    border-color: color-mix(in srgb, var(--primary) 38%, var(--border));
+    box-shadow: 0 30px 72px color-mix(in srgb, var(--shadow) 85%, transparent);
+  }
 }
 
 .recipeCard {
