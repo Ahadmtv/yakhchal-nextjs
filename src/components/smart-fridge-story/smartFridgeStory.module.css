@@ -51,7 +51,7 @@
   box-shadow: 0 0 0 36px color-mix(in srgb, var(--primary) 4%, transparent), 0 0 0 74px color-mix(in srgb, var(--primary) 2%, transparent);
 }
 
-.story[data-enhanced="true"] {
+:global(html[data-js="true"]) .story {
   height: 300svh;
   padding-block: 0;
 }
@@ -60,7 +60,7 @@
   position: relative;
 }
 
-.story[data-enhanced="true"] .sticky {
+:global(html[data-js="true"]) .story .sticky {
   position: sticky;
   z-index: 1;
   top: 82px;
@@ -1271,11 +1271,11 @@
 }
 
 @media (max-width: 899px) {
-  .story[data-enhanced="true"] {
+  :global(html[data-js="true"]) .story {
     height: 285svh;
   }
 
-  .story[data-enhanced="true"] .sticky {
+  :global(html[data-js="true"]) .story .sticky {
     top: 72px;
     height: calc(100svh - 72px);
   }
@@ -1399,11 +1399,11 @@
 }
 
 @media (max-width: 699px) {
-  .story[data-enhanced="true"] {
+  :global(html[data-js="true"]) .story {
     height: 250svh;
   }
 
-  .story[data-enhanced="true"] .sticky {
+  :global(html[data-js="true"]) .story .sticky {
     top: 68px;
     height: calc(100svh - 68px);
   }
@@ -1673,12 +1673,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .story,
-  .story[data-enhanced="true"] {
+  :global(html[data-js="true"]) .story {
     height: auto;
     padding-block: 76px;
   }
 
-  .story[data-enhanced="true"] .sticky {
+  :global(html[data-js="true"]) .story .sticky {
     position: relative;
     top: auto;
     height: auto;

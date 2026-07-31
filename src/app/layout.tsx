@@ -69,7 +69,7 @@ export const viewport: Viewport = {
   ],
 };
 
-const themeScript = `(()=>{try{const k="yakhchal:theme";let t=localStorage.getItem(k);if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;document.documentElement.style.colorScheme=t}catch{}})()`;
+const bootstrapScript = `(()=>{document.documentElement.dataset.js="true";try{const k="yakhchal:theme";let t=localStorage.getItem(k);if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;document.documentElement.style.colorScheme=t}catch{}})()`;
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -98,7 +98,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="fa" dir="rtl" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: bootstrapScript }} />
       </head>
       <body>
         <AppShell>{children}</AppShell>
