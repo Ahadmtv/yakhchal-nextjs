@@ -1,5 +1,6 @@
 "use client";
 
+import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -96,7 +97,7 @@ export default function Navbar() {
             {links.map((link) => {
               const active = isActivePath(pathname, link.match);
               return (
-                <Link key={link.href} className={`nav-link${active ? " active" : ""}`} href={link.href} aria-current={active ? "page" : undefined}>
+                <Link key={link.href} className={`nav-link${active ? " active" : ""}`} href={link.href as Route} aria-current={active ? "page" : undefined}>
                   {link.label}
                 </Link>
               );
@@ -136,7 +137,7 @@ export default function Navbar() {
             {links.map((link) => {
               const active = isActivePath(pathname, link.match);
               return (
-                <Link key={link.href} className={`mobile-nav-link${active ? " active" : ""}`} href={link.href} onClick={closeMenu} aria-current={active ? "page" : undefined}>
+                <Link key={link.href} className={`mobile-nav-link${active ? " active" : ""}`} href={link.href as Route} onClick={closeMenu} aria-current={active ? "page" : undefined}>
                   {link.label}
                 </Link>
               );

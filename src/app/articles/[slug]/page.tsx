@@ -28,8 +28,7 @@ export async function generateMetadata({
   return {
     title: article.title,
     description: article.excerpt,
-    keywords: article.keywords,
-    authors: [{ name: article.author || "Yakhchal Team" }],
+    authors: article.author ? [{ name: article.author.name, url: article.author.url ?? `/authors/${article.author.slug}` }] : undefined,
     alternates: { canonical, languages: { "fa-IR": canonical } },
     openGraph: {
       type: "article",
@@ -41,7 +40,7 @@ export async function generateMetadata({
       images: [{ url: article.image, width: 900, height: 681, alt: article.title }],
       publishedTime: article.publishedAt,
       modifiedTime: article.modifiedAt,
-      authors: [article.author || "Yakhchal Team"],
+      authors: article.author ? [article.author.name] : undefined,
       tags: article.tags,
     },
     twitter: {
@@ -69,22 +68,13 @@ export default async function ArticlePage({
     headline: article.title,
     description: article.excerpt,
     image: [article.image],
-    articleBody: article.sections.map((section) => section.body).join("\n\n"),
-    mainEntityOfPage: articleUrl,
-    keywords: article.keywords,
+    articleBody: article.sections.flatMap((section) => [section.summary ?? "", section.body ?? "", ...(section.paragraphs ?? []), ...(section.list ?? [])]).join("\n\n"),
+    mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
     inLanguage: "fa-IR",
-    author: {
-      "@type": "Organization",
-      name: article.author || "Yakhchal Team",
-      url: siteConfig.url,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Yakhchal",
-      logo: { "@type": "ImageObject", url: assets.icon192 },
-    },
-    datePublished: article.publishedAt,
-    dateModified: article.modifiedAt || article.publishedAt,
+    publisher: { "@type": "Organization", name: "یخچال", url: siteConfig.url, logo: { "@type": "ImageObject", url: assets.icon192 } },
+    ...(article.author ? { author: { "@type": "Person", name: article.author.name, url: article.author.url ?? `${siteConfig.url}/authors/${article.author.slug}` } } : {}),
+    ...(article.publishedAt ? { datePublished: article.publishedAt } : {}),
+    ...(article.modifiedAt || article.publishedAt ? { dateModified: article.modifiedAt || article.publishedAt } : {}),
   };
 
   const breadcrumbs = {

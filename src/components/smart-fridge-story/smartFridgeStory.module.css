@@ -51,8 +51,12 @@
   box-shadow: 0 0 0 36px color-mix(in srgb, var(--primary) 4%, transparent), 0 0 0 74px color-mix(in srgb, var(--primary) 2%, transparent);
 }
 
-:global(html[data-js="true"]) .story {
+.story {
   height: 300svh;
+  padding-block: 0;
+}
+
+:global(html[data-js="true"]) .story {
   padding-block: 0;
 }
 
@@ -1271,7 +1275,7 @@
 }
 
 @media (max-width: 899px) {
-  :global(html[data-js="true"]) .story {
+  .story {
     height: 285svh;
   }
 
@@ -1399,7 +1403,7 @@
 }
 
 @media (max-width: 699px) {
-  :global(html[data-js="true"]) .story {
+  .story {
     height: 250svh;
   }
 

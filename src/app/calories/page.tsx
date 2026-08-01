@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import CalorieCalculator from "@/components/CalorieCalculator";
 import CalorieHelp from "@/components/CalorieHelp";
+import CaloriesContentHub from "@/components/CaloriesContentHub";
 import { assets } from "@/lib/assets";
 import { serializeJsonLd } from "@/lib/jsonld";
 import { siteConfig } from "@/lib/site";
@@ -72,10 +73,8 @@ export default function CaloriesPage() {
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbSchema) }}
       />
       <CalorieCalculator />
-      <div className="container calorie-help-wrap">
-        <CalorieHelp />
-      </div>
+      <div className="container calorie-help-wrap"><CalorieHelp /></div>
+      <CaloriesContentHub />
     </>
   );
 }
-

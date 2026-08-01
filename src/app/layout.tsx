@@ -4,7 +4,7 @@ import "vazirmatn/Vazirmatn-Variable-font-face.css";
 import "./globals.css";
 import AppShell from "@/components/AppShell";
 import { assets } from "@/lib/assets";
-import { serializeJsonLd } from "@/lib/jsonld";
+
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -12,17 +12,7 @@ export const metadata: Metadata = {
   title: { default: siteConfig.title, template: "%s | یخچال" },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  authors: [{ name: "Yakhchal Team", url: siteConfig.url }],
-  creator: "Yakhchal Team",
-  publisher: "Yakhchal",
-  keywords: [
-    "یخچال",
-    "برنامه غذایی",
-    "کالری شمار",
-    "تغذیه سالم",
-    "لیست خرید هوشمند",
-    "دستور غذا",
-  ],
+  publisher: siteConfig.name,
   alternates: { canonical: "/", languages: { "fa-IR": "/" } },
   openGraph: {
     type: "website",
@@ -71,28 +61,7 @@ export const viewport: Viewport = {
 
 const bootstrapScript = `(()=>{document.documentElement.dataset.js="true";try{const k="yakhchal:theme";let t=localStorage.getItem(k);if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;document.documentElement.style.colorScheme=t}catch{}})()`;
 
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Yakhchal",
-  alternateName: "یخچال",
-  url: siteConfig.url,
-  logo: assets.icon512,
-  email: siteConfig.email,
-  sameAs: ["https://instagram.com/yakhchal.app", "https://www.linkedin.com/company/yakhchal"],
-};
 
-const softwareSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "یخچال",
-  applicationCategory: "HealthApplication",
-  operatingSystem: "Android",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "IRR" },
-  description: siteConfig.description,
-  url: siteConfig.url,
-  image: assets.og,
-};
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
@@ -102,8 +71,6 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       </head>
       <body>
         <AppShell>{children}</AppShell>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(organizationSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(softwareSchema) }} />
       </body>
     </html>
   );

@@ -7,6 +7,7 @@ export default function FeatureDetail({ feature }: Readonly<{ feature: Feature }
   return (
     <article className="detail-page feature-detail">
       <div className="container">
+        <nav className="breadcrumbs" aria-label="مسیر صفحه"><Link href="/">خانه</Link><span>/</span><Link href="/features">امکانات</Link><span>/</span><span aria-current="page">{feature.title}</span></nav>
         <div className="detail-topline"><Link className="text-link" href="/features"><Icon name="arrow" />بازگشت به ویژگی‌ها</Link><span className="tag">ویژگی‌ها</span></div>
         <h1>{feature.title}</h1>
         <p className="detail-lead">{feature.description}</p>

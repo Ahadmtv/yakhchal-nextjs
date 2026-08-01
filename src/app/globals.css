@@ -507,6 +507,32 @@
   .not-found h1 { margin: -25px 0 10px; font-size: clamp(2rem,4vw,3.3rem); }
   .not-found p:not(.not-found-code) { color: var(--text-muted); }
   .not-found > div > div { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+
+  .planner-actions, .article-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 38px; }
+  .planner-content, .trust-content, .calorie-content-hub { display: grid; gap: 28px; }
+  .planner-content > section, .trust-content > section, .calorie-content-hub > div > section { padding-top: 26px; border-top: 1px solid var(--border); }
+  .planner-content h2, .trust-content h2, .calorie-content-hub h2 { margin-bottom: 12px; font-size: clamp(1.45rem, 2.5vw, 2.2rem); }
+  .planner-content h3, .calorie-content-hub h3 { margin-bottom: 8px; font-size: 1.18rem; }
+  .planner-content details { margin-top: 9px; padding: 15px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
+  .planner-content summary { cursor: pointer; font-weight: 800; }
+  .planner-content details p { margin: 12px 0 0; color: var(--text-muted); }
+  .content-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; }
+  .content-table-wrap table { width: 100%; min-width: 480px; border-collapse: collapse; }
+  .content-table-wrap th, .content-table-wrap td { padding: 12px; border-bottom: 1px solid var(--border); text-align: right; }
+  .content-table-wrap th { background: var(--surface-soft); }
+  .article-section { scroll-margin-top: 112px; }
+  .article-section h2 a, .article-section h3 a { color: inherit; text-decoration: none; }
+  .article-answer { color: var(--text); }
+  .article-links a { color: var(--primary); font-weight: 800; }
+  .article-callout, .article-review { margin-top: 18px; padding: 15px; border-inline-start: 4px solid var(--primary); background: var(--surface-soft); }
+  .article-sources { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border); }
+  .calorie-content-hub { padding: 30px 0 80px; }
+  .calorie-content-hub > div > p { color: var(--text-muted); }
+  .food-reference-list, .food-category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 22px; padding: 0; list-style: none; }
+  .food-reference-list li, .food-category-grid > div { padding: 14px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
+  .food-reference-list span { display: block; margin-top: 4px; color: var(--text-muted); font-size: .86rem; }
+  .food-category-grid ul { margin: 0; padding-inline-start: 20px; color: var(--text-muted); }
+  .food-category-grid h4 { margin: 0 0 8px; }
 }
 
 @layer utilities {

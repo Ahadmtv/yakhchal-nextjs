@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Route } from "next";
 import Link from "next/link";
 import Icon, { type IconName } from "@/components/Icon";
 import { assets } from "@/lib/assets";
@@ -8,8 +9,10 @@ const footerLinks = [
   { label: "کالری غذاها", href: "/calories" },
   { label: "مجله سلامت", href: "/articles" },
   { label: "سؤالات متداول", href: "/#faq" },
-  { label: "حریم خصوصی", href: "/#privacy" },
+  { label: "حریم خصوصی", href: "/privacy" },
   { label: "تماس با ما", href: "/#contact" },
+  { label: "درباره یخچال", href: "/about" },
+  { label: "شرایط استفاده", href: "/terms" },
 ] as const;
 
 const socials: ReadonlyArray<{ label: string; href: string; icon: IconName }> = [
@@ -28,7 +31,7 @@ export default function Footer() {
             <p>همراه فارسی شما برای برنامه‌ریزی غذا، کالری‌شماری و خرید هوشمند.</p>
             <div className="footer-socials">{socials.map((item) => <a key={item.href} href={item.href} aria-label={item.label} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}><Icon name={item.icon} /></a>)}</div>
           </div>
-          <div><h2>دسترسی سریع</h2><nav className="footer-links" aria-label="پیوندهای پایین صفحه">{footerLinks.map((link) => <Link key={link.href} href={link.href}>{link.label}</Link>)}</nav></div>
+          <div><h2>دسترسی سریع</h2><nav className="footer-links" aria-label="پیوندهای پایین صفحه">{footerLinks.map((link) => <Link key={link.href} href={link.href as Route}>{link.label}</Link>)}</nav></div>
         </div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} یخچال؛ همه حقوق محفوظ است.</span><span>طراحی‌شده برای انتخاب‌های ساده‌تر و سالم‌تر</span></div>
       </div>

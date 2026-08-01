@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import FeatureDetail from "@/components/FeatureDetail";
+import WeeklyMealPlannerLanding from "@/components/WeeklyMealPlannerLanding";
 import { features } from "@/data/features";
 import { serializeJsonLd } from "@/lib/jsonld";
 import { siteConfig } from "@/lib/site";
@@ -24,24 +25,28 @@ export async function generateMetadata({
   }
 
   const canonical = `/features/${slug}`;
+  const isWeeklyPlanner = slug === "weekly-meal-planner";
+  const title = isWeeklyPlanner ? "اپلیکیشن برنامه غذایی هفتگی | برنامه‌ریزی وعده‌ها با یخچال" : feature.title;
+  const description = isWeeklyPlanner
+    ? "با اپلیکیشن یخچال وعده‌های هفته را برنامه‌ریزی کنید، هدف کالری را در نظر بگیرید و مواد لازم را مستقیم به لیست خرید اضافه کنید."
+    : feature.description;
   return {
-    title: feature.title,
-    description: feature.description,
-    keywords: feature.tags,
+    title,
+    description,
     alternates: { canonical, languages: { "fa-IR": canonical } },
     openGraph: {
       type: "website",
       url: canonical,
       siteName: siteConfig.name,
       locale: "fa_IR",
-      title: feature.title,
-      description: feature.description,
+      title,
+      description,
       images: [{ url: feature.mainImage, width: 900, height: 681, alt: feature.title }],
     },
     twitter: {
       card: "summary_large_image",
-      title: feature.title,
-      description: feature.description,
+      title,
+      description,
       images: [feature.mainImage],
     },
   };
@@ -93,7 +98,7 @@ export default async function FeaturePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbs) }}
       />
-      <FeatureDetail feature={feature} />
+      {slug === "weekly-meal-planner" ? <WeeklyMealPlannerLanding feature={feature} /> : <FeatureDetail feature={feature} />}
     </>
   );
 }

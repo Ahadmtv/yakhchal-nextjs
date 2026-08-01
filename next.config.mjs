@@ -18,6 +18,9 @@ const nextConfig = {
     deviceSizes: [360, 480, 640, 750, 828, 1080, 1200, 1440, 1920],
     imageSizes: [32, 48, 64, 80, 96, 128, 256, 384],
   },
+  async redirects() {
+    return [{ source: "/contact", destination: "/#contact", permanent: true }];
+  },
   async headers() {
     return [
       {
