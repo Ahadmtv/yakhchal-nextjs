@@ -1,6 +1,6 @@
 # Yakhchal website
 
-وب‌سایت فارسی «یخچال» با Next.js App Router، React Server Components و TypeScript. هدف اصلی سایت توضیح محصول، هدایت کاربر به نسخه رسمی اندروید و ارائه محتوای عمومی با مرزهای روشن اعتماد و سلامت است.
+وب‌سایت فارسی «یخچال» با Next.js App Router، React Server Components و TypeScript. سایت محصول اندرویدی را معرفی می‌کند، لینک فروشگاه‌های رسمی را در اختیار کاربر می‌گذارد و محتوای عمومی تغذیه را با مرزهای روشن اعتماد و سلامت منتشر می‌کند.
 
 ## اجرای محلی
 
@@ -11,64 +11,48 @@ npm ci
 npm run dev
 ```
 
-سایت توسعه روی `http://localhost:3000` اجرا می‌شود. برای تولید:
+برای build تولیدی:
 
 ```bash
 npm run build
 npm start
 ```
 
-## متغیر محیطی
+در `.env.local` می‌توان `NEXT_PUBLIC_SITE_URL=http://localhost:3000` را تنظیم کرد. مقدار production باید `https://yakhchalapp.ir` باشد؛ canonical، sitemap، robots و JSON-LD از آن استفاده می‌کنند.
 
-فایل `.env.local`:
+## معماری فعلی
 
-```env
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-```
+- `AppShell`، محتوای بازاریابی و صفحات جزئیات Server Component باقی مانده‌اند.
+- صفحه اصلی به‌ترتیب Hero، Smart Fridge Story، Features، Use Cases، Download، Testimonials، Product Update، BMI، Articles، Contact، FAQ و Privacy را نمایش می‌دهد.
+- صحنه تصویری Smart Fridge Story یک Client Island تنبل است؛ متن و مراحل Story در HTML سرور می‌مانند و runtime تصویری نزدیک viewport بار می‌شود.
+- فونت اصلی، dependency محلی و self-hosted `vazirmatn@33.0.3` است. هیچ Google Font یا CDN فونت استفاده نمی‌شود.
+- `src/data/appStats.ts` منبع واحد نسخه، تاریخ release، آمار تفکیک‌شده فروشگاه‌ها و testimonialهای تأییدشده است.
+- مدل `FoodItem` یک discriminated union برای منبع `verified` یا `unverified` است؛ همه داده‌های فعلی همچنان `unverified` هستند.
+- analytics فعلاً vendor-neutral و درون‌حافظه‌ای است و هیچ tracker، cookie یا درخواست شبکه ندارد.
 
-در Production مقدار باید `https://yakhchalapp.ir` باشد. این متغیر مبنای canonical، sitemap، robots و JSON-LD است.
+## تصاویر ویژگی‌ها
+
+اسکرین‌شات‌های واقعی در `public/assets/features/` نگهداری می‌شوند. صفحات meal planner، shopping list، fridge inventory، expiry reminder، recipes by ingredients، quick cook و world cuisine تصویر اختصاصی دارند. برای `calorie-counter` و `guided-recipes` هنوز asset مرتبط ارائه نشده و UI به‌صراحت fallback بدون تصویر نشان می‌دهد.
 
 ## کنترل کیفیت
 
 ```bash
-npm run typecheck
-npm run lint
-npm run check:architecture
-npm run build
-npm run test:production
 npm run check
+npm audit
 npm run audit:lighthouse
-npm run capture:production
 ```
 
-`test:production` پس از build، سرور واقعی Next.js را بالا می‌آورد و مسیرهای اصلی، redirectها، canonical، sitemap، لینک‌های داخلی، متن‌های حقوقی و hookهای تحلیل را بررسی می‌کند. دو دستور آخر به‌ترتیب گزارش Lighthouse و تصاویر کنترل بصری را در `.codex-qa` تولید می‌کنند.
+`npm run check` به‌ترتیب معماری، typecheck، lint، build و آزمون production را اجرا می‌کند. آزمون production علاوه بر route، canonical، sitemap و redirect، وجود Vazirmatn در build، Story در Home، نبود Workflow قدیمی، نبود sticky CTA در `/download`، taxonomy CTAها، نسخه JSON-LD و assetهای feature را بررسی می‌کند.
+
+GitHub Actions روی push و pull request برنچ‌های `main` و `main-issues`، `npm ci`، `npm run check` و `npm audit --audit-level=high` را اجرا می‌کند. Lighthouse به‌صورت workflow دستی و جدا اجرا می‌شود. گزارش‌های محلی Lighthouse در `.codex-qa/` نوشته می‌شوند و وارد Git نمی‌شوند.
 
 ## مسیرهای اصلی
 
-- `/` معرفی محصول و مسیر اصلی تبدیل
-- `/download` لینک‌های رسمی مایکت و کافه‌بازار، QR و اطلاعات نسخه
-- `/features` و `/features/[slug]` صفحات مستقل امکانات
-- `/calories` ابزار تخمینی کالری با هشدار منبع
-- `/articles` و `/articles/[slug]` مقالات منبع‌دار
-- `/privacy`، `/terms` و `/about` صفحات اعتماد
-- `/editorial-policy` و `/calorie-data-methodology` صفحات شفافیت با `noindex`
+- `/download`: لینک رسمی مایکت و کافه‌بازار، اطلاعات نسخه و راهنمای نصب
+- `/features` و `/features/[slug]`: فهرست و جزئیات قابلیت‌ها
+- `/calories`: ابزار تخمینی کالری با هشدار منبع
+- `/articles` و `/articles/[slug]`: محتوای منبع‌دار
+- `/privacy`، `/terms` و `/about`: صفحات اعتماد
+- `/editorial-policy` و `/calorie-data-methodology`: صفحات شفافیت با `noindex`
 
-## معماری و داده
-
-محتوای بازاریابی و صفحات جزئیات Server Component هستند. JavaScript مرورگر فقط برای منو/تم، BMI، محاسبه کالری، نمودار و پل رویدادهای تحلیلی استفاده می‌شود. فهرست Client Islandهای مجاز در `scripts/verify-architecture.mjs` کنترل می‌شود.
-
-اطلاعات نسخه و شاخص‌های فروشگاه‌ها در `src/data/appStats.ts` متمرکز است. مقدار مایکت و کافه‌بازار به دلیل تفاوت تعریف «دانلود» و «نصب» با هم جمع نمی‌شوند. داده‌های `src/data/foods.ts` فعلاً همگی `unverified` هستند و نباید مرجع درمانی تلقی شوند.
-
-هیچ سرویس Analytics نصب نشده است. `src/lib/analytics.ts` فقط رویدادها را در حافظه همان صفحه منتشر می‌کند و درخواست شبکه یا ذخیره پایدار ندارد. جزئیات در `ANALYTICS_FUNNEL.md` است.
-
-## مستندات تحویل
-
-- `CHANGELOG.md`
-- `SEO_AUDIT.md`
-- `ACCESSIBILITY_AUDIT.md`
-- `PERFORMANCE_AUDIT.md`
-- `ANALYTICS_FUNNEL.md`
-- `NUTRITION_DATA_AUDIT.md`
-- `DOMAIN_EMAIL_SETUP.md`
-
-صفحات حقوقی پیش‌نویس عملیاتی محصول هستند، نه جایگزین بازبینی وکیل. پیش از تغییر مدل داده، حساب کاربری، Analytics یا شریک ثالث، متن حریم خصوصی و شرایط استفاده باید دوباره بررسی شود.
+صفحات حقوقی پیش‌نویس عملیاتی محصول‌اند و جایگزین بازبینی وکیل نیستند. پیش از اضافه‌کردن analytics provider، حساب کاربری یا شریک ثالث باید Privacy و Terms دوباره بررسی شوند.
