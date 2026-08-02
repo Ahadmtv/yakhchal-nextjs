@@ -10,26 +10,35 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
-    "check": "npm run check:architecture && npm run typecheck && npm run lint && npm run build",
+    "typecheck": "next typegen && tsc --noEmit",
+    "check": "npm run check:architecture && npm run typecheck && npm run lint && npm run build && npm run test:production",
     "analyze": "ANALYZE=true next build",
-    "check:architecture": "node scripts/verify-architecture.mjs"
+    "audit:lighthouse": "node scripts/run-lighthouse.mjs",
+    "capture:production": "node scripts/capture-production.mjs",
+    "check:architecture": "node scripts/verify-architecture.mjs",
+    "test:production": "node scripts/verify-production.mjs"
   },
   "dependencies": {
     "next": "16.2.12",
+    "qrcode": "1.5.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "recharts": "3.10.1",
-    "vazirmatn": "33.0.3"
+    "recharts": "3.10.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "16.2.12",
     "@types/node": "22.15.0",
+    "@types/qrcode": "1.5.6",
     "@types/react": "19.2.0",
     "@types/react-dom": "19.2.0",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "9.39.5",
     "eslint-config-next": "16.2.12",
     "typescript": "5.9.3"
+  },
+  "overrides": {
+    "brace-expansion@1.1.16": "1.1.17",
+    "postcss@<=8.5.17": "8.5.25",
+    "sharp@<0.35.0": "0.35.3"
   }
 }

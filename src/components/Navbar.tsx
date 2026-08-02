@@ -28,6 +28,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const frameRef = useRef<number | null>(null);
   const closeRef = useRef<HTMLButtonElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const drawerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const update = () => {
@@ -57,7 +59,25 @@ export default function Navbar() {
     document.body.style.overflow = "hidden";
     closeRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = drawerRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     addEventListener("keydown", onKeyDown);
     return () => {
@@ -78,17 +98,20 @@ export default function Navbar() {
     }
   }, []);
 
-  const closeMenu = useCallback(() => setOpen(false), []);
+  const closeMenu = useCallback(() => {
+    setOpen(false);
+    window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+  }, []);
 
   return (
     <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
       <div className="container">
         <div className="nav-surface">
-          <Link className="brand" href="/" aria-label="یخچال، صفحه اصلی">
-            <Image className="brand-logo" src={assets.logo} alt="" width={42} height={42} sizes="42px" loading="eager" />
+          <Link className="brand" href="/" prefetch={false} aria-label="یخچال، صفحه اصلی">
+            <Image className="brand-logo" src={assets.logo} alt="" width={42} height={42} sizes="42px" />
             <span className="brand-wordmarks" aria-hidden="true">
-              <Image className="wordmark wordmark-light" src={assets.wordmarkLight} alt="" width={110} height={48} sizes="106px" loading="eager" />
-              <Image className="wordmark wordmark-dark" src={assets.wordmarkDark} alt="" width={110} height={48} sizes="106px" loading="eager" />
+              <Image className="wordmark wordmark-light" src={assets.wordmarkLight} alt="" width={110} height={48} sizes="106px" />
+              <Image className="wordmark wordmark-dark" src={assets.wordmarkDark} alt="" width={110} height={48} sizes="106px" />
             </span>
             <span className="sr-only">یخچال</span>
           </Link>
@@ -97,7 +120,7 @@ export default function Navbar() {
             {links.map((link) => {
               const active = isActivePath(pathname, link.match);
               return (
-                <Link key={link.href} className={`nav-link${active ? " active" : ""}`} href={link.href as Route} aria-current={active ? "page" : undefined}>
+                <Link key={link.href} className={`nav-link${active ? " active" : ""}`} href={link.href as Route} prefetch={false} aria-current={active ? "page" : undefined}>
                   {link.label}
                 </Link>
               );
@@ -109,11 +132,11 @@ export default function Navbar() {
               <Icon className="theme-icon theme-sun" name="sun" />
               <Icon className="theme-icon theme-moon" name="moon" />
             </button>
-            <Link className="button button-primary nav-download" href="/#download">
+            <Link className="button button-primary nav-download" href="/download" prefetch={false} data-analytics-event="click_hero_primary_cta" data-analytics-source="navbar">
               <Icon name="download" />
               دریافت برنامه
             </Link>
-            <button className="icon-button mobile-menu-button" type="button" onClick={() => setOpen(true)} aria-label="بازکردن منوی اصلی" aria-expanded={open} aria-controls="mobile-navigation">
+            <button ref={menuButtonRef} className="icon-button mobile-menu-button" type="button" onClick={() => setOpen(true)} aria-label="بازکردن منوی اصلی" aria-expanded={open} aria-controls="mobile-navigation">
               <Icon name="menu" />
             </button>
           </div>
@@ -123,9 +146,9 @@ export default function Navbar() {
       <div className={`mobile-overlay${open ? " open" : ""}`} aria-hidden={!open} onMouseDown={(event: ReactMouseEvent<HTMLDivElement>) => {
         if (event.target === event.currentTarget) closeMenu();
       }}>
-        <aside id="mobile-navigation" className="mobile-drawer" role="dialog" aria-modal="true" aria-label="منوی اصلی">
+        <aside ref={drawerRef} id="mobile-navigation" className="mobile-drawer" role="dialog" aria-modal="true" aria-label="منوی اصلی">
           <div className="drawer-head">
-            <Link className="drawer-brand" href="/" onClick={closeMenu}>
+            <Link className="drawer-brand" href="/" prefetch={false} onClick={closeMenu}>
               <Image src={assets.logo} alt="" width={38} height={38} sizes="38px" />
               <strong>یخچال</strong>
             </Link>
@@ -137,13 +160,13 @@ export default function Navbar() {
             {links.map((link) => {
               const active = isActivePath(pathname, link.match);
               return (
-                <Link key={link.href} className={`mobile-nav-link${active ? " active" : ""}`} href={link.href as Route} onClick={closeMenu} aria-current={active ? "page" : undefined}>
+                <Link key={link.href} className={`mobile-nav-link${active ? " active" : ""}`} href={link.href as Route} prefetch={false} onClick={closeMenu} aria-current={active ? "page" : undefined}>
                   {link.label}
                 </Link>
               );
             })}
           </nav>
-          <Link className="button button-primary drawer-download" href="/#download" onClick={closeMenu}>
+          <Link className="button button-primary drawer-download" href="/download" prefetch={false} onClick={closeMenu} data-analytics-event="click_download_mobile_sticky" data-analytics-source="mobile_drawer">
             <Icon name="download" />
             دریافت رایگان برنامه
           </Link>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-// TODO: Publish only foods with verified source, review date, serving data, and distinct editorial copy.
+// Food detail pages remain unpublished until source, review date, serving data, and distinct editorial copy are verified.
 export const dynamicParams = false;
 
 export function generateStaticParams(): { slug: string }[] {

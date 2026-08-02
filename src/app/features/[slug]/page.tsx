@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import FeatureDetail from "@/components/FeatureDetail";
-import WeeklyMealPlannerLanding from "@/components/WeeklyMealPlannerLanding";
 import { features } from "@/data/features";
 import { serializeJsonLd } from "@/lib/jsonld";
 import { siteConfig } from "@/lib/site";
@@ -25,11 +24,8 @@ export async function generateMetadata({
   }
 
   const canonical = `/features/${slug}`;
-  const isWeeklyPlanner = slug === "weekly-meal-planner";
-  const title = isWeeklyPlanner ? "اپلیکیشن برنامه غذایی هفتگی | برنامه‌ریزی وعده‌ها با یخچال" : feature.title;
-  const description = isWeeklyPlanner
-    ? "با اپلیکیشن یخچال وعده‌های هفته را برنامه‌ریزی کنید، هدف کالری را در نظر بگیرید و مواد لازم را مستقیم به لیست خرید اضافه کنید."
-    : feature.description;
+  const title = feature.title;
+  const description = feature.description;
   return {
     title,
     description,
@@ -41,7 +37,7 @@ export async function generateMetadata({
       locale: "fa_IR",
       title,
       description,
-      images: [{ url: feature.mainImage, width: 900, height: 681, alt: feature.title }],
+      images: [{ url: feature.mainImage, width: 1200, height: 630, alt: feature.title }],
     },
     twitter: {
       card: "summary_large_image",
@@ -88,6 +84,16 @@ export default async function FeaturePage({
     ],
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: feature.faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+
   return (
     <>
       <script
@@ -98,7 +104,8 @@ export default async function FeaturePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbs) }}
       />
-      {slug === "weekly-meal-planner" ? <WeeklyMealPlannerLanding feature={feature} /> : <FeatureDetail feature={feature} />}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqSchema) }} />
+      <FeatureDetail feature={feature} />
     </>
   );
 }

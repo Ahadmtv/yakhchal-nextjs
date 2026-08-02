@@ -6,6 +6,7 @@ import { assets } from "@/lib/assets";
 
 const footerLinks = [
   { label: "امکانات", href: "/features" },
+  { label: "دانلود برنامه", href: "/download" },
   { label: "کالری غذاها", href: "/calories" },
   { label: "مجله سلامت", href: "/articles" },
   { label: "سؤالات متداول", href: "/#faq" },

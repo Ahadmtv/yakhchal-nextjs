@@ -1,51 +1,72 @@
-# Performance audit - implemented changes
+# ممیزی عملکرد
 
-## Critical fixes
+## نتیجه نهایی
 
-1. **FAQ runtime failure:** داده‌های FAQ از فایل مستقل server-safe وارد می‌شوند؛ هیچ Server Component از فایل `use client` داده import نمی‌کند.
-2. **Initial client bundle:** MUI، Emotion، Stylis و مجموعه آیکون‌ها حذف شدند؛ محتوای بازاریابی و layout فقط HTML/CSS/SVG سروری هستند.
-3. **Theme flash:** یک اسکریپت inline کوچک، theme ذخیره‌شده یا system preference را پیش از paint روی `<html>` اعمال می‌کند.
-4. **Image pipeline:** حالت `unoptimized` حذف شده و همه تصاویر با `next/image`، responsive sizes و فرمت‌های AVIF/WebP رندر می‌شوند.
-5. **Heavy libraries:** Recharts فقط در زمان وجود داده و BMI فقط نزدیک viewport دانلود می‌شوند.
+Lighthouse موبایل روی build محلی production در ۱۱ مرداد ۱۴۰۵ اجرا شد:
 
-## Server / Client boundaries
+| معیار | نتیجه |
+| --- | ---: |
+| Performance | 92 |
+| Accessibility | 100 |
+| Best Practices | 100 |
+| SEO | 100 |
+| FCP | 1.2s |
+| LCP شبیه‌سازی‌شده | 2.9s |
+| LCP مشاهده‌شده در اجرای مرورگر | 1.57s |
+| CLS | 0 |
+| TBT | 190ms |
+| Speed Index | 2.8s |
+| انتقال شبکه | حدود 259KiB |
 
-### Server only
+فایل خام نتیجه در `.codex-qa/lighthouse-after.json` تولید می‌شود. این اعداد lab data یک اجرا روی localhost هستند؛ LCP شبیه‌سازی‌شده هنوز از بودجه ترجیحی 2.5 ثانیه بیشتر است و باید پس از انتشار نیز با cold cache و داده‌های میدانی CrUX/Search Console پایش شود.
 
-- Layout و AppShell
-- Hero، Features، Workflow، Download، Articles، Contact
-- FAQ، Privacy، Footer و Calorie Help
-- صفحات فهرست و جزئیات مقاله/ویژگی
-- metadata، sitemap، robots، manifest و JSON-LD
+دو اجرای متوالی نهایی نوسان طبیعی زیر را نشان دادند: Performance بین 92 و 93، LCP شبیه‌سازی‌شده بین 2.8 و 2.9 ثانیه و LCP مشاهده‌شده بین 1.49 و 1.57 ثانیه. جدول بالا آخرین اجرای ذخیره‌شده را نشان می‌دهد.
 
-### Client islands
+## خط مبنا
 
-- Navbar: منوی موبایل، scroll state و theme toggle
-- Lazy BMI loader و BMI calculator
-- Calorie calculator
-- Recharts chart chunk
+نسخه زنده `https://yakhchalapp.ir/` پیش از این تغییرات در همان تاریخ:
 
-## Runtime work reduction
+| معیار | مقدار |
+| --- | ---: |
+| Performance | 95 |
+| Accessibility | 96 |
+| Best Practices | 100 |
+| SEO | 100 |
+| FCP | 1.6s |
+| LCP | 1.7s |
+| CLS | 0.02 |
+| TBT | 190ms |
+| انتقال شبکه | حدود 437KiB |
 
-- food lookup: `Map` با دسترسی O(1)
-- derived rows، total و chart data: `useMemo`
-- update handlers و row actions: `useCallback`
-- rows و charts: `memo`
-- React Compiler: فعال
-- dependency versions: exact/pinned; architecture regression check: فعال
-- persisted state: validate و clamp پیش از استفاده
-- scroll listener: passive و throttle با `requestAnimationFrame`
-- FAQ و help: native `details/summary` و بدون JavaScript
+نسخه جدید با وجود افزوده‌شدن صفحه دانلود، QR، اعتمادسازها، FAQ و رهگیری رویدادها، امتیاز دسترس‌پذیری را به 100 رسانده و حجم انتقال را حدود 41٪ کاهش داده است. تفاوت Performance و LCP دو اجرا برای مقایسه قطعی کافی نیست و نتیجه اصلی باید بعد از deploy روی یک URL و زیرساخت یکسان تکرار شود.
 
-## Loading strategy
+## تغییرات مؤثر
 
-- Hero/article/feature LCP: حداکثر یک preload در هر صفحه
-- تصاویر دیگر: lazy loading داخلی Next Image
-- BMI: Intersection Observer با root margin پیش از dynamic import
-- Recharts: dynamic import با `ssr: false` فقط بعد از وجود داده
-- below-fold sections: `content-visibility`
-- فونت: self-hosted از dependency محلی
+- داستان تعاملی سنگین صفحه خانه با یک مسیر چهارمرحله‌ای سبک جایگزین شد.
+- تصویر بزرگ Hero در موبایل حذف شده، اما اسکرین‌شات واقعی محصول در ادامه صفحه و صفحه دانلود باقی مانده است.
+- prefetch خودکار مسیرهای پنهان منوی موبایل غیرفعال شد؛ تعداد درخواست‌های اجرای Lighthouse از 38 به 18 رسید.
+- فونت وب از مسیر بحرانی حذف و یک font stack سیستمی فارسی استفاده شد.
+- بخش‌های بازاریابی، مقاله، ویژگی، دانلود و FAQ همچنان Server Component هستند.
+- BMI نزدیک viewport بارگذاری می‌شود و Recharts فقط پس از وجود داده import می‌شود.
+- تصاویر با `next/image`، `sizes` متناسب و AVIF/WebP ارائه می‌شوند.
+- `content-visibility` فقط در صفحه‌های بزرگ فعال است تا در موبایل باعث تداخل هندسی هدف‌ها نشود.
+- scroll handler منو passive و با `requestAnimationFrame` محدود شده است.
+- QR در سرور ساخته می‌شود و JavaScript مرورگر اضافه نمی‌کند.
 
-## Remaining deployment action
+## بودجه انتشار
 
-انتقال تصاویر اصلی به `public/assets` اولین fetch سرور از GitHub را نیز حذف می‌کند و deployment را کاملاً مستقل می‌سازد. در وضعیت فعلی، تحویل به browser همچنان از optimizer و cache خود Next.js انجام می‌شود.
+- Performance موبایل Lighthouse: حداقل 90 — پاس در اجرای محلی
+- Accessibility: حداقل 95 — پاس با امتیاز 100؛ بررسی دستی همچنان لازم است
+- CLS: کمتر از 0.1 — پاس با مقدار 0
+- TBT: کمتر از 200ms — پاس با مقدار 190ms
+- LCP: کمتر از 2.5s — LCP مشاهده‌شده پاس، مقدار شبیه‌سازی‌شده 2.9s و نیازمند پایش/بهبود پس از انتشار
+- بدون `<img>` خام و بدون Client Component خارج از allowlist معماری
+
+## اجرای مجدد
+
+```bash
+npm run build
+npm run audit:lighthouse
+```
+
+در ویندوز ممکن است Chrome پس از نوشتن گزارش کامل، هنگام پاک‌سازی پوشه موقت خطای `EPERM` بدهد. runner فقط در صورتی آن را قابل‌قبول می‌داند که گزارش تازه و کامل Lighthouse روی دیسک نوشته شده باشد.

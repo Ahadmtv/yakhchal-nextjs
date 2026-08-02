@@ -14,7 +14,7 @@ export default function FaqSection() {
         />
         <div className="faq-list">
           {faqs.map((item, index) => (
-            <details className="faq-item" key={item.q} open={index === 0}>
+            <details className="faq-item" key={item.q} open={index === 0} data-analytics-event="open_faq" data-analytics-source="home_faq">
               <summary><span><b>۰{index + 1}</b>{item.q}</span><i aria-hidden="true"><Icon name="add" /></i></summary>
               <p>{item.a}</p>
             </details>

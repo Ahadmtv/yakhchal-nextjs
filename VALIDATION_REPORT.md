@@ -1,28 +1,36 @@
-# Validation report
+# گزارش اعتبارسنجی
 
-## Passed
+آخرین اعتبارسنجی در ۱۱ مرداد ۱۴۰۵ روی build محلی production انجام شده است.
 
-- TypeScript/TSX parser diagnostics: 0 files with syntax errors
-- Local relative and `@/` import resolution: 0 unresolved imports
-- Semantic TypeScript check with external-library declaration stubs: passed
-- Unused local/import check: passed
-- `package.json`: valid JSON
-- JavaScript config syntax: `next.config.mjs` and `eslint.config.mjs` passed `node --check`
-- Raw `<img>` usage: none
-- MUI/Emotion imports: none
-- FAQ data imported only from `src/data/faqs.ts`
-- Server/Client directives audited: 5 focused client islands
-- Static params، metadata، sitemap، robots و manifest present
-- Architecture regression script: passed
+## کنترل‌های خودکار
 
-## Environment limitation
+- `next typegen` و TypeScript بدون خطا
+- ESLint بدون خطا
+- Next.js production build موفق
+- ممیزی معماری موفق: بدون `<img>` خام و بدون Client Component خارج از allowlist
+- راه‌اندازی سرور production و پاسخ موفق مسیرهای اصلی
+- بررسی ۸ صفحه اصلی و ۲۵ لینک داخلی
+- بررسی canonical، sitemap، redirectها، صفحه 404 و image optimizer
+- بررسی خودکار نبود متن عمومی `TODO` و placeholder حقوقی
+- بررسی JSON-LD، رویدادهای funnel و متن‌های حقوقی کلیدی
+- `npm audit`: صفر آسیب‌پذیری شناخته‌شده
+- Lighthouse موبایل: Performance 92، Accessibility 100، Best Practices 100 و SEO 100
 
-`npm ping` returned HTTP 503 from the configured package registry and dependency installation timed out. Therefore generation of `package-lock.json` and dependency-aware TypeScript، ESLint and `next build` could not be executed in this sandbox.
-
-Run in a network-enabled environment before deployment:
+## دستور کنترل کامل
 
 ```bash
-npm install
+npm ci
 npm run check
-npm start
+npm audit
+npm run audit:lighthouse
 ```
+
+`npm run check` به‌ترتیب معماری، typecheck، lint، build و آزمون production را اجرا می‌کند. نتایج Lighthouse داده آزمایشگاهی localhost هستند و باید بعد از deploy روی دامنه واقعی دوباره اجرا شوند.
+
+## کنترل‌های انسانی باقی‌مانده
+
+- بازبینی حقوقی متن حریم خصوصی و شرایط استفاده با توجه به رفتار واقعی آخرین نسخه اپ
+- جایگزینی ایمیل عمومی با ایمیل رسمی دامنه پس از ساخت mailbox
+- تأیید منبع و بازبینی تخصصی داده‌های کالری پیش از انتشار صفحه مستقل هر ماده غذایی
+- آزمون دستی صفحه‌خوان روی Android و iOS و آزمون دستگاه‌های واقعی
+- تأیید نهایی آمار فروشگاه‌ها در روز انتشار

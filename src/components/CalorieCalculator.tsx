@@ -15,6 +15,7 @@ import {
 } from "react";
 import Icon from "@/components/Icon";
 import { iranianFoods } from "@/data/foods";
+import { trackEvent } from "@/lib/analytics";
 import type {
   BarDatum,
   CalculatedCalorieRow,
@@ -97,6 +98,8 @@ type RowProps = Readonly<{
 }>;
 
 const CalorieItemRow = memo(function CalorieItemRow({ row, onUpdate, onRemove }: RowProps) {
+  const invalid = row.grams <= 0;
+  const errorId = `weight-${row.id}-error`;
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => onUpdate(row.id, numericDigits(event.target.value)), [onUpdate, row.id]);
   const handleRemove = useCallback(() => onRemove(row.id), [onRemove, row.id]);
   const set50 = useCallback(() => onUpdate(row.id, 50), [onUpdate, row.id]);
@@ -106,10 +109,11 @@ const CalorieItemRow = memo(function CalorieItemRow({ row, onUpdate, onRemove }:
   return (
     <div className="calorie-row">
       <div className="calorie-row-title"><strong>{row.food.name}</strong><small>هر ۱۰۰ گرم: {formatNumber(row.food.caloriesPer100g)} کالری</small></div>
-      <label className="grams-field"><span className="sr-only">وزن {row.food.name}</span><input value={formatNumber(row.grams)} onChange={handleChange} inputMode="numeric" aria-label={`وزن ${row.food.name}`} /><i>گرم</i></label>
+      <label className="grams-field"><span className="sr-only">وزن {row.food.name}</span><input value={formatNumber(row.grams)} onChange={handleChange} inputMode="numeric" min={1} max={MAX_GRAMS} aria-label={`وزن ${row.food.name} به گرم`} aria-invalid={invalid} aria-describedby={invalid ? errorId : undefined} /><i>گرم</i></label>
       <div className="quick-grams"><button type="button" onClick={set50}>۵۰</button><button type="button" onClick={set100}>۱۰۰</button><button type="button" onClick={set150}>۱۵۰</button></div>
       <button className="icon-button danger" type="button" onClick={handleRemove} aria-label={`حذف ${row.food.name}`}><Icon name="delete" /></button>
       <strong className="row-calories">{formatNumber(row.calories)} کالری</strong>
+      {invalid && <small className="row-weight-error" id={errorId}>وزن باید بیشتر از صفر و حداکثر ۵٬۰۰۰ گرم باشد.</small>}
     </div>
   );
 });
@@ -150,7 +154,12 @@ export default function CalorieCalculator() {
   const categories = useMemo(() => createCategoryData(calculatedRows), [calculatedRows]);
 
   const add = useCallback((id: string) => {
-    setRows((current) => current.some((row) => row.id === id) ? current : [...current, { id, grams: 100 }]);
+    setRows((current) => {
+      if (current.some((row) => row.id === id)) return current;
+      trackEvent("use_calorie_calculator", { source: "food_search" });
+      trackEvent("complete_calorie_calculation", { item_count: current.length + 1 });
+      return [...current, { id, grams: 100 }];
+    });
     setQuery("");
     setSearchOpen(false);
   }, []);
@@ -189,7 +198,7 @@ export default function CalorieCalculator() {
             <div><p className="eyebrow">ابزار محاسبه آنلاین</p><h1 id="calorie-title">کالری غذاهای ایرانی</h1></div>
             <button className="button button-ghost" type="button" onClick={clear} disabled={!rows.length}><Icon name="reset" />حذف همه</button>
           </div>
-          <p className="calorie-intro">کالری غذاهای ایرانی را بر اساس وزن محاسبه کنید. برای یادگیری بیشتر، <Link href="/articles">مقالات</Link> را بخوانید یا <Link href="/features">ویژگی‌های برنامه</Link> را ببینید.</p>
+          <p className="calorie-intro">کالری غذاهای ایرانی را بر اساس وزن بر حسب گرم محاسبه کنید. اعداد فعلی منبع مستقل کنار هر خوراک ندارند و فقط برآورد عمومی‌اند؛ <Link href="/calorie-data-methodology">روش‌شناسی و محدودیت‌ها</Link> را بخوانید.</p>
 
           <div className="food-search">
             <label htmlFor="food-query">جست‌وجوی غذا</label>
@@ -239,6 +248,7 @@ export default function CalorieCalculator() {
           ) : (
             <div className="calorie-empty"><Icon name="add" /><p>یک غذا جست‌وجو کرده و مقدار آن را وارد کنید.</p></div>
           )}
+          <aside className="calorie-app-cta"><div><strong>برنامه غذا و خرید را یکجا نگه دارید</strong><p>برای ادامه مسیر از محاسبه تا برنامه هفتگی، نسخه اندروید یخچال را ببینید.</p></div><Link className="button button-primary" href="/download" data-analytics-event="click_calorie_install_cta" data-analytics-source="calorie_calculator"><Icon name="download" />رفتن به صفحه دانلود</Link></aside>
         </div>
       </div>
     </section>

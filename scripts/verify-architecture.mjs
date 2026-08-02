@@ -10,6 +10,7 @@ const allowedClientIslands = new Set([
   "src/components/CalorieCalculator.tsx",
   "src/components/calorie/CalorieCharts.tsx",
   "src/components/smart-fridge-story/SmartFridgeStoryClient.tsx",
+  "src/components/AnalyticsBridge.tsx",
 ]);
 
 async function walk(directory) {

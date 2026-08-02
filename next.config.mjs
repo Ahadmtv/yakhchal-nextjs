@@ -19,7 +19,11 @@ const nextConfig = {
     imageSizes: [32, 48, 64, 80, 96, 128, 256, 384],
   },
   async redirects() {
-    return [{ source: "/contact", destination: "/#contact", permanent: true }];
+    return [
+      { source: "/contact", destination: "/#contact", permanent: true },
+      { source: "/features/weekly-meal-planner", destination: "/features/meal-planner", permanent: true },
+      { source: "/features/pantry-to-recipes", destination: "/features/recipes-by-ingredients", permanent: true },
+    ];
   },
   async headers() {
     return [

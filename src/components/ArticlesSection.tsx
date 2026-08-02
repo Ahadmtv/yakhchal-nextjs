@@ -5,8 +5,12 @@ import SectionHeading from "@/components/SectionHeading";
 import { articles, type Article } from "@/data/articles";
 
 function readTime(article: Article): number {
-  const words = article.sections.flatMap((section) => `${section.heading} ${section.body}`.split(/\s+/)).length;
-  return Math.max(3, Math.round(words / 180));
+  const words = article.sections
+    .flatMap((section) => [section.heading, section.summary, section.body, ...(section.paragraphs ?? []), ...(section.list ?? [])])
+    .filter(Boolean)
+    .join(" ")
+    .split(/\s+/).length;
+  return Math.max(2, Math.round(words / 180));
 }
 
 function articleDate(article: Article): string {
@@ -41,7 +45,7 @@ export default function ArticlesSection({ standalone = false }: Readonly<{ stand
                 />
               </Link>
               <div className="article-card-content">
-                <div className="article-meta"><span><Icon name="clock" />{readTime(article)} دقیقه</span><time dateTime={article.publishedAt}>{articleDate(article)}</time></div>
+                <div className="article-meta"><span><Icon name="clock" />{readTime(article)} دقیقه</span><span>{article.category}</span><time dateTime={article.publishedAt}>{articleDate(article)}</time></div>
                 <h3><Link href={`/articles/${article.slug}`}>{article.title}</Link></h3>
                 <p>{article.excerpt}</p>
                 <div className="article-card-footer">

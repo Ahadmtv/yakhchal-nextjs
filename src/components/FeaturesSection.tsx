@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import SectionHeading from "@/components/SectionHeading";
@@ -20,23 +19,13 @@ export default function FeaturesSection({ standalone = false }: Readonly<{ stand
             <Link
               key={feature.slug}
               href={`/features/${feature.slug}`}
-              aria-label={`مشاهده جزئیات ${feature.title}`}
-              className={`feature-card feature-card-${index + 1}`}
+              className="feature-card-simple"
             >
-              <Image
-                src={feature.mainImage}
-                alt={feature.title}
-                fill
-                preload={standalone && index === 0}
-                quality={75}
-                sizes={index === 0 ? "(max-width: 899px) calc(100vw - 32px), 650px" : "(max-width: 599px) calc(100vw - 32px), (max-width: 899px) 50vw, 390px"}
-              />
-              <span className="feature-overlay" aria-hidden="true" />
-              <span className="feature-card-head"><em>{feature.tags?.[0] || "امکانات یخچال"}</em><small>۰{index + 1}</small></span>
-              <span className="feature-card-body">
-                <strong>{feature.title}</strong>
-                <span className="feature-card-bottom"><span>{feature.description}</span><i aria-hidden="true"><Icon name="arrow" /></i></span>
-              </span>
+              <span className="feature-simple-icon"><Icon name={feature.icon} /></span>
+              <span className="feature-simple-number">{new Intl.NumberFormat("fa-IR", { minimumIntegerDigits: 2 }).format(index + 1)}</span>
+              <strong>{feature.shortTitle}</strong>
+              <span>{feature.description}</span>
+              <i aria-hidden="true">جزئیات ویژگی<Icon name="arrow" /></i>
             </Link>
           ))}
         </div>

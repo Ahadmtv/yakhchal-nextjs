@@ -18,7 +18,7 @@ export default function ContactSection() {
         />
         <div className="contact-list">
           {items.map((item) => (
-            <a className="contact-item" key={item.title} href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined}>
+            <a className="contact-item" key={item.title} href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined} data-analytics-event="click_support" data-analytics-source={item.title}>
               <span className="contact-icon"><Icon name={item.icon} /></span>
               <span><small>{item.title}</small><strong>{item.label}</strong></span>
               <Icon className="contact-arrow" name={item.external ? "external" : "arrow"} />

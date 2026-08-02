@@ -1,53 +1,38 @@
+import Image from "next/image";
 import Icon, { type IconName } from "@/components/Icon";
 import SectionHeading from "@/components/SectionHeading";
+import { assets } from "@/lib/assets";
 
 const steps: ReadonlyArray<{ icon: IconName; title: string; description: string }> = [
-  { icon: "sparkle", title: "هدفتان را مشخص کنید", description: "هدف سلامتی، سلیقه و محدودیت‌های غذایی‌تان را یک‌بار ثبت کنید." },
-  { icon: "calendar", title: "برنامه شخصی بگیرید", description: "یخچال برای هر روز، وعده‌های متعادل و قابل‌اجرا پیشنهاد می‌دهد." },
-  { icon: "shopping", title: "هوشمند خرید کنید", description: "مواد لازم خودکار جمع می‌شوند تا خرید سریع‌تر و دورریز کمتر شود." },
+  { icon: "restaurant", title: "مواد غذایی موجود را ثبت کن", description: "مواد خانه را در موجودی یخچال، فریزر یا کابینت نگه دار." },
+  { icon: "sparkle", title: "غذاهای مناسب با موجودی را ببین", description: "از مواد ثبت‌شده برای پیدا کردن گزینه‌های قابل‌پخت کمک بگیر." },
+  { icon: "calendar", title: "برنامه هفته و لیست خرید را بساز", description: "وعده‌ها را بچین و کمبودهای برنامه را به فهرست خرید ببر." },
+  { icon: "shopping", title: "انقضا و خریدها را مدیریت کن", description: "مواد نزدیک به انقضا و اقلام خرید را در یک جریان مرور کن." },
 ];
-
-const meals = [
-  { day: "شنبه", meal: "مرغ و سبزیجات", calories: "۵۳۰" },
-  { day: "یکشنبه", meal: "عدس‌پلو سبک", calories: "۴۸۰" },
-  { day: "دوشنبه", meal: "سالاد مدیترانه", calories: "۴۲۰" },
-] as const;
 
 export default function WorkflowSection() {
   return (
-    <section className="workflow-section deferred-section" aria-labelledby="workflow-title">
+    <section className="workflow-section deferred-section" id="workflow" aria-labelledby="workflow-title">
       <div className="container workflow-grid">
         <div>
           <SectionHeading
-            eyebrow="ساده از روز اول"
-            title={<span id="workflow-title">مسیر سالم‌تر، بدون تصمیم‌های خسته‌کننده</span>}
-            description="یخچال کارهای پراکنده برنامه‌ریزی، انتخاب غذا و خرید را به یک جریان ساده و منظم تبدیل می‌کند."
+            eyebrow="چهار قدم کوتاه"
+            title={<span id="workflow-title">از موجودی خانه تا برنامه قابل‌اجرا</span>}
+            description="موجودی، پیشنهاد غذا، برنامه هفتگی و خرید در یک مسیر به هم متصل می‌شوند."
           />
-          <div className="workflow-steps">
+          <ol className="workflow-steps">
             {steps.map((step, index) => (
-              <div className={`workflow-step${index === 0 ? " active" : ""}`} key={step.title}>
-                <span><Icon name={step.icon} /></span>
+              <li className="workflow-step" key={step.title}>
+                <span><Icon name={step.icon} /><b>{index + 1}</b></span>
                 <div><strong>{step.title}</strong><p>{step.description}</p></div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
-        <div className="plan-wrap">
-          <div className="plan-glow" aria-hidden="true" />
-          <div className="plan-card">
-            <div className="plan-head"><div><small>برنامه این هفته</small><h3>۵ وعده تا هدف</h3></div><span className="plan-chip"><Icon name="check" />۸۲٪ آماده</span></div>
-            <div className="plan-progress" role="progressbar" aria-label="پیشرفت برنامه هفتگی" aria-valuenow={82} aria-valuemin={0} aria-valuemax={100}><span /></div>
-            <div className="meal-list">
-              {meals.map((meal, index) => (
-                <div className={`meal-row${index === 0 ? " active" : ""}`} key={meal.day}>
-                  <div><b>{index + 1}</b><span><small>{meal.day}</small><strong>{meal.meal}</strong></span></div>
-                  <small>{meal.calories} کالری</small>
-                </div>
-              ))}
-            </div>
-            <p className="plan-note">مواد لازم همین حالا به لیست خرید اضافه شد</p>
-          </div>
-        </div>
+        <figure className="workflow-app-preview">
+          <Image src={assets.appPreview760} alt="نمای واقعی رابط فعلی اپلیکیشن یخچال" width={760} height={1516} sizes="(max-width: 899px) 280px, 330px" quality={80} />
+          <figcaption>نمای فعلی اپلیکیشن؛ جزئیات هر نسخه ممکن است تغییر کند.</figcaption>
+        </figure>
       </div>
     </section>
   );

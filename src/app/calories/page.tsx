@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import CalorieCalculator from "@/components/CalorieCalculator";
-import CalorieHelp from "@/components/CalorieHelp";
+import CalorieHelp, { calorieFaqs } from "@/components/CalorieHelp";
 import CaloriesContentHub from "@/components/CaloriesContentHub";
 import { assets } from "@/lib/assets";
 import { serializeJsonLd } from "@/lib/jsonld";
@@ -27,24 +27,11 @@ export const metadata: Metadata = {
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "کالری هر ۱۰۰ گرم چگونه محاسبه شده است؟",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "از میانگین منابع تغذیه عمومی استفاده شده است و بسته به دستور یا برند تفاوت دارد.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "آیا روش پخت روی کالری اثر دارد؟",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "بله؛ سرخ‌کردن معمولاً کالری را افزایش می‌دهد.",
-      },
-    },
-  ],
+  mainEntity: calorieFaqs.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 
 const breadcrumbSchema = {
