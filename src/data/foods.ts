@@ -1,12 +1,23 @@
-export type FoodItem = {
+export type BaseFoodItem = {
   id: string;
   name: string;
   category: string;
   caloriesPer100g: number;
+};
+
+export type UnverifiedFoodSource = {
   sourceStatus: "unverified";
   sourceUrl: null;
   reviewedAt: null;
 };
+
+export type VerifiedFoodSource = {
+  sourceStatus: "verified";
+  sourceUrl: string;
+  reviewedAt: string;
+};
+
+export type FoodItem = BaseFoodItem & (UnverifiedFoodSource | VerifiedFoodSource);
 export const iranianFoods: FoodItem[] = [
   ["rice-white","برنج سفید پخته","غلات",130],["rice-brown","برنج قهوه‌ای پخته","غلات",112],["naan-sangak","نان سنگک","نان",260],["naan-barbari","نان بربری","نان",270],["naan-lavash","نان لواش","نان",250],
   ["kabab-koobideh","کباب کوبیده","خوراک",280],["joojeh","جوجه‌کباب","خوراک",195],["kabab-barg","کباب برگ","خوراک",250],["kabab-chenjeh","کباب چنجه","خوراک",290],["ghormeh","قرمه‌سبزی","خورش",150],["gheymeh","قیمه","خورش",170],
