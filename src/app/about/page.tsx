@@ -75,7 +75,7 @@ export default function AboutPage() {
         {
           id: "contact",
           heading: "راه‌های رسمی ارتباط",
-          body: <>ایمیل رسمی: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>؛ صفحه اینستاگرام: <a href="https://instagram.com/yakhchal.app" target="_blank" rel="noopener noreferrer">@yakhchal.app</a>؛ صفحه حرفه‌ای: <a href="https://www.linkedin.com/company/yakhchal" target="_blank" rel="noopener noreferrer">Yakhchal در LinkedIn</a>. برای نصب برنامه فقط از <a href="https://myket.ir/app/me.jfrpr.yakhchal" target="_blank" rel="noopener noreferrer">مایکت</a> یا <a href="https://cafebazaar.ir/app/me.jfrpr.yakhchal" target="_blank" rel="noopener noreferrer">کافه‌بازار</a> استفاده کنید.</>,
+          body: <>ایمیل رسمی: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>؛ صفحه اینستاگرام: <a href="https://instagram.com/yakhchal.app" target="_blank" rel="noopener noreferrer">@yakhchal.app<span className="sr-only"> (در پنجره جدید)</span></a>؛ صفحه حرفه‌ای: <a href="https://www.linkedin.com/company/yakhchal" target="_blank" rel="noopener noreferrer">Yakhchal در LinkedIn<span className="sr-only"> (در پنجره جدید)</span></a>. برای نصب برنامه فقط از <a href="https://myket.ir/app/me.jfrpr.yakhchal" target="_blank" rel="noopener noreferrer">مایکت<span className="sr-only"> (در پنجره جدید)</span></a> یا <a href="https://cafebazaar.ir/app/me.jfrpr.yakhchal" target="_blank" rel="noopener noreferrer">کافه‌بازار<span className="sr-only"> (در پنجره جدید)</span></a> استفاده کنید.</>,
         },
         {
           heading: "بازخورد و پاسخ‌گویی",

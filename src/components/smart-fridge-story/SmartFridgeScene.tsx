@@ -115,6 +115,7 @@ export default function SmartFridgeScene() {
     <div
       className={styles.scene}
       data-story-canvas
+      role="img"
       aria-label="نمای تصویری تبدیل مواد موجود به پیشنهاد غذا، برنامه هفتگی و فهرست خرید"
     >
       <div className={styles.sceneGlow} aria-hidden="true" />

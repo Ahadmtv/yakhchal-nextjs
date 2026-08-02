@@ -30,7 +30,10 @@ export default function Footer() {
           <div className="footer-brand">
             <Link href="/" aria-label="یخچال، صفحه اصلی"><Image src={assets.logo} alt="" width={48} height={48} sizes="48px" /><Image src={assets.wordmarkDark} alt="یخچال" width={120} height={50} sizes="120px" /></Link>
             <p>همراه فارسی شما برای برنامه‌ریزی غذا، کالری‌شماری و خرید هوشمند.</p>
-            <div className="footer-socials">{socials.map((item) => <a key={item.href} href={item.href} aria-label={item.label} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}><Icon name={item.icon} /></a>)}</div>
+            <div className="footer-socials">{socials.map((item) => {
+              const external = item.href.startsWith("http");
+              return <a key={item.href} href={item.href} aria-label={`${item.label}${external ? " (در پنجره جدید)" : ""}`} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined}><Icon name={item.icon} /></a>;
+            })}</div>
           </div>
           <div><h2>دسترسی سریع</h2><nav className="footer-links" aria-label="پیوندهای پایین صفحه">{footerLinks.map((link) => <Link key={link.href} href={link.href as Route}>{link.label}</Link>)}</nav></div>
         </div>

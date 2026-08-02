@@ -20,7 +20,7 @@ export default function ContactSection() {
           {items.map((item) => (
             <a className="contact-item" key={item.title} href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined} data-analytics-event="click_support" data-analytics-source={item.title}>
               <span className="contact-icon"><Icon name={item.icon} /></span>
-              <span><small>{item.title}</small><strong>{item.label}</strong></span>
+              <span><small>{item.title}</small><strong>{item.label}</strong>{item.external ? <span className="sr-only"> (در پنجره جدید)</span> : null}</span>
               <Icon className="contact-arrow" name={item.external ? "external" : "arrow"} />
             </a>
           ))}
