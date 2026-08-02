@@ -7,7 +7,6 @@ export default function HeroTrustBar() {
         <a href={store.url} key={store.id} target="_blank" rel="noopener noreferrer">
           <span>{store.name}</span>
           <strong>{store.rating}</strong>
-          <small>{store.ratingCount}</small>
           <span className="sr-only"> (در پنجره جدید)</span>
         </a>
       ))}

@@ -9,7 +9,7 @@ export default function FeatureDetail({ feature }: Readonly<{ feature: Feature }
       <div className="container container-article">
         <nav className="breadcrumbs" aria-label="مسیر صفحه"><Link href="/">خانه</Link><span>/</span><Link href="/features">امکانات</Link><span>/</span><span aria-current="page">{feature.title}</span></nav>
         <div className="feature-page-hero">
-          <div>
+          <div className="feature-page-copy">
             <p className="eyebrow">ویژگی یخچال</p>
             <h1>{feature.title}</h1>
             <p className="detail-lead">{feature.description}</p>
@@ -20,7 +20,8 @@ export default function FeatureDetail({ feature }: Readonly<{ feature: Feature }
             </div>
           </div>
           {feature.mockupImage && feature.imageAlt ? (
-            <figure className="feature-real-preview">
+            <figure className="feature-real-preview feature-page-visual">
+              <span className="feature-visual-badge"><Icon name="sparkle" />نمای واقعی اپلیکیشن</span>
               <Image
                 src={feature.mockupImage}
                 alt={feature.imageAlt}
@@ -28,9 +29,9 @@ export default function FeatureDetail({ feature }: Readonly<{ feature: Feature }
                 height={feature.imageHeight}
                 preload
                 quality={85}
-                sizes="(max-width: 699px) 250px, 290px"
+                sizes="(max-width: 699px) calc(100vw - 54px), 420px"
               />
-              <figcaption>اسکرین‌شات واقعی {feature.shortTitle} در اپلیکیشن یخچال.</figcaption>
+              <figcaption>تصویر واقعی از {feature.shortTitle} در اپلیکیشن یخچال.</figcaption>
             </figure>
           ) : (
             <aside className="feature-image-pending" aria-label="وضعیت تصویر قابلیت">

@@ -22,7 +22,7 @@ export default function FeaturesSection({ standalone = false }: Readonly<{ stand
               className="feature-card-simple"
             >
               <span className="feature-simple-icon"><Icon name={feature.icon} /></span>
-              <span className="feature-simple-number">{new Intl.NumberFormat("fa-IR", { minimumIntegerDigits: 2 }).format(index + 1)}</span>
+              <span className="feature-simple-number">{new Intl.NumberFormat("fa-IR").format(index + 1)}</span>
               <strong>{feature.shortTitle}</strong>
               <span>{feature.description}</span>
               <i aria-hidden="true">جزئیات ویژگی<Icon name="arrow" /></i>
