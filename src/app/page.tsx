@@ -1,7 +1,7 @@
 import Hero from "@/components/Hero";
 import type { Metadata } from "next";
 import FeaturesSection from "@/components/FeaturesSection";
-import WorkflowSection from "@/components/WorkflowSection";
+import SmartFridgeStory from "@/components/smart-fridge-story/SmartFridgeStory";
 import UseCasesSection from "@/components/UseCasesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ProductUpdateSection from "@/components/ProductUpdateSection";
@@ -95,7 +95,7 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(softwareSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqSchema) }} />
       <Hero />
-      <WorkflowSection />
+      <SmartFridgeStory />
       <FeaturesSection />
       <UseCasesSection />
       <DownloadSection />
