@@ -3,7 +3,9 @@ export type AnalyticsEventName =
   | "view_download_page"
   | "view_feature_page"
   | "view_article"
-  | "use_calorie_calculator"
+  | "click_download_navbar"
+  | "click_download_drawer"
+  | "start_calorie_calculation"
   | "complete_calorie_calculation"
   | "click_download_bazaar"
   | "click_download_myket"
@@ -11,22 +13,37 @@ export type AnalyticsEventName =
   | "scan_download_qr"
   | "click_hero_primary_cta"
   | "click_article_install_cta"
+  | "click_article_feature_cta"
   | "click_calorie_install_cta"
   | "click_feature_install_cta"
   | "open_faq"
   | "click_support";
 
-export type AnalyticsProperties = Readonly<Record<string, string | number | boolean | undefined>>;
+type AnalyticsPropertyName = "source" | "store" | "feature_name" | "article_slug" | "item_count";
+export type AnalyticsProperties = Readonly<Partial<Record<AnalyticsPropertyName, string | number | boolean>>>;
+
+const allowedPropertyNames = new Set<AnalyticsPropertyName>([
+  "source",
+  "store",
+  "feature_name",
+  "article_slug",
+  "item_count",
+]);
 
 type DataLayerWindow = Window & { dataLayer?: Array<Record<string, unknown>> };
 
 export function trackEvent(event: AnalyticsEventName, properties: AnalyticsProperties = {}): void {
   if (typeof window === "undefined") return;
+  const safeProperties = Object.fromEntries(
+    Object.entries(properties).filter(
+      ([key, value]) => allowedPropertyNames.has(key as AnalyticsPropertyName) && value !== undefined,
+    ),
+  );
   const payload = {
     event,
     page_path: window.location.pathname,
     device_type: window.matchMedia("(max-width: 699px)").matches ? "mobile" : "desktop",
-    ...properties,
+    ...safeProperties,
   };
 
   // No analytics vendor is installed. This in-memory layer and CustomEvent let a

@@ -80,6 +80,6 @@ export default function ArticleDetail({ article }: Readonly<{ article: Article }
       </div>
     </section>
     {relatedArticles.length ? <aside className="related-content" aria-labelledby="related-title"><h2 id="related-title">مطالب مرتبط</h2><div>{relatedArticles.map((item) => <Link className="tag tag-link" key={item.slug} href={`/articles/${item.slug}`}>{item.title}</Link>)}</div></aside> : null}
-    <aside className="article-end-cta"><strong>برای برنامه‌ریزی آماده‌اید؟</strong><Link className="text-link" href="/features/meal-planner" data-analytics-event="click_article_install_cta" data-analytics-article={`${article.slug}:end`}>ببینید برنامه‌ریز هفتگی چطور کار می‌کند <Icon name="arrow" /></Link></aside>
+    <aside className="article-end-cta"><strong>برای برنامه‌ریزی آماده‌اید؟</strong><Link className="text-link" href="/features/meal-planner" data-analytics-event="click_article_feature_cta" data-analytics-article={article.slug} data-analytics-feature="meal-planner">ببینید برنامه‌ریز هفتگی چطور کار می‌کند <Icon name="arrow" /></Link></aside>
   </div></article>;
 }

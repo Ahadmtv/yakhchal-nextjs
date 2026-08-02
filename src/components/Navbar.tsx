@@ -132,7 +132,7 @@ export default function Navbar() {
               <Icon className="theme-icon theme-sun" name="sun" />
               <Icon className="theme-icon theme-moon" name="moon" />
             </button>
-            <Link className="button button-primary nav-download" href="/download" prefetch={false} data-analytics-event="click_hero_primary_cta" data-analytics-source="navbar">
+            <Link className="button button-primary nav-download" href="/download" prefetch={false} data-analytics-event="click_download_navbar" data-analytics-source="navbar">
               <Icon name="download" />
               دریافت برنامه
             </Link>
@@ -166,7 +166,7 @@ export default function Navbar() {
               );
             })}
           </nav>
-          <Link className="button button-primary drawer-download" href="/download" prefetch={false} onClick={closeMenu} data-analytics-event="click_download_mobile_sticky" data-analytics-source="mobile_drawer">
+          <Link className="button button-primary drawer-download" href="/download" prefetch={false} onClick={closeMenu} data-analytics-event="click_download_drawer" data-analytics-source="mobile_drawer">
             <Icon name="download" />
             دریافت رایگان برنامه
           </Link>

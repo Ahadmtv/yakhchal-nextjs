@@ -8,6 +8,7 @@ import {
   useEffect,
   useId,
   useMemo,
+  useRef,
   useState,
   type ChangeEvent,
   type MouseEvent as ReactMouseEvent,
@@ -125,6 +126,8 @@ export default function CalorieCalculator() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [rows, setRows] = useState<CalorieRowState[]>([]);
   const [storageReady, setStorageReady] = useState(false);
+  const startedRef = useRef(false);
+  const completedRef = useRef(false);
 
   useEffect(() => {
     try {
@@ -153,16 +156,27 @@ export default function CalorieCalculator() {
   const bars = useMemo(() => createBarData(calculatedRows), [calculatedRows]);
   const categories = useMemo(() => createCategoryData(calculatedRows), [calculatedRows]);
 
+  useEffect(() => {
+    if (!storageReady || completedRef.current) return;
+    const validItemCount = calculatedRows.filter((row) => row.grams > 0).length;
+    if (!validItemCount) return;
+    completedRef.current = true;
+    trackEvent("complete_calorie_calculation", { item_count: validItemCount });
+  }, [calculatedRows, storageReady]);
+
   const add = useCallback((id: string) => {
+    if (rows.some((row) => row.id === id)) return;
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackEvent("start_calorie_calculation", { source: "food_search" });
+    }
     setRows((current) => {
       if (current.some((row) => row.id === id)) return current;
-      trackEvent("use_calorie_calculator", { source: "food_search" });
-      trackEvent("complete_calorie_calculation", { item_count: current.length + 1 });
       return [...current, { id, grams: 100 }];
     });
     setQuery("");
     setSearchOpen(false);
-  }, []);
+  }, [rows]);
   const update = useCallback((id: string, grams: number) => {
     const safeGrams = Math.max(0, Math.min(MAX_GRAMS, Number.isFinite(grams) ? grams : 0));
     setRows((current) => current.map((row) => row.id === id ? { ...row, grams: safeGrams } : row));
