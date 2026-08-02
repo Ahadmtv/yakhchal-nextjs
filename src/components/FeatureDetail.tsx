@@ -19,7 +19,26 @@ export default function FeatureDetail({ feature }: Readonly<{ feature: Feature }
               <Link className="button button-outline" href="/features">همه امکانات</Link>
             </div>
           </div>
-          <figure className="feature-real-preview"><Image src={feature.mockupImage} alt="نمای واقعی رابط اپلیکیشن یخچال" width={760} height={1516} preload quality={85} sizes="(max-width: 699px) 230px, 290px" /><figcaption>نمای واقعی نسخه فعلی؛ تصویر اختصاصی این قابلیت هنوز در مخزن موجود نیست.</figcaption></figure>
+          {feature.mockupImage && feature.imageAlt ? (
+            <figure className="feature-real-preview">
+              <Image
+                src={feature.mockupImage}
+                alt={feature.imageAlt}
+                width={feature.imageWidth}
+                height={feature.imageHeight}
+                preload
+                quality={85}
+                sizes="(max-width: 699px) 250px, 290px"
+              />
+              <figcaption>اسکرین‌شات واقعی {feature.shortTitle} در اپلیکیشن یخچال.</figcaption>
+            </figure>
+          ) : (
+            <aside className="feature-image-pending" aria-label="وضعیت تصویر قابلیت">
+              <Icon name="sparkle" />
+              <strong>اسکرین‌شات این قابلیت در دسترس نیست</strong>
+              <p>تا زمان دریافت تصویر مرتبط، هیچ نمای عمومی یا ساختگی به‌جای آن نمایش داده نمی‌شود.</p>
+            </aside>
+          )}
         </div>
 
         <section className="feature-problem-solution" aria-label="مسئله و راه‌حل">

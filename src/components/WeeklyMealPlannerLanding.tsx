@@ -19,7 +19,7 @@ export default function WeeklyMealPlannerLanding({ feature }: Readonly<{ feature
         <div className="planner-actions"><Link className="button button-primary" href="/#download">دریافت برنامه</Link><Link className="button button-outline" href="/features/smart-shopping-list">مشاهده لیست خرید هوشمند</Link></div>
         <div className="feature-detail-grid">
           <div className="feature-detail-copy"><p>{feature.longDescription}</p><ul>{feature.highlights?.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul></div>
-          <div className="feature-mockup-wrap"><div className="feature-mockup"><Image src={feature.mockupImage} alt="نمای برنامه‌ریز هفتگی در اپلیکیشن یخچال" fill preload quality={85} sizes="(max-width: 599px) 230px, (max-width: 899px) 280px, 320px" /></div></div>
+          {feature.mockupImage && feature.imageAlt ? <div className="feature-mockup-wrap"><div className="feature-mockup"><Image src={feature.mockupImage} alt={feature.imageAlt} fill preload quality={85} sizes="(max-width: 599px) 230px, (max-width: 899px) 280px, 320px" /></div></div> : null}
         </div>
         <div className="planner-content">
           <section id="weekly-plan"><h2>برنامه غذایی هفتگی چیست؟</h2><p><strong>برنامه غذایی هفتگی، نمایی از وعده‌های چند روز آینده است.</strong> به‌جای تصمیم‌گیری لحظه‌ای، صبحانه، ناهار و شام را پیش از شروع هفته کنار هم می‌چینید تا انتخاب و خرید ساده‌تر شود.</p><p>این روش کمک می‌کند بدانید چه مواد اولیه‌ای لازم است و برای هر روز چه گزینه‌ای در نظر دارید؛ بدون آن‌که لازم باشد همه‌چیز را روی کاغذ یادداشت کنید.</p></section>

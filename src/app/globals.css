@@ -464,6 +464,10 @@
   .feature-real-preview { margin: 0; padding: 20px; border: 1px solid var(--border); border-radius: 32px; background: radial-gradient(circle at 50% 35%,var(--surface-soft),var(--surface)); text-align: center; }
   .feature-real-preview img { width: 250px; height: auto; margin-inline: auto; filter: drop-shadow(0 20px 24px rgba(14,48,27,.2)); }
   .feature-real-preview figcaption { margin-top: 10px; color: var(--text-muted); font-size: .7rem; line-height: 1.6; }
+  .feature-image-pending { align-self: stretch; display: grid; place-content: center; gap: 10px; min-height: 360px; padding: 28px; border: 1px dashed var(--border-strong); border-radius: 32px; color: var(--text-muted); background: var(--surface-soft); text-align: center; }
+  .feature-image-pending svg { width: 34px; height: 34px; margin-inline: auto; color: var(--primary); }
+  .feature-image-pending strong { color: var(--text); }
+  .feature-image-pending p { margin: 0; font-size: .82rem; }
   .feature-problem-solution { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; margin-top: 70px; }
   .feature-problem-solution article { padding: 27px; border: 1px solid var(--border); border-radius: 24px; background: var(--surface); }
   .feature-problem-solution article > span { display: inline-flex; margin-bottom: 14px; padding: 4px 10px; border-radius: 999px; color: var(--primary); background: var(--surface-soft); font-size: .72rem; font-weight: 800; }

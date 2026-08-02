@@ -26,6 +26,9 @@ export async function generateMetadata({
   const canonical = `/features/${slug}`;
   const title = feature.title;
   const description = feature.description;
+  const socialImage = feature.ogImage && feature.imageAlt
+    ? [{ url: feature.ogImage, width: feature.imageWidth, height: feature.imageHeight, alt: feature.imageAlt }]
+    : undefined;
   return {
     title,
     description,
@@ -37,13 +40,13 @@ export async function generateMetadata({
       locale: "fa_IR",
       title,
       description,
-      images: [{ url: feature.mainImage, width: 1200, height: 630, alt: feature.title }],
+      images: socialImage,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [feature.mainImage],
+      images: feature.ogImage ? [feature.ogImage] : undefined,
     },
   };
 }
@@ -63,7 +66,7 @@ export default async function FeaturePage({
     "@type": "WebPage",
     name: feature.title,
     description: feature.description,
-    image: feature.mainImage,
+    ...(feature.mainImage ? { image: feature.mainImage } : {}),
     url: featureUrl,
     inLanguage: "fa-IR",
     isPartOf: { "@type": "WebSite", name: "یخچال", url: siteConfig.url },
