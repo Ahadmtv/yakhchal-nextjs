@@ -512,6 +512,8 @@
   .planner-content, .trust-content, .calorie-content-hub { display: grid; gap: 28px; }
   .planner-content > section, .trust-content > section, .calorie-content-hub > div > section { padding-top: 26px; border-top: 1px solid var(--border); }
   .planner-content h2, .trust-content h2, .calorie-content-hub h2 { margin-bottom: 12px; font-size: clamp(1.45rem, 2.5vw, 2.2rem); }
+  .trust-updated { margin: 18px 0 28px; color: var(--text-muted); font-size: .86rem; }
+  .trust-content a { color: var(--primary); font-weight: 750; }
   .planner-content h3, .calorie-content-hub h3 { margin-bottom: 8px; font-size: 1.18rem; }
   .planner-content details { margin-top: 9px; padding: 15px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
   .planner-content summary { cursor: pointer; font-weight: 800; }
