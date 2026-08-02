@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process";
+import { readFile } from "node:fs/promises";
 import { setTimeout as delay } from "node:timers/promises";
 import path from "node:path";
 import process from "node:process";
@@ -22,7 +23,8 @@ function assert(condition, message) {
 }
 
 async function fetchPage(pathname, options) {
-  return fetch(`${origin}${pathname}`, { redirect: "manual", ...options });
+  const url = /^https?:\/\//.test(pathname) ? pathname : new URL(pathname, origin).href;
+  return fetch(url, { redirect: "manual", ...options });
 }
 
 async function waitForServer() {
@@ -49,7 +51,30 @@ async function checkPage(pathname, requiredTexts = []) {
   }
   assert(!/TODO:\s|مالک سایت باید|باید بعداً اضافه شوند|جزئیات .* هنوز باید تکمیل/.test(html), `${pathname} exposes unfinished copy`);
   assert(/<link rel="canonical"/.test(html), `${pathname} is missing a canonical link`);
+  for (const link of html.matchAll(/<a\b[^>]*target="_blank"[^>]*>[\s\S]*?<\/a>/g)) {
+    assert(
+      /در پنجره جدید/.test(link[0]),
+      `${pathname} has a new-window link without a screen-reader announcement`,
+    );
+  }
   return html;
+}
+
+async function combinedStyles(html) {
+  const stylesheets = [...html.matchAll(/<link[^>]+href="([^"]+\.css[^"]*)"[^>]*>/g)]
+    .map((match) => match[1].replaceAll("&amp;", "&"));
+  let vazirmatnAsset = null;
+  const contents = await Promise.all(stylesheets.map(async (href) => {
+    const response = await fetchPage(href);
+    assert(response.ok, `Stylesheet ${href} returned ${response.status}`);
+    const css = await response.text();
+    if (css.includes("Vazirmatn")) {
+      const relativeAsset = css.match(/url\(([^)]+\.woff2[^)]*)\)/)?.[1]?.replaceAll(/["']/g, "");
+      if (relativeAsset) vazirmatnAsset = new URL(relativeAsset, new URL(href, origin)).href;
+    }
+    return css;
+  }));
+  return { css: contents.join("\n"), vazirmatnAsset };
 }
 
 function localPathsFrom(html) {
@@ -77,9 +102,45 @@ async function main() {
   pages.set("/articles/healthy-eating-fundamentals", await checkPage("/articles/healthy-eating-fundamentals", ["منابع و تاریخ بررسی", "سازمان جهانی بهداشت"]));
 
   const home = pages.get("/");
+  const download = pages.get("/download");
   assert(home.includes('"@type":"MobileApplication"'), "Home is missing MobileApplication JSON-LD");
   assert(!home.includes('"@type":"Offer"'), "Home exposes an unverified Offer in JSON-LD");
   assert(home.includes('data-analytics-event="click_hero_primary_cta"'), "Hero CTA tracking hook is missing");
+  assert(home.includes('data-analytics-event="click_download_navbar"'), "Navbar download tracking hook is missing");
+  assert(home.includes('data-analytics-event="click_download_drawer"'), "Drawer download tracking hook is missing");
+  assert(!home.includes('data-analytics-event="click_hero_primary_cta" data-analytics-source="navbar"'), "Navbar still uses the hero CTA event");
+  assert(!home.includes('data-analytics-event="click_download_mobile_sticky" data-analytics-source="mobile_drawer"'), "Drawer still uses the sticky CTA event");
+  assert(home.includes('id="smart-fridge-title"'), "Home is missing Smart Fridge Story");
+  assert(!home.includes("چهار قدم کوتاه"), "The removed four-step Workflow is still on Home");
+  assert(!download.includes("mobile-download-bar"), "/download still renders the mobile sticky download bar");
+
+  const { css: styles, vazirmatnAsset } = await combinedStyles(home);
+  assert(/font-family:\s*['"]?Vazirmatn/.test(styles), "Vazirmatn font-face is missing from the production CSS");
+  assert(/font-weight:\s*100 900/.test(styles), "Vazirmatn variable weight range is missing from the production CSS");
+  assert(vazirmatnAsset, "Vazirmatn WOFF2 asset is missing from the build");
+  const fontResponse = await fetchPage(vazirmatnAsset);
+  assert(fontResponse.ok, `Vazirmatn asset returned ${fontResponse.status}`);
+
+  const homeSource = await readFile(path.join(process.cwd(), "src/app/page.tsx"), "utf8");
+  const downloadSource = await readFile(path.join(process.cwd(), "src/app/download/page.tsx"), "utf8");
+  assert(!/softwareVersion:\s*["']/.test(`${homeSource}\n${downloadSource}`), "A hardcoded softwareVersion remains in page source");
+  assert((home.match(/"softwareVersion":"1\.4\.1"/g) ?? []).length === 1, "Home softwareVersion is not generated as 1.4.1");
+  assert((download.match(/"softwareVersion":"1\.4\.1"/g) ?? []).length === 1, "Download softwareVersion is not generated as 1.4.1");
+
+  const dedicatedFeatureAssets = [
+    "/assets/features/meal-planner.webp",
+    "/assets/features/shopping-list.webp",
+    "/assets/features/shopping-list-create.webp",
+    "/assets/features/fridge-inventory.webp",
+    "/assets/features/expiry-reminder.webp",
+    "/assets/features/recipes-by-ingredients.webp",
+    "/assets/features/quick-cook.webp",
+    "/assets/features/world-cuisine-library.webp",
+  ];
+  for (const assetPath of dedicatedFeatureAssets) {
+    const response = await fetchPage(assetPath);
+    assert(response.ok && response.headers.get("content-type")?.startsWith("image/"), `Feature asset ${assetPath} is not fetchable`);
+  }
   const optimizedImagePath = home.match(/src="([^\"]*\/_next\/image\?[^\"]+)"/)?.[1]?.replaceAll("&amp;", "&");
   assert(optimizedImagePath, "Home is missing a Next.js optimized image");
   const optimizedImage = await fetchPage(optimizedImagePath);

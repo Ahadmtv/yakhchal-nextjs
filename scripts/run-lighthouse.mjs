@@ -6,9 +6,13 @@ import process from "node:process";
 
 const port = Number(process.env.LIGHTHOUSE_PORT || 3218);
 const origin = `http://127.0.0.1:${port}`;
-const outputPath = path.join(process.cwd(), ".codex-qa", "lighthouse-after.json");
+const outputDirectory = path.join(process.cwd(), ".codex-qa");
+const outputPaths = {
+  mobile: path.join(outputDirectory, "lighthouse-mobile.json"),
+  desktop: path.join(outputDirectory, "lighthouse-desktop.json"),
+};
 const nextBin = path.join(process.cwd(), "node_modules", "next", "dist", "bin", "next");
-mkdirSync(path.dirname(outputPath), { recursive: true });
+mkdirSync(outputDirectory, { recursive: true });
 
 const server = spawn(process.execPath, [nextBin, "start", "-H", "127.0.0.1", "-p", String(port)], {
   cwd: process.cwd(),
@@ -31,7 +35,8 @@ async function waitForServer() {
   throw new Error(`Server did not become ready.\n${serverLogs.join("")}`);
 }
 
-function runLighthouse() {
+function runLighthouse(formFactor) {
+  const outputPath = outputPaths[formFactor];
   const startedAt = Date.now();
   const npmCliDirectory = process.env.npm_execpath ? path.dirname(process.env.npm_execpath) : "";
   const adjacentNpxCli = path.join(path.dirname(process.execPath), "node_modules", "npm", "bin", "npx-cli.js");
@@ -41,6 +46,7 @@ function runLighthouse() {
     ...(npxCli ? [npxCli] : []),
     "lighthouse@12.8.2",
     origin,
+    ...(formFactor === "desktop" ? ["--preset=desktop"] : []),
     "--output=json",
     `--output-path=${outputPath}`,
     "--chrome-flags=--headless --no-sandbox",
@@ -76,10 +82,20 @@ function runLighthouse() {
   });
 }
 
+function summarize(formFactor) {
+  const report = JSON.parse(readFileSync(outputPaths[formFactor], "utf8"));
+  const score = (category) => Math.round((report.categories[category]?.score ?? 0) * 100);
+  const metric = (id) => report.audits[id]?.displayValue ?? "n/a";
+  console.log(`${formFactor}: performance ${score("performance")}, accessibility ${score("accessibility")}, best-practices ${score("best-practices")}, SEO ${score("seo")}, LCP ${metric("largest-contentful-paint")}, CLS ${metric("cumulative-layout-shift")}`);
+}
+
 try {
   await waitForServer();
-  await runLighthouse();
-  console.log(`Lighthouse report written to ${outputPath}`);
+  await runLighthouse("mobile");
+  await runLighthouse("desktop");
+  summarize("mobile");
+  summarize("desktop");
+  console.log(`Lighthouse reports written to ${outputDirectory}`);
 } finally {
   server.kill();
 }
