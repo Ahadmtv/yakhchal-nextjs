@@ -755,7 +755,6 @@
   }
 
   @media (max-width: 699px) {
-    .deferred-section { content-visibility: visible; contain-intrinsic-size: none; }
     .article-toc ol { grid-template-columns: 1fr; }
     .article-product-cta, .article-end-cta { align-items: stretch; flex-direction: column; }
     .article-product-cta .btn { width: 100%; }

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "vazirmatn/Vazirmatn-Variable-font-face.css";
+import vazirmatnFontUrl from "vazirmatn/fonts/webfonts/Vazirmatn[wght].woff2";
 import "./globals.css";
 import AppShell from "@/components/AppShell";
 import { assets } from "@/lib/assets";
@@ -67,6 +68,13 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="fa" dir="rtl" suppressHydrationWarning>
       <head>
+        <link
+          rel="preload"
+          href={vazirmatnFontUrl}
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <script dangerouslySetInnerHTML={{ __html: bootstrapScript }} />
       </head>
       <body>

@@ -1,12 +1,30 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import HeroTrustBar from "@/components/HeroTrustBar";
 import { assets } from "@/lib/assets";
 
+const heroPhoneSizes = "(max-width: 699px) 1px, (max-width: 900px) 210px, 230px";
+const { props: heroPhoneImageProps } = getImageProps({
+  src: assets.appPreview760,
+  alt: "",
+  width: 760,
+  height: 1516,
+  sizes: heroPhoneSizes,
+  quality: 72,
+});
+
 export default function Hero() {
   return (
-    <section className="hero" id="product" aria-labelledby="hero-title">
+    <>
+      <link
+        rel="preload"
+        as="image"
+        imageSrcSet={heroPhoneImageProps.srcSet}
+        imageSizes={heroPhoneImageProps.sizes}
+        media="(min-width: 700px)"
+      />
+      <section className="hero" id="product" aria-labelledby="hero-title">
       <div className="container hero-grid">
         <div className="hero-copy">
           <p className="hero-badge">
@@ -72,8 +90,9 @@ export default function Hero() {
               alt="نمای اپلیکیشن یخچال روی گوشی اندرویدی"
               width={760}
               height={1516}
-              sizes="(max-width: 600px) 180px, (max-width: 900px) 210px, 230px"
-              quality={60}
+              sizes={heroPhoneSizes}
+              quality={72}
+              fetchPriority="high"
               className="responsive-image"
             />
           </div>
@@ -84,6 +103,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
