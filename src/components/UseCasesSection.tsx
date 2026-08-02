@@ -16,7 +16,7 @@ export default function UseCasesSection() {
         <SectionHeading
           eyebrow="برای زندگی واقعی"
           title={<span id="use-cases-title">یخچال برای چه کسانی مفید است؟</span>}
-          description="هر کارت یک نتیجه عملی را نشان می‌دهد؛ بدون وعده درمانی یا نتیجه تضمین‌شده."
+          description="برای روزهای شلوغ، خرید منظم و استفاده بهتر از مواد غذایی خانه."
           align="center"
         />
         <div className="use-cases-grid">

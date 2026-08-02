@@ -35,7 +35,7 @@ export default function TestimonialsSection() {
         <SectionHeading
           eyebrow="نظر کاربران فروشگاه"
           title={<span id="testimonials-title">تجربه‌هایی که واقعاً منتشر شده‌اند</span>}
-          description="این‌ها گزیده‌ای از نظرات عمومی صفحه رسمی یخچال در کافه‌بازار و مایکت هستند؛ متن، نام و امتیاز بدون بازنویسی معنایی نقل شده‌اند."
+          description="تجربه‌هایی از کاربرانی که یخچال را برای برنامه‌ریزی غذا و خرید روزانه انتخاب کرده‌اند."
           align="center"
         />
         <div
