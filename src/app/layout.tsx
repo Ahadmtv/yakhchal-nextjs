@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import "vazirmatn/Vazirmatn-Variable-font-face.css";
 import "./globals.css";
 import AppShell from "@/components/AppShell";
 import { assets } from "@/lib/assets";
