@@ -9,15 +9,18 @@ export default function TestimonialsSection() {
         <SectionHeading
           eyebrow="نظر کاربران فروشگاه"
           title={<span id="testimonials-title">تجربه‌هایی که واقعاً منتشر شده‌اند</span>}
-          description="متن‌ها از صفحه عمومی یخچال در مایکت نقل شده‌اند و تصویر یا هویت تکمیلی برای کاربران ساخته نشده است."
+          description="این‌ها گزیده‌ای از نظرات عمومی صفحه رسمی یخچال در کافه‌بازار و مایکت هستند؛ متن، نام و امتیاز بدون بازنویسی معنایی نقل شده‌اند."
           align="center"
         />
         <div className="testimonials-grid">
           {verifiedTestimonials.map((item) => (
-            <figure className="testimonial-card" key={item.author}>
+            <figure className="testimonial-card" key={`${item.store}-${item.author}-${item.publishedAt ?? ""}`}>
               <Icon name="sparkle" />
               <blockquote>{item.quote}</blockquote>
-              <figcaption><strong>{item.author}</strong><a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">مشاهده در {item.store}</a></figcaption>
+              <figcaption>
+                <span><strong>{item.author}</strong>{item.rating ? <small>{item.rating}</small> : null}{item.publishedAt ? <time>{item.publishedAt}</time> : null}</span>
+                <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">مشاهده در {item.store}<span className="sr-only"> (در پنجره جدید)</span></a>
+              </figcaption>
             </figure>
           ))}
         </div>

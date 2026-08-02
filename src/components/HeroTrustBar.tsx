@@ -1,4 +1,4 @@
-import { storeListings } from "@/data/appStats";
+import { latestStoreVerification, storeListings } from "@/data/appStats";
 
 export default function HeroTrustBar() {
   return (
@@ -8,9 +8,10 @@ export default function HeroTrustBar() {
           <span>{store.name}</span>
           <strong>{store.rating}</strong>
           <small>{store.ratingCount}</small>
+          <span className="sr-only"> (در پنجره جدید)</span>
         </a>
       ))}
-      <p>بررسی آمار: <time dateTime={storeListings[0].verifiedAt}>{storeListings[0].verifiedAtLabel}</time></p>
+      <p>بررسی آمار: <time dateTime={latestStoreVerification.date}>{latestStoreVerification.label}</time></p>
     </div>
   );
 }

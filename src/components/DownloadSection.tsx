@@ -16,7 +16,7 @@ export default function DownloadSection() {
             <h2 id="download-title">یخچال را همین حالا همراه خودتان ببرید</h2>
             <p>برای مدیریت موجودی، پیشنهاد غذا، برنامه هفتگی و فهرست خرید، فروشگاه موردنظر خود را انتخاب کنید.</p>
             <ul className="download-benefits">
-              {["رابط فارسی", `آخرین نسخه تأییدشده ${latestVerifiedRelease.version}`, "انتشار رسمی برای اندروید"].map((item) => <li key={item}><Icon name="check" />{item}</li>)}
+              {["رابط فارسی", `آخرین نسخه تأییدشده ${latestVerifiedRelease.versionLabel}`, "انتشار رسمی برای اندروید"].map((item) => <li key={item}><Icon name="check" />{item}</li>)}
             </ul>
             <StoreButtons source="home_download_section" />
             <Link className="text-link download-details-link" href="/download">جزئیات نسخه و راهنمای نصب<Icon name="arrow" /></Link>

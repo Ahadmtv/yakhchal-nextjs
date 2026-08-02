@@ -15,7 +15,7 @@ import { faqs } from "@/data/faqs";
 import { serializeJsonLd } from "@/lib/jsonld";
 import { assets } from "@/lib/assets";
 import { siteConfig } from "@/lib/site";
-import { latestVerifiedRelease, storeListings } from "@/data/appStats";
+import { getStore, latestVerifiedRelease } from "@/data/appStats";
 
 export const metadata: Metadata = {
   title: { absolute: "با مواد یخچال، برنامه غذایی هفته را بساز | یخچال" },
@@ -58,6 +58,8 @@ const organizationSchema = {
   sameAs: ["https://instagram.com/yakhchal.app", "https://www.linkedin.com/company/yakhchal"],
 };
 
+const myket = getStore("myket");
+
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "MobileApplication",
@@ -67,7 +69,7 @@ const softwareSchema = {
   softwareVersion: latestVerifiedRelease.version,
   description: siteConfig.description,
   url: `${siteConfig.url}/download`,
-  downloadUrl: storeListings[0].url,
+  downloadUrl: myket.url,
   image: assets.og,
   featureList: [
     "برنامه‌ریزی وعده‌های هفتگی",

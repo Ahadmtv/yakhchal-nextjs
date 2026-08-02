@@ -639,6 +639,8 @@
   .testimonial-card > svg { width: 25px; color: var(--primary); }
   .testimonial-card blockquote { min-height: 62px; margin: 18px 0; font-size: 1.04rem; line-height: 1.9; }
   .testimonial-card figcaption { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--text-muted); font-size: .78rem; }
+  .testimonial-card figcaption > span { display: grid; gap: 2px; }
+  .testimonial-card figcaption small, .testimonial-card figcaption time { font-size: .7rem; }
   .testimonial-card figcaption a { color: var(--primary); font-weight: 750; }
   .product-update-section { background: color-mix(in srgb,var(--surface-soft) 58%,transparent); }
   .release-card { display: grid; grid-template-columns: 150px 1fr; gap: 28px; margin-top: 38px; padding: 28px; border: 1px solid var(--border); border-radius: 28px; background: var(--surface); box-shadow: 0 18px 50px var(--shadow); }

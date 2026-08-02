@@ -4,7 +4,7 @@ import Link from "next/link";
 import DownloadQrCode from "@/components/DownloadQrCode";
 import Icon from "@/components/Icon";
 import StoreButtons from "@/components/StoreButtons";
-import { latestVerifiedRelease, storeListings } from "@/data/appStats";
+import { getStore, latestStoreVerification, latestVerifiedRelease, storeListings } from "@/data/appStats";
 import { assets } from "@/lib/assets";
 import { serializeJsonLd } from "@/lib/jsonld";
 import { siteConfig } from "@/lib/site";
@@ -47,6 +47,8 @@ const downloadFaqs = [
   },
 ] as const;
 
+const myket = getStore("myket");
+
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "MobileApplication",
@@ -55,8 +57,8 @@ const softwareSchema = {
   applicationCategory: "LifestyleApplication",
   description,
   url: `${siteConfig.url}/download`,
-  downloadUrl: storeListings[0].url,
-  softwareVersion: "1.4.1",
+  downloadUrl: myket.url,
+  softwareVersion: latestVerifiedRelease.version,
   image: assets.og,
   publisher: { "@type": "Organization", name: "گروه یخچال", url: siteConfig.url },
 };
@@ -85,7 +87,7 @@ export default function DownloadPage() {
               <h1>{title}</h1>
               <p className="detail-lead">از فروشگاه مورداعتماد خود نصب کنید و مواد خانه، پیشنهاد غذا، برنامه هفتگی و فهرست خرید را کنار هم نگه دارید.</p>
               <StoreButtons source="download_page_hero" />
-              <p className="verified-note"><Icon name="check" />اطلاعات فروشگاه‌ها آخرین‌بار در <time dateTime={storeListings[0].verifiedAt}>{storeListings[0].verifiedAtLabel}</time> بررسی شده‌اند.</p>
+              <p className="verified-note"><Icon name="check" />اطلاعات فروشگاه‌ها آخرین‌بار در <time dateTime={latestStoreVerification.date}>{latestStoreVerification.label}</time> بررسی شده‌اند.</p>
             </div>
             <div className="download-page-visual">
               <Image src={assets.appPreview760} alt="نمای واقعی اپلیکیشن یخچال" width={760} height={1516} preload quality={85} sizes="(max-width: 699px) 230px, 300px" />
@@ -101,20 +103,20 @@ export default function DownloadPage() {
                 <article key={store.id}>
                   <h3>{store.name}</h3>
                   <dl>
-                    <div><dt>نسخه</dt><dd>{store.version}</dd></div>
-                    <div><dt>انتشار</dt><dd>{store.releaseDate}</dd></div>
+                    <div><dt>نسخه</dt><dd>{store.versionLabel}</dd></div>
+                    <div><dt>انتشار</dt><dd><time dateTime={store.releaseDate}>{store.releaseDateLabel}</time></dd></div>
                     <div><dt>حجم</dt><dd>{store.size}</dd></div>
                     <div><dt>{store.metricLabel}</dt><dd>{store.metricValue}</dd></div>
                     <div><dt>امتیاز</dt><dd>{store.rating}؛ {store.ratingCount}</dd></div>
                   </dl>
-                  <a className="text-link" href={store.url} target="_blank" rel="noopener noreferrer">مشاهده منبع<Icon name="external" /></a>
+                  <a className="text-link" href={store.url} target="_blank" rel="noopener noreferrer">مشاهده منبع<span className="sr-only"> (در پنجره جدید)</span><Icon name="external" /></a>
                 </article>
               ))}
             </div>
           </section>
 
           <section className="release-notes" aria-labelledby="release-notes-title">
-            <div><p className="eyebrow">تغییرات اخیر</p><h2 id="release-notes-title">نسخه {latestVerifiedRelease.version}</h2><p>{latestVerifiedRelease.date}، طبق توضیحات انتشار {latestVerifiedRelease.store}</p></div>
+            <div><p className="eyebrow">تغییرات اخیر</p><h2 id="release-notes-title">نسخه {latestVerifiedRelease.versionLabel}</h2><p><time dateTime={latestVerifiedRelease.date}>{latestVerifiedRelease.dateLabel}</time>، طبق توضیحات انتشار {latestVerifiedRelease.store}</p></div>
             <ul>{latestVerifiedRelease.changes.map((change) => <li key={change}><Icon name="check" />{change}</li>)}</ul>
           </section>
 
